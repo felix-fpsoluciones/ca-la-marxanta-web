@@ -1,0 +1,141 @@
+/* =====================================================================
+   STORY — pàgines Història / Obrador (procés, ingredients) i Troba'ns
+   ===================================================================== */
+
+/* Intro de pàgina editorial */
+.story-intro { max-width: 60ch; }
+
+/* --- Procés (passos numerats) --- */
+.steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-8) var(--space-12); counter-reset: step; }
+@media (max-width: 720px) { .steps { grid-template-columns: 1fr; } }
+.step { display: grid; grid-template-columns: auto 1fr; gap: var(--space-6); align-items: start; }
+.step__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-700);
+  color: var(--color-terracota);
+  line-height: 1;
+  width: 2.5ch;
+}
+.step h3 { font-size: var(--fs-600); margin-bottom: var(--space-2); }
+.step p { color: var(--color-tinta-soft); }
+
+/* --- Ingredients (graella) --- */
+.ingredients-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
+@media (max-width: 860px) { .ingredients-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .ingredients-grid { grid-template-columns: 1fr; } }
+.ingredient {
+  background: var(--color-marfil);
+  border-radius: var(--radius-l);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-s);
+}
+.ingredient h3 { font-size: var(--fs-600); margin-bottom: var(--space-2); }
+.ingredient p { color: var(--color-tinta-soft); font-size: .95rem; }
+
+/* --- Promesa (pilars en llista) --- */
+.promise { display: grid; gap: var(--space-4); max-width: 60ch; }
+.promise li { display: flex; gap: var(--space-4); align-items: baseline; font-size: var(--fs-500); }
+.promise li::before { content: "—"; color: var(--color-or); }
+
+/* --- Troba'ns --- */
+.shop-search { max-width: 34rem; margin-bottom: var(--space-8); }
+.shop-search label {
+  display: block;
+  font-size: var(--fs-300); letter-spacing: .04em; text-transform: uppercase;
+  color: var(--color-tinta-soft); margin-bottom: var(--space-2);
+}
+.shop-search input {
+  font: inherit;
+  width: 100%;
+  color: var(--color-text);
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid var(--color-linia);
+  padding: .6rem .2rem;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.shop-search input:focus { outline: none; border-color: var(--color-or); }
+
+.filters { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-12); }
+.filter {
+  padding: .55rem 1.2rem;
+  border: 1.5px solid var(--color-linia);
+  border-radius: var(--radius-pill);
+  font-size: .9rem;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.filter:hover { border-color: var(--color-terracota); }
+.filter.is-active { background: var(--color-xocolata); color: var(--color-blanc-trencat); border-color: var(--color-xocolata); }
+
+.shops { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+@media (max-width: 860px) { .shops { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .shops { grid-template-columns: 1fr; } }
+.shop {
+  background: var(--color-blanc-trencat);
+  border: 1px solid var(--color-linia);
+  border-radius: var(--radius-m);
+  padding: var(--space-6);
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.shop:hover { transform: translateY(-3px); box-shadow: var(--shadow-m); }
+.shop__zone {
+  font-size: var(--fs-300); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--color-terracota); margin-bottom: var(--space-2);
+}
+.shop h3 { font-size: var(--fs-600); margin-bottom: var(--space-2); }
+.shop p { font-size: .95rem; color: var(--color-tinta-soft); margin-bottom: var(--space-3); }
+.shop .link-arrow { font-size: .9rem; }
+
+/* --- Invitació quan no hi ha establiments a la zona (i banda de tancament) --- */
+.invite {
+  background: var(--color-marfil);
+  border-radius: var(--radius-l);
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  box-shadow: var(--shadow-s);
+}
+.invite h2,
+.invite h3 { font-size: var(--fs-700); margin-bottom: var(--space-3); }
+.invite p {
+  color: var(--color-tinta-soft);
+  max-width: 48ch;
+  margin: 0 auto var(--space-8);
+}
+.invite--band { margin-top: var(--space-12); }
+
+/* --- Zones més demanades (prova social; només zona i recompte) --- */
+.demand { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+@media (max-width: 860px) { .demand { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .demand { grid-template-columns: 1fr; } }
+.demand__item { border-top: 1px solid var(--color-linia); padding-top: var(--space-4); }
+.demand__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-700);
+  line-height: 1;
+  display: block;
+}
+.demand__zone {
+  font-size: .95rem;
+  color: var(--color-tinta-soft);
+  margin-top: var(--space-2);
+}
+
+/* --- Cita anònima d'una recomanació rebuda --- */
+.testimoni {
+  border-left: 2px solid var(--color-or);
+  padding-left: var(--space-6);
+  max-width: 60ch;
+}
+.testimoni p {
+  font-family: var(--font-display);
+  font-size: var(--fs-600);
+  line-height: 1.5;
+  margin-bottom: var(--space-3);
+}
+.testimoni cite {
+  font-style: normal;
+  font-size: var(--fs-300);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--color-tinta-soft);
+}

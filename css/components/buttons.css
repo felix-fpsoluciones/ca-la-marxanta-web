@@ -1,0 +1,49 @@
+/* =====================================================================
+   BUTTONS — "no semblen botons, semblen invitacions"
+   ===================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: .9rem 1.6rem;
+  border-radius: var(--radius-pill);
+  font-size: .95rem;
+  font-weight: 500;
+  letter-spacing: .01em;
+  min-height: 44px;
+  transition: transform var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn--primary {
+  background: var(--color-xocolata);
+  color: var(--color-blanc-trencat);
+  box-shadow: var(--shadow-m);
+}
+.btn--primary:hover { background: var(--color-terracota); box-shadow: var(--shadow-l); }
+
+.btn--secondary {
+  border: 1.5px solid currentColor;
+  color: var(--color-tinta);
+}
+.btn--secondary:hover { background: var(--color-tinta); color: var(--color-blanc-trencat); }
+
+/* Sobre fons fosc / imatge */
+.btn--ghost-light { border: 1.5px solid rgba(250,247,241,.7); color: var(--color-blanc-trencat); }
+.btn--ghost-light:hover { background: var(--color-blanc-trencat); color: var(--color-tinta); }
+
+/* Enllaç amb subratllat animat */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--color-terracota);
+  font-weight: 500;
+  position: relative;
+}
+.link-arrow span { transition: transform var(--dur-fast) var(--ease); }
+.link-arrow:hover span { transform: translateX(5px); }

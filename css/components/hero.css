@@ -1,0 +1,80 @@
+/* =====================================================================
+   HERO — pantalla completa, imatge amb overlay, text en fade lent
+   ===================================================================== */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--color-blanc-trencat);
+  /* Reserva espai a dalt (capçalera) i a baix (indicador de scroll) perquè
+     el contingut centrat no es trepitgi amb l'indicador. */
+  padding-top: var(--header-h);
+  padding-bottom: var(--space-24);
+}
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: hero-zoom 16s var(--ease) forwards alternate infinite;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--overlay-hero);
+}
+
+.hero__content { max-width: 880px; }
+.hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 500;
+  letter-spacing: -.02em;
+  margin-bottom: var(--space-6);
+}
+.hero__subtitle {
+  font-size: var(--fs-500);
+  max-width: 54ch;
+  color: rgba(250, 247, 241, .92);
+  margin-bottom: var(--space-8);
+}
+.hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+
+/* Indicador de scroll (només icona; discret) */
+.hero__scroll {
+  position: absolute;
+  left: 50%; bottom: var(--space-6);
+  transform: translateX(-50%);
+  display: flex; align-items: center; justify-content: center;
+  opacity: .8;
+  pointer-events: none;
+}
+.hero__scroll svg { animation: scroll-hint 2.4s var(--ease) infinite; }
+
+/* En pantalles baixes no hi ha lloc: amaguem l'indicador per no trepitjar els botons */
+@media (max-height: 820px) {
+  .hero__scroll { display: none; }
+}
+
+/* Entrada de text del hero (fade lent en càrrega) */
+.hero__content > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: hero-in 1.2s var(--ease) forwards;
+}
+.hero__content > *:nth-child(1) { animation-delay: .2s; }
+.hero__content > *:nth-child(2) { animation-delay: .5s; }
+.hero__content > *:nth-child(3) { animation-delay: .8s; }
+@keyframes hero-in { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__content > * { opacity: 1; transform: none; animation: none; }
+}

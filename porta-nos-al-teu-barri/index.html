@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Porta'ns al teu barri · Ca la Marxanta</title>
+  <meta name="description" content="No trobes els nostres carquinyolis al teu barri? Recomana'ns una botiga de la teva zona i hi anirem a trucar de part teva.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/settings.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/components/navbar.css">
+  <link rel="stylesheet" href="../css/components/buttons.css">
+  <link rel="stylesheet" href="../css/components/cards.css">
+  <link rel="stylesheet" href="../css/components/product.css">
+  <link rel="stylesheet" href="../css/components/quote.css">
+  <link rel="stylesheet" href="../css/components/story.css">
+  <link rel="stylesheet" href="../css/components/forms.css">
+  <link rel="stylesheet" href="../css/components/footer.css">
+  
+</head>
+<body>
+<a class="skip-link" href="#contingut">Salta al contingut</a>
+<header class="header is-scrolled" data-header>
+  <div class="header__inner">
+    <a class="brand" href="../index.html" aria-label="Ca la Marxanta — inici">
+      <svg class="brand__mark" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="28" cy="28" r="20.5" fill="none" stroke="currentColor" stroke-width="0.75" opacity="0.45"/><text x="28" y="35" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="23" font-weight="500" fill="currentColor">M</text><text x="28" y="46.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="5" letter-spacing="1.5" fill="currentColor" opacity="0.85">2018</text></svg>
+      <span class="brand__text">Ca la Marxanta<small>Carquinyolis d'Horta</small></span>
+    </a>
+    <nav class="nav" data-nav aria-label="Navegació principal">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="../historia/">Història</a></li>
+        <li><a class="nav__link" href="../obrador/">L'obrador</a></li>
+        <li><a class="nav__link" href="../colleccio/">Col·lecció</a></li>
+        <li><a class="nav__link" href="../trobans/">On trobar-nos</a></li>
+        <li><a class="nav__link" href="../empreses/">Empreses</a></li>
+        <li><a class="nav__link" href="../contacte/">Contacte</a></li>
+      </ul>
+      <div class="nav__lang" aria-label="Idioma"><a href="../index.html" aria-current="true">CA</a><span>ES</span><span>EN</span></div>
+    </nav>
+    <button class="nav__toggle" data-nav-toggle aria-label="Obre el menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main id="contingut">
+  <section class="section section--tight">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Molla de pa"><a href="../index.html">Inici</a><span>›</span><a href="../trobans/">On trobar-nos</a><span>›</span>Porta'ns al teu barri</nav>
+      <div class="page-head story-intro" style="padding-top:var(--space-12)">
+        <p class="eyebrow">Porta'ns al teu barri</p>
+        <h1 data-barri-title>Quina botiga hi encaixaria?</h1>
+        <hr class="rule">
+        <p class="lead" data-barri-lead>Si al teu barri o a la teva ciutat no ens trobes, ajuda'ns a arribar-hi. Digues-nos quina botiga hi encaixaria i hi anirem a trucar de part teva.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight"><div class="container">
+    <form class="form reveal" name="barri" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-form="barri" novalidate>
+      <input type="hidden" name="form-name" value="barri">
+      <p hidden aria-hidden="true"><label>No omplis aquest camp <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <div class="form__grid">
+        <div class="field"><label for="b-barri">El teu barri o ciutat *</label><input id="b-barri" name="barri" required autocomplete="address-level3"><span class="field__error"></span></div>
+        <div class="field"><label for="b-cp">Codi postal</label><input id="b-cp" name="cp" inputmode="numeric" autocomplete="postal-code"><span class="field__error"></span></div>
+        <div class="field"><label for="b-botiga">Botiga que recomanes</label><input id="b-botiga" name="botiga" placeholder="Nom de la botiga"><span class="field__error"></span></div>
+        <div class="field"><label for="b-on">On és</label><input id="b-on" name="on_es" placeholder="Adreça o Instagram"><span class="field__error"></span></div>
+        <div class="field form__row--full"><label for="b-motiu">Per què hi encaixaria?</label><textarea id="b-motiu" name="motiu" placeholder="És una botiga de barri amb producte de proximitat…"></textarea><span class="field__error"></span></div>
+        <div class="field"><label for="b-nom">El teu nom</label><input id="b-nom" name="nom" autocomplete="name"><span class="field__error"></span></div>
+        <div class="field"><label for="b-email">Correu</label><input id="b-email" name="email" type="email" autocomplete="email"><span class="field__error"></span></div>
+        <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> Accepto la <a href="../legal/politica-de-privacitat/">política de privacitat</a> i el tractament de les meves dades. *</label><span class="field__error"></span></div>
+        <div class="form__row--full"><label class="consent"><input type="checkbox" name="citable"> Autoritzo que Ca la Marxanta expliqui a la botiga que la recomanació ve d'un client del barri (sense donar el meu nom).</label></div>
+      </div>
+      <p class="form-error" data-form-error hidden role="alert">No hem pogut enviar el formulari. Torna-ho a provar o escriu-nos a <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
+      <p style="margin-top:var(--space-8)"><button type="submit" class="btn btn--primary">Enviar la recomanació</button></p>
+    </form>
+    <div class="form-success" id="barri-success">
+      <img class="form-success__scene" src="../images/illustrations/llindar.png"
+        width="459" height="737" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <svg class="form-success__mark" viewBox="0 0 168 96" aria-hidden="true">
+        <g stroke="var(--color-or-soft)" stroke-width="2" stroke-linecap="round">
+          <path d="M22 34h16M14 48h18M22 62h16"/>
+          <path d="M146 34h-16M154 48h-18M146 62h-16"/>
+        </g>
+        <circle cx="84" cy="48" r="35" fill="var(--color-exit-fosc)"/>
+        <circle cx="84" cy="48" r="35" fill="none" stroke="var(--color-or)" stroke-width="1.5"/>
+        <circle cx="84" cy="48" r="30" fill="none" stroke="var(--color-or-soft)" stroke-width="0.75" opacity="0.55"/>
+        <g fill="none" stroke="var(--color-or-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M84 30v37"/>
+          <path d="M84 30l-13 4v29l13 4"/>
+          <path d="M84 30h13v37H84"/>
+          <circle cx="79" cy="49" r="1.6" fill="var(--color-or-soft)" stroke="none"/>
+        </g>
+      </svg>
+      <h3>Gràcies per obrir-nos una porta</h3>
+      <div class="form-success__div" aria-hidden="true">
+        <svg width="17" height="15" viewBox="0 0 17 15" fill="currentColor"><path d="M8.5 14.5S0 9.3 0 4.7A4.5 4.5 0 0 1 8.5 2.4 4.5 4.5 0 0 1 17 4.7c0 4.6-8.5 9.8-8.5 9.8Z"/></svg>
+      </div>
+      <p class="form-success__lead">Hem apuntat la teva recomanació<span data-success-lloc></span>.<br>Cada botiga que ens recomaneu és una <strong>conversa</strong> que comencem amb molt <strong>més sentit</strong>.</p>
+      <p class="form-success__note">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 11h18"/><circle cx="8" cy="15" r="1.1" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r="1.1" fill="currentColor" stroke="none"/><circle cx="16" cy="15" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <span>Si ens has deixat el correu,<br>t'avisarem el dia que hi arribem.</span>
+      </p>
+    </div>
+  </div></section>
+
+  <section class="section text-center" style="background:var(--color-xocolata);color:var(--color-blanc-trencat)"><div class="container container--narrow reveal">
+    <p class="eyebrow mx-auto" style="color:var(--color-or)">I si la botiga ets tu?</p>
+    <h2>Tens un negoci i vols oferir els nostres productes?</h2>
+    <hr class="rule mx-auto">
+    <p class="lead mx-auto" style="margin-bottom:var(--space-8);color:rgba(250,247,241,.85)">No cal esperar que et recomanin: escriu-nos i en parlem.</p>
+    <a class="btn btn--ghost-light" href="../empreses/">Parlem-ne</a>
+  </div></section></main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__brand-name">Ca la Marxanta</p>
+        <p class="footer__tagline">Carquinyolis, Porretes i Petarrons 100% artesans, elaborats al barri d'Horta. No volem vendre't un producte, volem que t'agradi.</p>
+        <div class="footer__social"><a href="https://www.instagram.com/calamarxanta_/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></div>
+      </div>
+      <div class="footer__col"><h4>Explora</h4><ul>
+        <li><a href="../historia/">La nostra història</a></li>
+        <li><a href="../obrador/">L'obrador</a></li>
+        <li><a href="../colleccio/">Col·lecció</a></li>
+        <li><a href="../trobans/">On trobar-nos</a></li>
+        <li><a href="../porta-nos-al-teu-barri/">Porta'ns al teu barri</a></li>
+        <li><a href="../empreses/">Empreses</a></li>
+        <li><a href="../contacte/">Contacte</a></li>
+      </ul></div>
+      <div class="footer__col"><h4>Contacte</h4><ul>
+        <li>Carrer Plutó, 24<br>08035 Barcelona</li>
+        <li><a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a></li>
+        <li><a href="tel:+34608387092">+34 608 387 092</a></li>
+      </ul></div>
+    </div>
+    <div class="footer__bottom">
+      <p>Carquinyolis d'Horta © <span data-year>2026</span> · Ca la Marxanta</p>
+      <div class="footer__legal"><a href="../legal/avis-legal/">Nota legal</a><a href="../legal/politica-de-privacitat/">Política de privacitat</a><a href="../legal/politica-de-cookies/">Política de cookies</a></div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../js/main.js"></script>
+</body>
+</html>

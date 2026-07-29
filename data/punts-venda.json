@@ -1,0 +1,28 @@
+{
+  "zones": ["Horta", "Barcelona ciutat", "Tarragona"],
+  "establiments": [
+    { "nom": "Esther", "adreca": "C/ Lloret de Mar, 69", "cp": "08031", "zona": "Horta" },
+    { "nom": "Cereals Tarrida-Colom", "adreca": "C/ Dante Alighieri, 53", "cp": "08032", "zona": "Horta" },
+    { "nom": "Terra de sabors", "adreca": "C/ Horta, 55", "cp": "08032", "zona": "Horta" },
+    { "nom": "Supermercat Supagru", "adreca": "C/ Chapí, 58", "cp": "08031", "zona": "Horta" },
+    { "nom": "Sopa de lletres", "adreca": "C/ Porrera, 32 baixos", "cp": "08031", "zona": "Horta" },
+    { "nom": "Cansaladeria Grau", "adreca": "C/ Horta, 59", "cp": "08032", "zona": "Horta" },
+    { "nom": "Mercat d'Horta", "adreca": "C/ Tajo, 79", "cp": "08032", "zona": "Horta" },
+    { "nom": "Alt Urgell", "adreca": "Passeig Maragall, 334 bis", "cp": "08031", "zona": "Horta" },
+    { "nom": "L'Estanyet", "adreca": "Plaça Joan Cornudella, 10-11", "cp": "08035", "zona": "Horta" },
+    { "nom": "Graneria Sala", "adreca": "Travessera de Gràcia, 137", "cp": "08012", "zona": "Barcelona ciutat" },
+    { "nom": "Colmado Quílez", "adreca": "Rambla Catalunya, 65", "cp": "08007", "zona": "Barcelona ciutat" },
+    { "nom": "Carnisseria Roig", "adreca": "C/ Aribau, 70", "cp": "08011", "zona": "Barcelona ciutat" },
+    { "nom": "Formatgeria Simó", "adreca": "C/ Sant Pere Més Alt, 40", "cp": "08003", "zona": "Barcelona ciutat" },
+    { "nom": "Idoni", "adreca": "Av. Mistral, 20 bis", "cp": "08015", "zona": "Barcelona ciutat" },
+    { "nom": "Sublims", "adreca": "Mercat de Sant Antoni, parada 47-48", "cp": "08011", "zona": "Barcelona ciutat" },
+    { "nom": "Llet Crua", "adreca": "C/ Cáceres, 14", "cp": "08028", "zona": "Barcelona ciutat" },
+    { "nom": "Làctics Saborit SL", "adreca": "Passatge Llavallol, 9", "cp": "08025", "zona": "Barcelona ciutat" },
+    { "nom": "Formatgeria Camarasa", "adreca": "C/ Santaló, 157", "cp": "08021", "zona": "Barcelona ciutat" },
+    { "nom": "La Castafiore", "adreca": "C/ Aribau, 58", "cp": "08011", "zona": "Barcelona ciutat" },
+    { "nom": "Tant de bo", "adreca": "Mercat de la Concepció, C/ Aragó, 317", "cp": "08009", "zona": "Barcelona ciutat" },
+    { "nom": "Granja M. Viader", "adreca": "C/ d'en Xuclà, 4", "cp": "08001", "zona": "Barcelona ciutat" },
+    { "nom": "Cooperativa d'Alforja", "adreca": "Av. Catalunya, 29", "cp": "43365", "zona": "Tarragona" },
+    { "nom": "Vilella Bonet", "adreca": "C/ de la Font, 1", "cp": "43365", "zona": "Tarragona" }
+  ]
+}

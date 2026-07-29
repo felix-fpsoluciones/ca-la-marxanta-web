@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO -->
+  <title>Ca la Marxanta · Carquinyolis artesans d'Horta (Barcelona)</title>
+  <meta name="description" content="Carquinyolis, Petarrons i Porretes 100% artesans, amb mantega artesana i avellanes i ametlles de Catalunya. Una tradició catalana nascuda al barri d'Horta el 2018.">
+  <link rel="canonical" href="https://www.carquinyolisdhorta.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ca la Marxanta">
+  <meta property="og:title" content="Ca la Marxanta · Carquinyolis artesans d'Horta">
+  <meta property="og:description" content="No volem vendre't un producte, volem que t'agradi.">
+  <meta property="og:image" content="https://www.carquinyolisdhorta.com/images/workshop/obrador-hero.jpg">
+  <meta property="og:locale" content="ca_ES">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Estils (modular, en ordre de capes) -->
+  <link rel="stylesheet" href="css/settings.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/hero.css">
+  <link rel="stylesheet" href="css/components/quote.css">
+  <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+
+  <!-- Dades estructurades -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Ca la Marxanta",
+    "legalName": "CARQUINYOLIS D'HORTA — Ferran Escardó",
+    "description": "Carquinyolis, Petarrons i Porretes artesans elaborats al barri d'Horta de Barcelona.",
+    "url": "https://www.carquinyolisdhorta.com/",
+    "telephone": "+34608387092",
+    "email": "info@calamarxanta.com",
+    "foundingDate": "2018",
+    "image": "https://www.carquinyolisdhorta.com/images/workshop/obrador-hero.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Carrer Plutó, 24",
+      "postalCode": "08035",
+      "addressLocality": "Barcelona",
+      "addressCountry": "ES"
+    },
+    "sameAs": ["https://www.instagram.com/calamarxanta_/"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#contingut">Salta al contingut</a>
+
+  <!-- ============================ CAPÇALERA ============================ -->
+  <header class="header" data-header>
+    <div class="header__inner">
+      <a class="brand" href="index.html" aria-label="Ca la Marxanta — inici">
+        <svg class="brand__mark" viewBox="0 0 56 56" aria-hidden="true">
+          <circle cx="28" cy="28" r="26" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="28" cy="28" r="20.5" fill="none" stroke="currentColor" stroke-width="0.75" opacity="0.45"/>
+          <text x="28" y="35" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="23" font-weight="500" fill="currentColor">M</text>
+          <text x="28" y="46.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="5" letter-spacing="1.5" fill="currentColor" opacity="0.85">2018</text>
+        </svg>
+        <span class="brand__text">Ca la Marxanta<small>Carquinyolis d'Horta</small></span>
+      </a>
+
+      <nav class="nav" data-nav aria-label="Navegació principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="historia/">Història</a></li>
+          <li><a class="nav__link" href="obrador/">L'obrador</a></li>
+          <li><a class="nav__link" href="colleccio/">Col·lecció</a></li>
+          <li><a class="nav__link" href="trobans/">On trobar-nos</a></li>
+          <li><a class="nav__link" href="empreses/">Empreses</a></li>
+          <li><a class="nav__link" href="contacte/">Contacte</a></li>
+        </ul>
+        <div class="nav__lang" aria-label="Idioma">
+          <a href="index.html" aria-current="true">CA</a>
+          <span>ES</span>
+          <span>EN</span>
+        </div>
+      </nav>
+
+      <button class="nav__toggle" data-nav-toggle aria-label="Obre el menú" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contingut">
+
+    <!-- ============================ HERO ============================ -->
+    <section class="hero">
+      <div class="hero__media">
+        <!-- TODO: substituir per vídeo/foto reals de l'obrador (placeholder temporal) -->
+        <img src="images/workshop/obrador-hero.jpg" alt="Mans treballant la massa a l'obrador" fetchpriority="high">
+      </div>
+      <div class="container hero__content">
+        <h1 class="hero__title">No fem carquinyolis.<br>Conservem una tradició catalana.</h1>
+        <p class="hero__subtitle">Cada recepta neix del respecte pels ingredients, pel temps i per una manera de fer les coses que gairebé no ha canviat amb els anys.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#historia">Descobreix la nostra història</a>
+          <a class="btn btn--ghost-light" href="colleccio/">Veure la col·lecció</a>
+        </div>
+      </div>
+      <a class="hero__scroll" href="#historia" aria-label="Baixa per descobrir més">
+        <svg width="20" height="30" viewBox="0 0 18 28" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1" y="1" width="16" height="26" rx="8"/><line x1="9" y1="7" x2="9" y2="12"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- ===================== CAP 1 · LA HISTÒRIA ===================== -->
+    <section class="section" id="historia">
+      <div class="container">
+        <div class="editorial">
+          <div class="editorial__media reveal">
+            <img src="images/workshop/obrador-rodillo.jpg" alt="Treball manual de la massa amb corró de fusta">
+          </div>
+          <div class="editorial__body reveal" data-delay="1">
+            <p class="eyebrow">Una història que mereix ser explicada</p>
+            <h2>Tot va començar el 2018, al barri d'Horta</h2>
+            <hr class="rule">
+            <p>Darrere de cada carquinyoli hi ha una decisió valenta: apostar per un ofici tradicional, recuperar una recepta i dedicar-hi el temps necessari per fer les coses bé. Així va néixer Ca la Marxanta de la mà d'en Xavier, i així continua creixent.</p>
+            <p style="margin-top:1rem"><em>No volem vendre't un producte, volem que t'agradi.</em></p>
+            <p style="margin-top:1.5rem">
+              <a class="link-arrow" href="historia/">Conèixer la nostra història <span>→</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cita a pantalla completa -->
+    <section class="quote">
+      <div class="quote__media"><img src="images/workshop/obrador-masa.jpg" alt=""></div>
+      <p class="quote__text reveal">Hi ha sabors que no haurien de desaparèixer mai.</p>
+    </section>
+
+    <!-- ===================== CAP 2 · L'OBRADOR ===================== -->
+    <section class="section" id="obrador">
+      <div class="container">
+        <div class="editorial editorial--reverse">
+          <div class="editorial__media reveal">
+            <img src="images/workshop/obrador-masa.jpg" alt="Boles de massa enfarinades a punt d'enfornar">
+          </div>
+          <div class="editorial__body reveal" data-delay="1">
+            <p class="eyebrow">La tradició segueix viva</p>
+            <h2>Les coses ben fetes necessiten temps</h2>
+            <hr class="rule">
+            <p>Treballem amb mantega 100% artesana i amb avellanes i ametlles de Catalunya. La recepta s'inspira en uns carquinyolis més cruixents i mengívols que els habituals.</p>
+            <p style="margin-top:1rem">Es tallen <strong>un a un abans d'entrar al forn</strong>. D'aquesta manera no queden en forma de llesca com la variant més estesa: és el seu tret característic, i és com s'ha de fer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cita plana -->
+    <section class="quote quote--plain">
+      <p class="quote__text reveal">Cada matí comença igual.<br>I això ens encanta.</p>
+    </section>
+
+    <!-- ================ CAP 3 · LA DIFERÈNCIA (PILARS) ================ -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:60ch;margin-inline:auto;margin-bottom:var(--space-16)">
+          <p class="eyebrow">La diferència és en els detalls</p>
+          <h2>Tres maneres d'entendre l'artesania</h2>
+        </div>
+        <div class="pillars">
+          <article class="pillar reveal">
+            <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 6c6 6 9 12 9 18a9 9 0 1 1-18 0c0-6 3-12 9-18z"/></svg>
+            <h3>Ingredients</h3>
+            <p>Avellanes i ametlles de Catalunya, mantega artesana i pell de llimona ecològica. Productes de proximitat i de gran qualitat.</p>
+          </article>
+          <article class="pillar reveal" data-delay="1">
+            <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="14" width="32" height="26" rx="3"/><path d="M16 14V9a8 8 0 0 1 16 0v5M16 26h16"/></svg>
+            <h3>Elaboració</h3>
+            <p>Tallats un a un i de doble cocció. Sense pressa, amb la mateixa dedicació de sempre.</p>
+          </article>
+          <article class="pillar reveal" data-delay="2">
+            <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 42s-14-8-14-20a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 12-14 20-14 20z"/></svg>
+            <h3>Tradició</h3>
+            <p>Una manera de fer arrelada al barri d'Horta, que es manté viva perquè algú decideix protegir-la.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cita a pantalla completa -->
+    <section class="quote">
+      <div class="quote__media"><img src="images/workshop/obrador-rodillo.jpg" alt=""></div>
+      <p class="quote__text reveal">No accelerem el temps. Perquè el bon sabor mai va tenir pressa.</p>
+    </section>
+
+    <!-- ================ CAP 4 · LA COL·LECCIÓ ================ -->
+    <section class="section" id="colleccio">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:60ch;margin-inline:auto;margin-bottom:var(--space-16)">
+          <p class="eyebrow">La nostra col·lecció</p>
+          <h2>Hi ha receptes que no canvien. Només milloren amb el temps.</h2>
+        </div>
+        <div class="collection">
+          <article class="family-card reveal">
+            <div class="family-card__media"><img src="images/products/carquinyolis-ametlla.png" alt="Caixa de Carquinyolis d'Horta d'ametlla"></div>
+            <div class="family-card__body">
+              <h3>Carquinyolis d'Horta</h3>
+              <p class="family-card__variety">Ametlla · Avellana</p>
+              <p>El cruixent clàssic, tallat un a un. El que marida amb cafès, tes i vins dolços.</p>
+              <a class="link-arrow" href="colleccio/carquinyolis-dhorta-ametlla/">Descobrir <span>→</span></a>
+            </div>
+          </article>
+          <article class="family-card family-card--porretes reveal" data-delay="1">
+            <div class="family-card__media"><img src="images/products/porretes-ametlla.png" alt="Caixa de Porretes del Padrí d'ametlla"></div>
+            <div class="family-card__body">
+              <h3>Porretes del Padrí</h3>
+              <p class="family-card__variety">Ametlla · Avellana</p>
+              <p>Bastons de carquinyoli per esmorzar i berenar. El mateix cor, en format bastó.</p>
+              <a class="link-arrow" href="colleccio/porretes-del-padri-ametlla/">Descobrir <span>→</span></a>
+            </div>
+          </article>
+          <article class="family-card family-card--petarrons reveal" data-delay="2">
+            <div class="family-card__media"><img src="images/products/petarrons-classics.png" alt="Caixa de Petarrons clàssics"></div>
+            <div class="family-card__body">
+              <h3>Petarrons</h3>
+              <p class="family-card__variety">5 varietats</p>
+              <p>Galetes de mantega artesana 100%. Tan bones que tothom preguntava si eren pets de monja.</p>
+              <a class="link-arrow" href="colleccio/petarrons-classics/">Descobrir <span>→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cita plana -->
+    <section class="quote quote--plain">
+      <p class="quote__text reveal">Cada recepta té la seva pròpia personalitat.</p>
+    </section>
+
+    <!-- ================ CAP 5 · AMB QUÈ GAUDIR-LOS ================ -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:60ch;margin-inline:auto;margin-bottom:var(--space-12)">
+          <p class="eyebrow">Amb què gaudir-los</p>
+          <h2>Petits plaers per compartir</h2>
+        </div>
+        <div class="pairings reveal" data-delay="1">
+          <div class="pairing"><span class="pairing__emoji">☕</span><span>Cafè</span></div>
+          <div class="pairing"><span class="pairing__emoji">🍵</span><span>Te</span></div>
+          <div class="pairing"><span class="pairing__emoji">🍷</span><span>Moscatell</span></div>
+          <div class="pairing"><span class="pairing__emoji">🥂</span><span>Cava</span></div>
+          <div class="pairing"><span class="pairing__emoji">🍨</span><span>Gelat</span></div>
+          <div class="pairing"><span class="pairing__emoji">🍫</span><span>Xocolata</span></div>
+          <div class="pairing"><span class="pairing__emoji">🧀</span><span>Formatges</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cita a pantalla completa -->
+    <section class="quote quote--plain">
+      <p class="quote__text reveal">Perquè els millors moments sempre es comparteixen.</p>
+    </section>
+
+    <!-- ================ FINAL · AGRAÏMENT ================ -->
+    <section class="section text-center" id="empreses">
+      <div class="container container--narrow reveal">
+        <p class="eyebrow mx-auto">Ca la Marxanta</p>
+        <h2>Hi ha oficis que sobreviuen gràcies a qui hi creu</h2>
+        <hr class="rule mx-auto">
+        <p class="lead mx-auto" style="margin-bottom:var(--space-8)">
+          Hi ha receptes que passen de generació en generació. I hi ha petits plaers que mantenen el mateix sabor de fa molts anys. Això és Ca la Marxanta.
+        </p>
+        <div class="hero__actions" style="justify-content:center">
+          <a class="btn btn--primary" href="colleccio/">Veure la col·lecció</a>
+          <a class="btn btn--secondary" href="empreses/">Empreses i professionals</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================ PEU ============================ -->
+  <footer class="footer" id="contacte">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__brand-name">Ca la Marxanta</p>
+          <p class="footer__tagline">Carquinyolis, Porretes i Petarrons 100% artesans, elaborats al barri d'Horta. No volem vendre't un producte, volem que t'agradi.</p>
+          <div class="footer__social">
+            <a href="https://www.instagram.com/calamarxanta_/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h4>Explora</h4>
+          <ul>
+            <li><a href="historia/">La nostra història</a></li>
+            <li><a href="obrador/">L'obrador</a></li>
+            <li><a href="colleccio/">Col·lecció</a></li>
+            <li><a href="trobans/">On trobar-nos</a></li>
+            <li><a href="porta-nos-al-teu-barri/">Porta'ns al teu barri</a></li>
+            <li><a href="empreses/">Empreses</a></li>
+            <li><a href="contacte/">Contacte</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>Contacte</h4>
+          <ul>
+            <li>Carrer Plutó, 24<br>08035 Barcelona</li>
+            <li><a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a></li>
+            <li><a href="tel:+34608387092">+34 608 387 092</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>Carquinyolis d'Horta © <span data-year>2026</span> · Ca la Marxanta</p>
+        <div class="footer__legal">
+          <a href="legal/avis-legal/">Nota legal</a>
+          <a href="legal/politica-de-privacitat/">Política de privacitat</a>
+          <a href="legal/politica-de-cookies/">Política de cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

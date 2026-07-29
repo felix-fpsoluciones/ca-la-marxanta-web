@@ -1,0 +1,85 @@
+/* =====================================================================
+   PRODUCT — pàgina de col·lecció + fitxa de producte
+   ===================================================================== */
+
+/* --- Breadcrumb --- */
+.breadcrumb {
+  padding-top: calc(var(--header-h) + var(--space-8));
+  font-size: var(--fs-300);
+  color: var(--color-tinta-soft);
+}
+.breadcrumb a:hover { color: var(--color-terracota); }
+.breadcrumb span { margin: 0 .4rem; opacity: .5; }
+
+/* --- Capçalera de secció de col·lecció --- */
+.page-head { padding-top: calc(var(--header-h) + var(--space-16)); }
+
+/* --- Família dins de la col·lecció --- */
+.family-block + .family-block { margin-top: var(--space-24); }
+.family-block__intro { max-width: 60ch; margin-bottom: var(--space-12); }
+.family-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-8); }
+@media (max-width: 720px) { .family-grid { grid-template-columns: 1fr; } }
+
+/* --- Badge --- */
+.badge {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: var(--fs-300); letter-spacing: .06em; text-transform: uppercase;
+  padding: .3rem .8rem; border-radius: var(--radius-pill);
+  background: var(--color-arena); color: var(--color-tinta);
+}
+.badge--season { background: var(--color-ambre); color: var(--color-xocolata-x); }
+
+/* ====================== FITXA DE PRODUCTE ====================== */
+.product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: start;
+}
+@media (max-width: 880px) { .product { grid-template-columns: 1fr; gap: var(--space-8); } }
+
+.product__media {
+  position: sticky; top: calc(var(--header-h) + var(--space-8));
+  background: #fff; /* els PNG porten fons de paper blanc incrustat */
+  border-radius: var(--radius-l);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  box-shadow: var(--shadow-m);
+}
+@media (max-width: 880px) { .product__media { position: static; } }
+.product__media img { margin-inline: auto; max-height: 520px; object-fit: contain; }
+
+.product__variety {
+  font-size: var(--fs-300); letter-spacing: var(--tracking-caps);
+  text-transform: uppercase; color: var(--color-terracota); margin: var(--space-3) 0;
+}
+.product__desc { font-size: var(--fs-500); color: var(--color-tinta-soft); }
+
+.product__meta { display: flex; gap: var(--space-3); flex-wrap: wrap; margin: var(--space-6) 0; }
+
+/* Pista discreta cap a "Porta'ns al teu barri" */
+.product__hint { font-size: .9rem; color: var(--color-tinta-soft); margin-top: var(--space-4); }
+.product__hint a { text-decoration: underline; text-decoration-color: var(--color-or); text-underline-offset: 3px; }
+.product__hint a:hover { color: var(--color-terracota); }
+
+/* Perfil de sabor */
+.flavour { display: grid; gap: var(--space-3); margin: var(--space-8) 0; }
+.flavour__row { display: grid; grid-template-columns: 9rem 1fr; align-items: center; gap: var(--space-4); }
+.flavour__label { font-size: var(--fs-300); letter-spacing: .06em; text-transform: uppercase; color: var(--color-tinta-soft); }
+.flavour__bar { height: 6px; border-radius: var(--radius-pill); background: var(--color-arena); overflow: hidden; }
+.flavour__bar i { display: block; height: 100%; background: var(--color-terracota); border-radius: inherit; }
+
+/* Blocs d'informació */
+.info-block { padding: var(--space-8) 0; border-top: 1px solid var(--color-linia); }
+.info-block h3 { font-size: var(--fs-600); margin-bottom: var(--space-4); }
+.allergens { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+.allergens .badge { background: var(--color-crema); }
+
+/* Taula nutricional */
+.nutri { width: 100%; border-collapse: collapse; max-width: 420px; }
+.nutri th, .nutri td { text-align: left; padding: .6rem 0; border-bottom: 1px solid var(--color-linia); font-size: .95rem; }
+.nutri td:last-child { text-align: right; font-variant-numeric: tabular-nums; color: var(--color-tinta-soft); }
+.nutri caption { text-align: left; font-size: var(--fs-300); color: var(--color-tinta-soft); margin-bottom: var(--space-3); }
+
+/* Relacionats */
+.related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+@media (max-width: 880px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
