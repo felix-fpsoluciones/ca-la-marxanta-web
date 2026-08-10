@@ -86,25 +86,42 @@
    res d'opacitats encadenades, que deixaven el text al 42% i el feien
    il·legible sobre la fotografia. */
 .nav__lang {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  font-size: .82rem;
-  letter-spacing: .06em;
+  /* Més petit i més obert: ha de llegir-se com una dada de servei, no com una
+     secció més del menú. */
+  font-size: .74rem;
+  letter-spacing: .14em;
+  /* Aire respecte al menú, perquè no sembli que hi ha nou apartats seguits */
+  margin-left: var(--space-4);
+  padding-left: var(--space-8);
   color: var(--color-blanc-trencat);
   /* Sobre la foto: una ombra imperceptible que el manté llegible encara que
      la imatge tingui una zona clara just a sota. */
   text-shadow: 0 1px 3px rgba(33, 28, 23, .55);
   transition: color var(--dur) var(--ease);
 }
+/* Filet vertical que separa el selector del menú */
+.nav__lang::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 15px;
+  background: currentColor;
+  opacity: .3;
+}
 .nav__lang a,
 .nav__lang span { padding: 2px 1px; color: inherit; }
-/* Idioma actual: daurat i subratllat fi */
+/* Idioma actual: només el daurat. Cap subratllat: cap secció del menú en porta,
+   i el selector no ha de cridar més que la navegació. */
 .nav__lang a[aria-current="true"] {
   color: var(--color-or-soft);
   font-weight: 500;
-  border-bottom: 1.5px solid var(--color-or);
-  padding-bottom: 3px;
 }
 /* Idiomes encara no disponibles: es veuen, però no són enllaços (evitem un 404) */
 .nav__lang span { opacity: .72; cursor: default; }
@@ -150,8 +167,18 @@
   .nav.is-open { transform: translateX(0); box-shadow: var(--shadow-l); }
   .nav__list { flex-direction: column; gap: var(--space-6); }
   .nav__link { color: var(--color-tinta) !important; font-size: 1.25rem; font-family: var(--font-display); }
-  /* Dins del panell (sempre clar) el selector va en tinta, sense ombra */
-  .nav__lang { color: var(--color-tinta); text-shadow: none; font-size: .9rem; gap: var(--space-4); }
+  /* Dins del panell (sempre clar) el selector va en tinta, sense ombra.
+     Aquí el menú és una columna: el filet vertical no hi pinta res. */
+  .nav__lang {
+    color: var(--color-tinta);
+    text-shadow: none;
+    font-size: .85rem;
+    gap: var(--space-4);
+    margin-left: 0;
+    padding-left: 0;
+    padding-top: var(--space-6);
+  }
+  .nav__lang::before { left: 0; top: 0; transform: none; width: 40px; height: 1px; }
   /* Sobre el crema del panell, ni el daurat ni el caramel arriben al mínim de
      contrast (4.33:1): fem servir la xocolata de la marca. Qui marca l'idioma
      actiu segueix sent el filet daurat de sota.
