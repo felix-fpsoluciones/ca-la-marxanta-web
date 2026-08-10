@@ -81,12 +81,39 @@
 }
 .nav__link:hover::after { transform: scaleX(1); }
 
-.nav__lang { display: flex; gap: var(--space-2); font-size: .8rem; opacity: .85; }
+/* Selector d'idioma.
+   El color el marca la capçalera (clar sobre el hero, fosc sobre el vidre):
+   res d'opacitats encadenades, que deixaven el text al 42% i el feien
+   il·legible sobre la fotografia. */
+.nav__lang {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: .82rem;
+  letter-spacing: .06em;
+  color: var(--color-blanc-trencat);
+  /* Sobre la foto: una ombra imperceptible que el manté llegible encara que
+     la imatge tingui una zona clara just a sota. */
+  text-shadow: 0 1px 3px rgba(33, 28, 23, .55);
+  transition: color var(--dur) var(--ease);
+}
 .nav__lang a,
-.nav__lang span { padding: 2px 4px; }
-.nav__lang a[aria-current="true"] { color: var(--color-or-soft); font-weight: 600; }
+.nav__lang span { padding: 2px 1px; color: inherit; }
+/* Idioma actual: daurat i subratllat fi */
+.nav__lang a[aria-current="true"] {
+  color: var(--color-or-soft);
+  font-weight: 500;
+  border-bottom: 1.5px solid var(--color-or);
+  padding-bottom: 3px;
+}
 /* Idiomes encara no disponibles: es veuen, però no són enllaços (evitem un 404) */
-.nav__lang span { opacity: .5; cursor: default; }
+.nav__lang span { opacity: .72; cursor: default; }
+
+/* Sobre la barra de vidre no hi ha fotografia: fora ombra i text en tinta */
+.header.is-scrolled .nav__lang { color: var(--color-tinta); text-shadow: none; }
+.header.is-scrolled .nav__lang a[aria-current="true"] { color: var(--color-fusta-fosc); }
+/* .7 i no menys: per sota es queda per sota del mínim de contrast (4.5:1) */
+.header.is-scrolled .nav__lang span { opacity: .7; }
 
 /* Estat "scrolled": el vidre l'aplica .header::before (vegeu a dalt) */
 .header.is-scrolled .brand,
@@ -123,6 +150,15 @@
   .nav.is-open { transform: translateX(0); box-shadow: var(--shadow-l); }
   .nav__list { flex-direction: column; gap: var(--space-6); }
   .nav__link { color: var(--color-tinta) !important; font-size: 1.25rem; font-family: var(--font-display); }
+  /* Dins del panell (sempre clar) el selector va en tinta, sense ombra */
+  .nav__lang { color: var(--color-tinta); text-shadow: none; font-size: .9rem; gap: var(--space-4); }
+  /* Sobre el crema del panell, ni el daurat ni el caramel arriben al mínim de
+     contrast (4.33:1): fem servir la xocolata de la marca. Qui marca l'idioma
+     actiu segueix sent el filet daurat de sota.
+     Cal repetir el selector amb .header i amb .is-scrolled: si no, les regles
+     d'escriptori pesen més i guanyen. */
+  .header .nav__lang a[aria-current="true"],
+  .header.is-scrolled .nav__lang a[aria-current="true"] { color: var(--color-xocolata); }
   body.nav-open { overflow: hidden; }
   .nav.is-open ~ .nav__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav.is-open ~ .nav__toggle span:nth-child(2) { opacity: 0; }
