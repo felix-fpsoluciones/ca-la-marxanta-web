@@ -402,11 +402,15 @@ function trobansPage() {
   const filters = zones.map((z, i) =>
     `<button class="filter ${i === 0 ? 'is-active' : ''}" data-zone="${z === 'Tots' ? 'tots' : esc(z)}">${esc(z)}</button>`).join('\n');
   const shops = venda.establiments.map((s) => {
-    const q = encodeURIComponent(`${s.nom}, ${s.adreca}, ${s.cp} Barcelona`);
+    // Cap "Barcelona" fix a la cerca del mapa: hi ha establiments fora de la
+    // província. El codi postal ja és únic a tot l'Estat; la població, si la
+    // tenim, acaba d'afinar-ho.
+    const lloc = s.poblacio ? `${s.cp} ${s.poblacio}` : `${s.cp} Catalunya`;
+    const q = encodeURIComponent(`${s.nom}, ${s.adreca}, ${lloc}`);
     return `<article class="shop reveal" data-zone="${esc(s.zona)}">
       <p class="shop__zone">${esc(s.zona)}</p>
       <h3>${esc(s.nom)}</h3>
-      <p>${esc(s.adreca)}<br>${esc(s.cp)}</p>
+      <p>${esc(s.adreca)}<br>${esc(s.cp)}${s.poblacio ? ' ' + esc(s.poblacio) : ''}</p>
       <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">Veure al mapa <span>→</span></a>
     </article>`;
   }).join('\n');
@@ -438,7 +442,7 @@ function trobansPage() {
 
     <div class="invite invite--band reveal">
       <h3>No ens trobes a prop de casa?</h3>
-      <p>Som en 23 establiments, però ens en falten molts. Si al teu barri, ciutat o poble hi ha una botiga que hi encaixaria, recomana-la: cada recomanació ens obre una porta.</p>
+      <p>Som en ${venda.establiments.length} establiments, però ens en falten molts. Si al teu barri, ciutat o poble hi ha una botiga que hi encaixaria, recomana-la: cada recomanació ens obre una porta.</p>
       <a class="btn btn--secondary" href="${p}porta-nos-al-teu-barri/">Porta'ns al teu barri</a>
     </div>
   </div></section>
@@ -689,10 +693,12 @@ function contactePage() {
    Compte: les rutes han de ser absolutes, perquè aquesta pàgina es serveix
    des de qualsevol nivell de l'adreça. */
 function noTrobadaPage() {
-  /* Adreces absolutes a partir de l'arrel del lloc. Per defecte '/', però en un
-     subdirectori (p. ex. GitHub Pages) cal indicar-ho:
-       BASE=/ca-la-marxanta-web/ node build/build-pages.mjs */
-  const arrel = process.env.BASE || '/';
+  /* Adreces absolutes a partir de l'arrel del lloc. El valor per defecte és el
+     del lloc publicat ara mateix (GitHub Pages, dins un subdirectori); si no
+     fos així, una regeneració qualsevol trencaria els enllaços del 404 sense
+     avisar. En un allotjament que serveixi des de l'arrel (Netlify, domini
+     propi) cal generar amb:  BASE=/ node build/build-pages.mjs */
+  const arrel = process.env.BASE || '/ca-la-marxanta-web/';
   const body = `
   <section class="section"><div class="container container--narrow text-center" style="padding-top:var(--space-16)">
     <p class="eyebrow mx-auto">Error 404</p>

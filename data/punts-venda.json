@@ -1,5 +1,5 @@
 {
-  "zones": ["Horta", "Barcelona ciutat", "Tarragona"],
+  "zones": ["Horta", "Barcelona ciutat", "Girona", "Tarragona"],
   "establiments": [
     { "nom": "Esther", "adreca": "C/ Lloret de Mar, 69", "cp": "08031", "zona": "Horta" },
     { "nom": "Cereals Tarrida-Colom", "adreca": "C/ Dante Alighieri, 53", "cp": "08032", "zona": "Horta" },
@@ -22,6 +22,7 @@
     { "nom": "La Castafiore", "adreca": "C/ Aribau, 58", "cp": "08011", "zona": "Barcelona ciutat" },
     { "nom": "Tant de bo", "adreca": "Mercat de la Concepció, C/ Aragó, 317", "cp": "08009", "zona": "Barcelona ciutat" },
     { "nom": "Granja M. Viader", "adreca": "C/ d'en Xuclà, 4", "cp": "08001", "zona": "Barcelona ciutat" },
+    { "nom": "Espai Gourmet Begur", "adreca": "C/ Sant Pere, 2", "cp": "17255", "poblacio": "Begur", "zona": "Girona" },
     { "nom": "Cooperativa d'Alforja", "adreca": "Av. Catalunya, 29", "cp": "43365", "zona": "Tarragona" },
     { "nom": "Vilella Bonet", "adreca": "C/ de la Font, 1", "cp": "43365", "zona": "Tarragona" }
   ]
