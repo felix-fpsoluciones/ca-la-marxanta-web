@@ -51,6 +51,46 @@
 .family-card--porretes { background: var(--color-crema); }
 .family-card--petarrons .family-card__variety { color: var(--color-ambre); }
 
+/* --- Targeta estreta: NOMÉS mòbil i tauleta ---
+   A "Altres receptes" hi van dues targetes per fila i al telèfon cadascuna es
+   queda en ~156px: el títol a 25px demana 148px dins d'un forat útil de 108, o
+   sigui que "Carquinyolis d'Horta" es tallava per la dreta i semblava
+   descentrat. La foto tampoc s'apreciava: 32px de marge interior a cada costat
+   es menjaven el 40% de l'amplada i deixaven l'envàs en 92px.
+
+   Dos nivells a posta:
+   · El @media limita tot això a ≤880px (telèfon i tauleta). A partir d'aquí
+     l'escriptori es queda EXACTAMENT igual que abans.
+   · A dins, un @container: qui mana és l'amplada real de la targeta, no la de
+     la pantalla, perquè aquesta mateixa targeta surt en graelles diferents.
+     Sense el container-type de sota, les regles @container no s'apliquen
+     enlloc; per això n'hi ha prou amb declarar-lo aquí dins per acotar-ho. */
+@media (max-width: 880px) {
+  .family-card { container-type: inline-size; }
+}
+
+@container (max-width: 260px) {
+  /* Marge de la foto proporcional, perquè l'envàs es vegi */
+  .family-card__media img { padding: var(--space-3); }
+  .family-card__body { padding: var(--space-4) var(--space-3) var(--space-6); }
+  .family-card__body h3 {
+    /* Mida contínua lligada a l'amplada de la targeta (cqw), no a salts: entre
+       16px i els 25px de sempre. Deixa marge folgat fins i tot a 320px. */
+    font-size: clamp(1rem, calc(15cqw - 3.5px), var(--fs-600));
+    line-height: 1.2;
+    /* Xarxa de seguretat: si algun dia hi ha un nom més llarg, que parteixi la
+       paraula abans que la targeta la retalli en silenci. */
+    overflow-wrap: break-word;
+  }
+  .family-card__variety {
+    font-size: .75rem;
+    letter-spacing: .1em;
+    margin: var(--space-1) 0 var(--space-2);
+  }
+  /* Perquè "Veure la fitxa →" no es parteixi en dues línies amb la fletxa despenjada */
+  .family-card .link-arrow { font-size: .85rem; gap: .35rem; }
+}
+
 /* --- Maridatges --- */
 .pairings { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-6) var(--space-12); }
 .pairing { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); width: 90px; }
