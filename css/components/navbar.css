@@ -90,6 +90,9 @@
 }
 .header .nav__toggle { color: var(--color-blanc-trencat); }
 .header.is-scrolled .nav__toggle { color: var(--color-tinta); }
+/* Amb el menú obert, el botó queda sobre el panell (que sempre és clar):
+   ha de ser fosc sí o sí, encara que la capçalera fos transparent. */
+.nav.is-open ~ .nav__toggle { color: var(--color-tinta); }
 
 @media (max-width: 980px) {
   .nav__toggle { display: block; z-index: 110; }
