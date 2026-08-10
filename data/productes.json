@@ -2,7 +2,7 @@
   "families": [
     { "id": "carquinyolis-dhorta", "nom": "Carquinyolis d'Horta", "lema": "El clàssic de tota la vida", "recepta": "fruit sec sencer, ou i sense mantega; tallats un a un abans d'enfornar" },
     { "id": "porretes-del-padri", "nom": "Porretes del Padrí", "lema": "Bastons de carquinyoli per esmorzar i berenar", "recepta": "el mateix cor del carquinyoli, en format bastó" },
-    { "id": "petarrons", "nom": "Petarrons", "lema": "Galetes de mantega artesana 100%", "recepta": "galeta de mantega artesana amb clara d'ou" }
+    { "id": "petarrons", "nom": "Petarrons", "lema": "Galetes de mantega 100% artesana", "recepta": "galeta de mantega artesana amb clara d'ou" }
   ],
   "productes": [
     {
@@ -14,12 +14,13 @@
       "imatge": "images/products/carquinyolis-ametlla.png",
       "pes": "150 g",
       "temporada": false,
-      "descripcio": "Els carquinyolis d'ametlla són els més coneguts arreu, mariden amb vins dolços, cafès, tes i ajuden a allargar les postres i les converses de sobretaula.",
+      "descripcio": "Els carquinyolis d'ametlla són els més coneguts arreu, mariden tant amb dolç (gelats, xocolates, vins dolços, cafès, tes, crema catalana…) com en salat (foie, sobrassada, formatges blaus, anxoves…) i ajuden a allargar les postres i les converses de sobretaula.",
+      "nota_maridatge": "Mariden tant amb dolç com amb salat: gelats, xocolates, vins dolços, cafès, tes o crema catalana; i també foie, sobrassada, formatges blaus o anxoves.",
       "ingredients": "Farina de blat, sucre morè, ametlla, ou pasteuritzat, gasificant i pell de llimona ecològica.",
       "allergens": ["gluten", "ou", "fruits secs (ametlla)"],
       "traces": "Pot contenir traces d'altra fruita seca de clofolla i de llet i derivats.",
       "nutricio_100g": { "energia": "1966 KJ / 468 Kcal", "greixos": "17,2 g", "greixos_saturats": "2,0 g", "hidrats": "67,7 g", "sucres": "35,9 g", "proteines": "10,5 g", "sal": "0,75 g" },
-      "maridatges": ["cafe", "te", "vi-dolc"]
+      "maridatges": ["cafe", "te", "vi-dolc", "formatge"]
     },
     {
       "id": 51,
@@ -30,7 +31,7 @@
       "imatge": "images/products/carquinyolis-avellana.png",
       "pes": "150 g",
       "temporada": true,
-      "descripcio": "Igualment tradicionals, però menys coneguts, són els carquinyolis d'avellana, que es feien en aquelles contrades on aquest fruit sec era més habitual. Quan despunta la calor no en trobareu, és un producte de temporada.",
+      "descripcio": "Igualment tradicionals, però menys coneguts, són els carquinyolis d'avellana, que es feien en aquelles contrades on aquest fruit sec era més habitual. És un producte de temporada: el trobareu d'octubre a març.",
       "ingredients": "Farina de blat, sucre morè, avellana, ou pasteuritzat, gasificant i pell de llimona ecològica.",
       "allergens": ["gluten", "ou", "fruits secs (avellana)"],
       "traces": "Pot contenir traces d'altra fruita seca de clofolla i de llet i derivats.",
@@ -61,8 +62,8 @@
       "varietat": "Avellana",
       "imatge": "images/products/porretes-avellana.png",
       "pes": "150 g",
-      "temporada": false,
-      "descripcio": "Els bastons de carquinyoli d'avellana per esmorzar i berenar!",
+      "temporada": true,
+      "descripcio": "Els bastons de carquinyoli d'avellana per esmorzar i berenar! És un producte de temporada: el trobareu d'octubre a març.",
       "ingredients": "Farina de blat, sucre morè, avellana, ou pasteuritzat, gasificant i pell de llimona ecològica.",
       "allergens": ["gluten", "ou", "fruits secs (avellana)"],
       "traces": "Pot contenir traces de fruita seca de clofolla i de llet i derivats.",
@@ -78,12 +79,12 @@
       "imatge": "images/products/petarrons-classics.png",
       "pes": "150 g",
       "temporada": false,
-      "descripcio": "Les galetes de mantega artesana 100%. Com que, pel seu aspecte, tothom ens preguntava si eren pets de monja, els vam batejar Petarrons!",
+      "descripcio": "Les galetes de mantega 100% artesana. Com que, pel seu aspecte, tothom ens preguntava si eren pets de monja, els vam batejar Petarrons!",
       "ingredients": "Farina de blat artesana, mantega artesana, clara d'ou pasteuritzada, sucre morè i gasificant.",
       "allergens": ["gluten", "ou", "llet"],
       "traces": "Pot contenir traces de fruita seca de clofolla.",
       "nutricio_100g": { "energia": "2125 KJ / 508 Kcal", "greixos": "26 g", "greixos_saturats": "17,3 g", "hidrats": "59,4 g", "sucres": "34,6 g", "proteines": "8,4 g", "sal": "0,9 g" },
-      "maridatges": ["cafe", "te", "cava"]
+      "maridatges": ["cafe", "te", "vins-escumosos"]
     },
     {
       "id": 55,
@@ -99,7 +100,7 @@
       "allergens": ["gluten", "ou", "llet"],
       "traces": "Pot contenir traces de fruita seca de clofolla.",
       "nutricio_100g": { "energia": "2393 KJ / 575 Kcal", "greixos": "40,5 g", "greixos_saturats": "27 g", "hidrats": "43,9 g", "sucres": "32,6 g", "proteines": "8,1 g", "sal": "1 g" },
-      "maridatges": ["te", "cafe", "cava"]
+      "maridatges": ["te", "cafe", "vins-escumosos"]
     },
     {
       "id": 56,
@@ -131,7 +132,7 @@
       "allergens": ["gluten", "ou", "llet"],
       "traces": "Pot contenir traces de fruita seca de clofolla.",
       "nutricio_100g": { "energia": "2367 KJ / 569 Kcal", "greixos": "38,1 g", "greixos_saturats": "29,1 g", "hidrats": "47,7 g", "sucres": "36,2 g", "proteines": "7,3 g", "sal": "1 g" },
-      "maridatges": ["cafe", "gelat", "cava"]
+      "maridatges": ["cafe", "gelat", "vins-escumosos"]
     },
     {
       "id": 58,

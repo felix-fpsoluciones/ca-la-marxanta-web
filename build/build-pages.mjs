@@ -20,7 +20,7 @@ const FLAVOUR = {
   'porretes-del-padri':  [['Cruixent', 3], ['Tendresa', 4], ['Dolçor', 3], ['Torrat', 4], ['Persistència', 4]],
   'petarrons':           [['Cruixent', 4], ['Mantega', 5], ['Dolçor', 3], ['Aroma', 4], ['Persistència', 3]]
 };
-const PAIR = { cafe:['☕','Cafè'], te:['🍵','Te'], 'vi-dolc':['🍷','Vi dolç'], cava:['🥂','Cava'], gelat:['🍨','Gelat'], xocolata:['🍫','Xocolata'], llet:['🥛','Llet'], formatge:['🧀','Formatges'] };
+const PAIR = { cafe:['☕','Cafè'], te:['🍵','Te'], 'vi-dolc':['🍷','Vi dolç'], 'vins-escumosos':['🥂','Vins escumosos'], gelat:['🍨','Gelat'], xocolata:['🍫','Xocolata'], llet:['🥛','Llet'], formatge:['🧀','Formatges'] };
 
 const esc = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
@@ -81,8 +81,7 @@ function head(p, { title, desc, jsonld = '' }) {
 <header class="header is-scrolled" data-header>
   <div class="header__inner">
     <a class="brand" href="${p}index.html" aria-label="Ca la Marxanta — inici">
-      <svg class="brand__mark" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="28" cy="28" r="20.5" fill="none" stroke="currentColor" stroke-width="0.75" opacity="0.45"/><text x="28" y="35" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="23" font-weight="500" fill="currentColor">M</text><text x="28" y="46.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="5" letter-spacing="1.5" fill="currentColor" opacity="0.85">2018</text></svg>
-      <span class="brand__text">Ca la Marxanta<small>Carquinyolis d'Horta</small></span>
+      <img class="brand__logo" src="${p}images/brand/logo.png" width="360" height="306" alt="Ca la Marxanta">
     </a>
     <nav class="nav" data-nav aria-label="Navegació principal">
       <ul class="nav__list">
@@ -251,6 +250,7 @@ function productPage(prod) {
             <div class="pairings" style="justify-content:flex-start">
               ${prod.maridatges.map((m) => PAIR[m] ? `<div class="pairing"><span class="pairing__emoji">${PAIR[m][0]}</span><span>${PAIR[m][1]}</span></div>` : '').join('')}
             </div>
+            ${prod.nota_maridatge ? `<p class="pairings__note">${esc(prod.nota_maridatge)}</p>` : ''}
           </div>
         </div>
       </div>
@@ -287,19 +287,6 @@ function historiaPage() {
       </div>
     </div>
   </section>
-
-  <section class="section section--tight"><div class="container">
-    <div class="editorial">
-      <div class="editorial__media reveal"><img src="${p}images/workshop/obrador-rodillo.jpg" alt="Treball de la massa a l'obrador"></div>
-      <div class="editorial__body reveal" data-delay="1">
-        <p class="eyebrow">Les persones</p>
-        <h2>D'en Xavier a en Ferran</h2>
-        <hr class="rule">
-        <p>El 2018, en Xavier va decidir recuperar una recepta i obrir un petit obrador al barri d'Horta. Així va néixer Ca la Marxanta: una aposta valenta per un ofici tradicional.</p>
-        <p style="margin-top:1rem">El 2026 comença la història d'en Ferran al costat d'en Xavier, que segueix formant-ne part. No és un relleu que substitueix: és una història que continua creixent, amb la mateixa passió de sempre.</p>
-      </div>
-    </div>
-  </div></section>
 
   <section class="quote quote--plain"><p class="quote__text reveal">Les tradicions no sobreviuen per casualitat. Sobreviuen perquè algú decideix protegir-les.</p></section>
 
@@ -342,7 +329,7 @@ function historiaPage() {
     <p class="lead mx-auto" style="margin-bottom:var(--space-8)">Perquè creiem que les millors tradicions mereixen seguir vives.</p>
     <a class="btn btn--primary" href="${p}obrador/">Descobreix com els elaborem</a>
   </div></section>`;
-  return head(p, { title: "La nostra història · Ca la Marxanta", desc: "La història de Ca la Marxanta: d'en Xavier a en Ferran, un obrador de carquinyolis artesans nascut al barri d'Horta el 2018." }) + body + foot(p);
+  return head(p, { title: "La nostra història · Ca la Marxanta", desc: "La història de Ca la Marxanta: un obrador de carquinyolis artesans nascut al barri d'Horta el 2018." }) + body + foot(p);
 }
 
 /* ---------- Pàgina OBRADOR ---------- */
@@ -352,9 +339,8 @@ function obradorPage() {
     ['Selecció', "Triem avellanes i ametlles de Catalunya, mantega artesana i pell de llimona ecològica."],
     ['Mescla', "Pastem els ingredients amb la proporció justa, sense additius innecessaris."],
     ['Treball manual', "Donem forma a la massa a mà, amb la cura de sempre."],
-    ['Primer forn', "Una primera cocció que assenta la massa i concentra el sabor."],
-    ['Tall un a un', "Tallem cada carquinyoli un a un abans del segon forn. Per això no queden en forma de llesca."],
-    ['Segon forn', "La segona cocció és la que els dona el cruixent característic."],
+    ['Tall un a un', "Tallem el carquinyoli un a un abans d'enfornar. Per això no queden en forma de llesca."],
+    ['Cocció', "La cocció és la que els dona el cruixent característic."],
     ['Envasat', "Els envasem amb cura perquè arribin perfectes a casa teva."]
   ];
   const ingredients = [
@@ -381,14 +367,14 @@ function obradorPage() {
   <section class="section section--tight"><div class="container">
     <div class="story-intro reveal" style="margin-bottom:var(--space-16)">
       <p class="eyebrow">El procés artesanal</p>
-      <h2>Set passos, sense dreceres</h2>
+      <h2>Sis passos</h2>
     </div>
     <div class="steps">
       ${steps.map(([t, d], i) => `<article class="step reveal"><span class="step__num">${String(i + 1).padStart(2, '0')}</span><div><h3>${t}</h3><p>${d}</p></div></article>`).join('\n')}
     </div>
   </div></section>
 
-  <section class="quote"><div class="quote__media"><img src="${p}images/workshop/obrador-masa.jpg" alt=""></div><p class="quote__text reveal">No creiem en les dreceres. Creiem en el temps, en les mans i en el respecte per una recepta.</p></section>
+  <section class="quote"><div class="quote__media"><img src="${p}images/workshop/obrador-masa.jpg" alt=""></div><p class="quote__text reveal">Creiem en el temps, en les mans i en el respecte per una recepta.</p></section>
 
   <section class="section"><div class="container">
     <div class="story-intro reveal" style="margin-bottom:var(--space-12)">
@@ -406,7 +392,7 @@ function obradorPage() {
     <p class="lead mx-auto" style="margin-bottom:var(--space-8)">Descobreix tota la col·lecció i troba el teu preferit.</p>
     <a class="btn btn--primary" href="${p}colleccio/">Veure la col·lecció</a>
   </div></section>`;
-  return head(p, { title: "L'obrador · Ca la Marxanta", desc: "Així elaborem els nostres carquinyolis: set passos artesanals, tallats un a un i de doble cocció, amb ingredients de proximitat." }) + body + foot(p);
+  return head(p, { title: "L'obrador · Ca la Marxanta", desc: "Així elaborem els nostres carquinyolis: sis passos artesanals, tallats un a un, amb ingredients de proximitat." }) + body + foot(p);
 }
 
 /* ---------- Pàgina TROBA'NS ---------- */
@@ -452,7 +438,7 @@ function trobansPage() {
 
     <div class="invite invite--band reveal">
       <h3>No ens trobes a prop de casa?</h3>
-      <p>Som en 23 establiments, però ens en falten molts. Si al teu barri o a la teva ciutat hi ha una botiga que hi encaixaria, recomana-la: cada recomanació ens obre una porta.</p>
+      <p>Som en 23 establiments, però ens en falten molts. Si al teu barri, ciutat o poble hi ha una botiga que hi encaixaria, recomana-la: cada recomanació ens obre una porta.</p>
       <a class="btn btn--secondary" href="${p}porta-nos-al-teu-barri/">Porta'ns al teu barri</a>
     </div>
   </div></section>
@@ -498,7 +484,7 @@ function barriPage() {
         <p class="eyebrow">Porta'ns al teu barri</p>
         <h1 data-barri-title>Quina botiga hi encaixaria?</h1>
         <hr class="rule">
-        <p class="lead" data-barri-lead>Si al teu barri o a la teva ciutat no ens trobes, ajuda'ns a arribar-hi. Digues-nos quina botiga hi encaixaria i hi anirem a trucar de part teva.</p>
+        <p class="lead" data-barri-lead>Si al teu barri, ciutat o poble no ens trobes, ajuda'ns a arribar-hi. Digues-nos quina botiga hi encaixaria i hi anirem a trucar de part teva.</p>
       </div>
     </div>
   </section>
@@ -508,7 +494,7 @@ function barriPage() {
       <input type="hidden" name="form-name" value="barri">
       <p hidden aria-hidden="true"><label>No omplis aquest camp <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <div class="form__grid">
-        <div class="field"><label for="b-barri">El teu barri o ciutat *</label><input id="b-barri" name="barri" required autocomplete="address-level3"><span class="field__error"></span></div>
+        <div class="field"><label for="b-barri">El teu barri, ciutat o poble *</label><input id="b-barri" name="barri" required autocomplete="address-level3"><span class="field__error"></span></div>
         <div class="field"><label for="b-cp">Codi postal</label><input id="b-cp" name="cp" inputmode="numeric" autocomplete="postal-code"><span class="field__error"></span></div>
         <div class="field"><label for="b-botiga">Botiga que recomanes</label><input id="b-botiga" name="botiga" placeholder="Nom de la botiga"><span class="field__error"></span></div>
         <div class="field"><label for="b-on">On és</label><input id="b-on" name="on_es" placeholder="Adreça o Instagram"><span class="field__error"></span></div>
@@ -560,7 +546,7 @@ function empresesPage() {
     ['Distribuïdors', "Relacions comercials duradores i de confiança."]
   ];
   const reasons = [
-    ['Elaboració artesana', "Tallats un a un, de doble cocció, sense pressa."],
+    ['Elaboració artesana', "Tallats un a un, sense pressa."],
     ['Ingredients triats', "Avellanes i ametlles de Catalunya i mantega artesana."],
     ['Imatge premium', "Un packaging cuidat que llueix a qualsevol lineal."],
     ['Proximitat', "Tracte proper i atenció personalitzada."]

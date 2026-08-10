@@ -22,31 +22,25 @@
   gap: var(--space-6);
 }
 
-/* Logo: emblema + paraula */
+/* Logo oficial. El logo ja porta el nom escrit a l'anell, així que no hi va
+   cap text al costat. */
 .brand {
   display: flex;
   align-items: center;
-  gap: .65rem;
   color: var(--color-blanc-trencat);
   transition: color var(--dur) var(--ease);
 }
-.brand__mark { width: 42px; height: 42px; flex: none; }
-.brand__text {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  letter-spacing: .02em;
-  line-height: 1;
+.brand__logo {
+  width: auto;
+  height: 54px;
+  flex: none;
+  /* El logo és negre. Sobre el hero (capçalera transparent) cal invertir-lo
+     perquè es vegi; en fer scroll, la capçalera es torna clara i torna a negre. */
+  filter: invert(1);
+  transition: filter var(--dur) var(--ease);
 }
-.brand__text small {
-  display: block;
-  font-family: var(--font-text);
-  font-size: .58rem;
-  letter-spacing: var(--tracking-caps);
-  text-transform: uppercase;
-  opacity: .8;
-  margin-top: 4px;
-}
-@media (max-width: 480px) { .brand__text small { display: none; } }
+.header.is-scrolled .brand__logo { filter: none; }
+@media (max-width: 480px) { .brand__logo { height: 44px; } }
 
 /* Menú */
 .nav { display: flex; align-items: center; gap: var(--space-6); }
