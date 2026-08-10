@@ -32,11 +32,12 @@
       "pes": "150 g",
       "temporada": true,
       "descripcio": "Igualment tradicionals, però menys coneguts, són els carquinyolis d'avellana, que es feien en aquelles contrades on aquest fruit sec era més habitual. És un producte de temporada: el trobareu d'octubre a març.",
+      "nota_maridatge": "Mariden tant amb dolç com amb salat: gelats, xocolates, vins dolços, cafès, tes o crema catalana; i també foie, sobrassada, formatges blaus o anxoves.",
       "ingredients": "Farina de blat, sucre morè, avellana, ou pasteuritzat, gasificant i pell de llimona ecològica.",
       "allergens": ["gluten", "ou", "fruits secs (avellana)"],
       "traces": "Pot contenir traces d'altra fruita seca de clofolla i de llet i derivats.",
       "nutricio_100g": { "energia": "1993 KJ / 474 Kcal", "greixos": "18,3 g", "greixos_saturats": "1,8 g", "hidrats": "67,8 g", "sucres": "37,8 g", "proteines": "9,6 g", "sal": "0,95 g" },
-      "maridatges": ["cafe", "te", "vi-dolc"]
+      "maridatges": ["cafe", "te", "vi-dolc", "formatge"]
     },
     {
       "id": 52,
