@@ -51,39 +51,49 @@ const DIVISOR = `<div class="form-success__div" aria-hidden="true">
 const ESCENA = (p) => `<img class="form-success__scene" src="${p}images/illustrations/llindar.png"
         width="459" height="737" alt="" aria-hidden="true" loading="lazy" decoding="async">`;
 
-function head(p, { title, desc, jsonld = '' }) {
+/* Fulls d'estil. Les pàgines interiors porten els de fitxa, història i
+   formularis; la portada, en canvi, porta hero.css i no necessita aquells.
+   Es declara aquí perquè és l'única diferència real entre les dues capçaleres. */
+const CSS_INTERIOR = ['settings', 'base', 'layout', 'animations', 'components/navbar',
+  'components/buttons', 'components/cards', 'components/product', 'components/quote',
+  'components/story', 'components/forms', 'components/footer'];
+const CSS_PORTADA = ['settings', 'base', 'layout', 'animations', 'components/navbar',
+  'components/buttons', 'components/hero', 'components/quote', 'components/cards',
+  'components/footer'];
+
+/* transparent: la capçalera arrenca sense vidre perquè va damunt del hero.
+   La resta de pàgines no tenen hero, així que hi comencen amb `is-scrolled`. */
+function head(p, { title, desc, jsonld = '', css = CSS_INTERIOR, transparent = false, canonical = '', og = null }) {
+  const fulls = css.map((n) => `<link rel="stylesheet" href="${p}css/${n}.css">`).join('\n  ');
+  const social = og ? `
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ca la Marxanta">
+  <meta property="og:title" content="${esc(og.title)}">
+  <meta property="og:description" content="${esc(og.desc)}">
+  <meta property="og:image" content="${esc(og.image)}">
+  <meta property="og:locale" content="${esc(og.locale)}">
+  <meta name="twitter:card" content="summary_large_image">` : '';
   return `<!DOCTYPE html>
 <html lang="ca">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(title)}</title>
-  <meta name="description" content="${esc(desc)}">
+  <meta name="description" content="${esc(desc)}">${canonical ? `\n  <link rel="canonical" href="${esc(canonical)}">` : ''}${social}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="${p}css/settings.css">
-  <link rel="stylesheet" href="${p}css/base.css">
-  <link rel="stylesheet" href="${p}css/layout.css">
-  <link rel="stylesheet" href="${p}css/animations.css">
-  <link rel="stylesheet" href="${p}css/components/navbar.css">
-  <link rel="stylesheet" href="${p}css/components/buttons.css">
-  <link rel="stylesheet" href="${p}css/components/cards.css">
-  <link rel="stylesheet" href="${p}css/components/product.css">
-  <link rel="stylesheet" href="${p}css/components/quote.css">
-  <link rel="stylesheet" href="${p}css/components/story.css">
-  <link rel="stylesheet" href="${p}css/components/forms.css">
-  <link rel="stylesheet" href="${p}css/components/footer.css">
+  ${fulls}
   ${jsonld ? `<script type="application/ld+json">${jsonld}</script>` : ''}
 </head>
 <body>
 <a class="skip-link" href="#contingut">Salta al contingut</a>
-<header class="header is-scrolled" data-header>
+<header class="header${transparent ? '' : ' is-scrolled'}" data-header>
   <div class="header__inner">
     <a class="brand" href="${p}index.html" aria-label="Ca la Marxanta — inici">
       <img class="brand__logo" src="${p}images/brand/logo.png" width="360" height="306" alt="Ca la Marxanta">
     </a>
-    <nav class="nav" data-nav aria-label="Navegació principal">
+    <nav class="nav" id="menu" data-nav aria-label="Navegació principal">
       <ul class="nav__list">
         <li><a class="nav__link" href="${p}historia/">Història</a></li>
         <li><a class="nav__link" href="${p}obrador/">L'obrador</a></li>
@@ -92,17 +102,25 @@ function head(p, { title, desc, jsonld = '' }) {
         <li><a class="nav__link" href="${p}empreses/">Empreses</a></li>
         <li><a class="nav__link" href="${p}contacte/">Contacte</a></li>
       </ul>
-      <div class="nav__lang" aria-label="Idioma"><a href="${p}index.html" aria-current="true">CA</a><span>ES</span><span>EN</span></div>
+      <!-- Amb salt de línia entre ells: enganxats, un lector de pantalla els llegeix
+           com una sola paraula ("CAESEN") i en copiar el text surten junts. -->
+      <div class="nav__lang" aria-label="Idioma">
+        <a href="${p}index.html" aria-current="true">CA</a>
+        <span>ES</span>
+        <span>EN</span>
+      </div>
     </nav>
-    <button class="nav__toggle" data-nav-toggle aria-label="Obre el menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    <!-- aria-controls ha d'apuntar a un id que existeixi: és el <nav id="menu"> de sobre.
+         A la portada escrita a mà hi era però el <nav> no tenia id, així que no apuntava enlloc. -->
+    <button class="nav__toggle" data-nav-toggle aria-label="Obre el menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 <main id="contingut">`;
 }
 
-function foot(p) {
+function foot(p, { id = '' } = {}) {
   return `</main>
-<footer class="footer">
+<footer class="footer"${id ? ` id="${id}"` : ''}>
   <div class="container">
     <div class="footer__grid">
       <div>
@@ -127,7 +145,11 @@ function foot(p) {
     </div>
     <div class="footer__bottom">
       <p>Carquinyolis d'Horta © <span data-year>2026</span> · Ca la Marxanta</p>
-      <div class="footer__legal"><a href="${p}legal/avis-legal/">Nota legal</a><a href="${p}legal/politica-de-privacitat/">Política de privacitat</a><a href="${p}legal/politica-de-cookies/">Política de cookies</a></div>
+      <div class="footer__legal">
+        <a href="${p}legal/avis-legal/">Nota legal</a>
+        <a href="${p}legal/politica-de-privacitat/">Política de privacitat</a>
+        <a href="${p}legal/politica-de-cookies/">Política de cookies</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -728,6 +750,213 @@ function legalPage(page) {
   return head(p, { title: `${page.title} · Ca la Marxanta`, desc: `${page.title} de Ca la Marxanta (Carquinyolis d'Horta).` }) + body + foot(p);
 }
 
+/* ---------- PORTADA ----------
+   Fins ara era l'única pàgina escrita a mà. Entra aquí perquè el web ha de
+   sortir en castellà i en anglès: mantenir tres portades a mà es descuadra a
+   la primera. El contingut és el mateix, paraula per paraula. */
+function portadaPage() {
+  const p = '';
+  const jsonld = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Ca la Marxanta",
+    "legalName": "CARQUINYOLIS D'HORTA — Ferran Escardó",
+    "description": "Carquinyolis, Petarrons i Porretes artesans elaborats al barri d'Horta de Barcelona.",
+    "url": "https://www.carquinyolisdhorta.com/",
+    "telephone": "+34608387092",
+    "email": "info@calamarxanta.com",
+    "foundingDate": "2018",
+    "image": "https://www.carquinyolisdhorta.com/images/workshop/obrador-hero.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Carrer Plutó, 24",
+      "postalCode": "08035",
+      "addressLocality": "Barcelona",
+      "addressCountry": "ES"
+    },
+    "sameAs": ["https://www.instagram.com/calamarxanta_/"]
+  }, null, 2);
+
+  const pilars = [
+    ['<path d="M24 6c6 6 9 12 9 18a9 9 0 1 1-18 0c0-6 3-12 9-18z"/>', 'Ingredients',
+      'Avellanes i ametlles de Catalunya, mantega artesana i pell de llimona ecològica. Productes de proximitat i de gran qualitat.'],
+    ['<rect x="8" y="14" width="32" height="26" rx="3"/><path d="M16 14V9a8 8 0 0 1 16 0v5M16 26h16"/>', 'Elaboració',
+      'Tallats un a un. Sense pressa, amb la mateixa dedicació de sempre.'],
+    ['<path d="M24 42s-14-8-14-20a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 12-14 20-14 20z"/>', 'Tradició',
+      'Una manera de fer arrelada al barri d\'Horta, que es manté viva perquè algú decideix protegir-la.']
+  ].map(([icona, titol, text], i) => `<article class="pillar reveal"${i ? ` data-delay="${i}"` : ''}>
+            <svg class="pillar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">${icona}</svg>
+            <h3>${esc(titol)}</h3>
+            <p>${esc(text)}</p>
+          </article>`).join('\n          ');
+
+  /* Les tres famílies, amb text editorial propi de la portada (no el de les
+     fitxes): aquí expliquem la família, no el producte concret. */
+  const families = [
+    ['', 'carquinyolis-ametlla.png', 'Caixa de Carquinyolis d\'Horta d\'ametlla', 'Carquinyolis d\'Horta', 'Ametlla · Avellana',
+      'El cruixent clàssic, tallat un a un. El que marida amb cafès, tes i vins dolços.', 'carquinyolis-dhorta-ametlla'],
+    [' family-card--porretes', 'porretes-ametlla.png', 'Caixa de Porretes del Padrí d\'ametlla', 'Porretes del Padrí', 'Ametlla · Avellana',
+      'Bastons de carquinyoli per esmorzar i berenar. El mateix cor, en format bastó.', 'porretes-del-padri-ametlla'],
+    [' family-card--petarrons', 'petarrons-classics.png', 'Caixa de Petarrons clàssics', 'Petarrons', '5 varietats',
+      'Galetes de mantega 100% artesana. Tan bones que tothom preguntava si eren pets de monja.', 'petarrons-classics']
+  ].map(([mod, img, alt, nom, varietat, text, slug], i) => `<article class="family-card${mod} reveal"${i ? ` data-delay="${i}"` : ''}>
+            <div class="family-card__media"><img src="${p}images/products/${img}" alt="${esc(alt)}"></div>
+            <div class="family-card__body">
+              <h3>${esc(nom)}</h3>
+              <p class="family-card__variety">${esc(varietat)}</p>
+              <p>${esc(text)}</p>
+              <a class="link-arrow" href="${p}colleccio/${slug}/">Descobrir <span>→</span></a>
+            </div>
+          </article>`).join('\n          ');
+
+  const maridatges = [['☕','Cafè'], ['🍵','Te'], ['🍷','Moscatell'], ['🥂','Vins escumosos'], ['🍨','Gelat'], ['🍫','Xocolata'], ['🧀','Formatges']]
+    .map(([e, n]) => `<div class="pairing"><span class="pairing__emoji">${e}</span><span>${esc(n)}</span></div>`).join('\n          ');
+
+  const body = `
+    <section class="hero">
+      <div class="hero__media">
+        <img src="${p}images/workshop/obrador-hero.jpg" alt="Mans treballant la massa a l'obrador" fetchpriority="high">
+      </div>
+      <div class="container hero__content">
+        <h1 class="hero__title">Fem carquinyolis.<br>Conservem la nostra tradició.</h1>
+        <p class="hero__subtitle">Cada recepta neix del respecte pels ingredients, pel temps i per una manera de fer les coses que gairebé no ha canviat amb els anys.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#historia">Descobreix la nostra història</a>
+          <a class="btn btn--ghost-light" href="${p}colleccio/">Veure la col·lecció</a>
+        </div>
+      </div>
+      <a class="hero__scroll" href="#historia" aria-label="Baixa per descobrir més">
+        <svg width="20" height="30" viewBox="0 0 18 28" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1" y="1" width="16" height="26" rx="8"/><line x1="9" y1="7" x2="9" y2="12"/>
+        </svg>
+      </a>
+    </section>
+
+    <section class="section" id="historia">
+      <div class="container">
+        <div class="editorial">
+          <div class="editorial__media reveal">
+            <img src="${p}images/workshop/obrador-rodillo.jpg" alt="Treball manual de la massa amb corró de fusta">
+          </div>
+          <div class="editorial__body reveal" data-delay="1">
+            <p class="eyebrow">Una història que mereix ser explicada</p>
+            <h2>Tot va començar el 2018, al barri d'Horta</h2>
+            <hr class="rule">
+            <p>Darrere de cada carquinyoli hi ha una decisió valenta: apostar per un ofici tradicional, recuperar una recepta i dedicar-hi el temps necessari per fer les coses bé. Així va néixer Ca la Marxanta, i així continua creixent.</p>
+            <p style="margin-top:1rem"><em>No volem vendre't un producte, volem que t'agradi.</em></p>
+            <p style="margin-top:1.5rem">
+              <a class="link-arrow" href="${p}historia/">Conèixer la nostra història <span>→</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote">
+      <div class="quote__media"><img src="${p}images/workshop/obrador-masa.jpg" alt=""></div>
+      <p class="quote__text reveal">Hi ha sabors que no haurien de desaparèixer mai.</p>
+    </section>
+
+    <section class="section" id="obrador">
+      <div class="container">
+        <div class="editorial editorial--reverse">
+          <div class="editorial__media reveal">
+            <img src="${p}images/workshop/obrador-masa.jpg" alt="Boles de massa enfarinades a punt d'enfornar">
+          </div>
+          <div class="editorial__body reveal" data-delay="1">
+            <p class="eyebrow">La tradició segueix viva</p>
+            <h2>Les coses ben fetes necessiten temps</h2>
+            <hr class="rule">
+            <p>Treballem amb mantega 100% artesana i amb avellanes i ametlles de Catalunya. La recepta s'inspira en uns carquinyolis més cruixents i mengívols que els habituals.</p>
+            <p style="margin-top:1rem">Es tallen <strong>un a un abans d'entrar al forn</strong>. D'aquesta manera no queden en forma de llesca com la variant més estesa: és el seu tret característic, i és com s'ha de fer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote quote--plain">
+      <p class="quote__text reveal">Cada matí comença igual.<br>I això ens encanta.</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:60ch;margin-inline:auto;margin-bottom:var(--space-16)">
+          <p class="eyebrow">La diferència és en els detalls</p>
+          <h2>Tres maneres d'entendre l'artesania</h2>
+        </div>
+        <div class="pillars">
+          ${pilars}
+        </div>
+      </div>
+    </section>
+
+    <section class="quote">
+      <div class="quote__media"><img src="${p}images/workshop/obrador-rodillo.jpg" alt=""></div>
+      <p class="quote__text reveal">No accelerem el temps. Perquè el bon sabor mai va tenir pressa.</p>
+    </section>
+
+    <section class="section" id="colleccio">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:60ch;margin-inline:auto;margin-bottom:var(--space-16)">
+          <p class="eyebrow">La nostra col·lecció</p>
+          <h2>Hi ha receptes que no canvien. Només milloren amb el temps.</h2>
+        </div>
+        <div class="collection">
+          ${families}
+        </div>
+      </div>
+    </section>
+
+    <section class="quote quote--plain">
+      <p class="quote__text reveal">Cada recepta té la seva pròpia personalitat.</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center reveal" style="max-width:60ch;margin-inline:auto;margin-bottom:var(--space-12)">
+          <p class="eyebrow">Amb què gaudir-los</p>
+          <h2>Petits plaers per compartir</h2>
+        </div>
+        <div class="pairings reveal" data-delay="1">${maridatges}</div>
+      </div>
+    </section>
+
+    <section class="quote quote--plain">
+      <p class="quote__text reveal">Perquè els millors moments sempre es comparteixen.</p>
+    </section>
+
+    <section class="section text-center" id="empreses">
+      <div class="container container--narrow reveal">
+        <p class="eyebrow mx-auto">Ca la Marxanta</p>
+        <h2>Hi ha oficis que sobreviuen gràcies a qui hi creu</h2>
+        <hr class="rule mx-auto">
+        <p class="lead mx-auto" style="margin-bottom:var(--space-8)">
+          Hi ha receptes que passen de generació en generació. I hi ha petits plaers que mantenen el mateix sabor de fa molts anys. Això és Ca la Marxanta.
+        </p>
+        <div class="hero__actions" style="justify-content:center">
+          <a class="btn btn--primary" href="${p}colleccio/">Veure la col·lecció</a>
+          <a class="btn btn--secondary" href="${p}empreses/">Empreses i professionals</a>
+        </div>
+      </div>
+    </section>
+`;
+
+  return head(p, {
+    title: "Ca la Marxanta · Carquinyolis artesans d'Horta (Barcelona)",
+    desc: "Carquinyolis, Petarrons i Porretes 100% artesans, amb mantega artesana i avellanes i ametlles de Catalunya. Una tradició catalana nascuda al barri d'Horta el 2018.",
+    css: CSS_PORTADA,
+    transparent: true,
+    canonical: 'https://www.carquinyolisdhorta.com/',
+    og: {
+      title: "Ca la Marxanta · Carquinyolis artesans d'Horta",
+      desc: "No volem vendre't un producte, volem que t'agradi.",
+      image: 'https://www.carquinyolisdhorta.com/images/workshop/obrador-hero.jpg',
+      locale: 'ca_ES'
+    },
+    jsonld
+  }) + body + foot(p, { id: 'contacte' });
+}
+
 /* ---------- Escriure fitxers ---------- */
 for (const [name, htmlFn] of [['historia', historiaPage], ['obrador', obradorPage], ['trobans', trobansPage], ['porta-nos-al-teu-barri', barriPage], ['empreses', empresesPage], ['contacte', contactePage]]) {
   await mkdir(join(ROOT, name), { recursive: true });
@@ -739,6 +968,7 @@ for (const lp of legals.pages) {
   await writeFile(join(dir, 'index.html'), legalPage(lp));
 }
 await writeFile(join(ROOT, '404.html'), noTrobadaPage());
+await writeFile(join(ROOT, 'index.html'), portadaPage());
 
 await mkdir(join(ROOT, 'colleccio'), { recursive: true });
 await writeFile(join(ROOT, 'colleccio', 'index.html'), collectionPage());
