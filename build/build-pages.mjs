@@ -12,6 +12,11 @@ const data = JSON.parse(await readFile(join(ROOT, 'data', 'productes.json'), 'ut
 const venda = JSON.parse(await readFile(join(ROOT, 'data', 'punts-venda.json'), 'utf8'));
 const legals = JSON.parse(await readFile(join(ROOT, 'data', 'legals.json'), 'utf8'));
 const recos = JSON.parse(await readFile(join(ROOT, 'data', 'recomanacions.json'), 'utf8'));
+/* Textos de la interfície. Un fitxer per idioma; de moment només hi ha el
+   català, que és l'original. En afegir textos.es.json i textos.en.json, això
+   passarà a ser un bucle per idioma. */
+const T = JSON.parse(await readFile(join(ROOT, 'data', 'textos.ca.json'), 'utf8'));
+const R = T.rutes;
 const familyById = Object.fromEntries(data.families.map((f) => [f.id, f]));
 
 /* Perfils de sabor orientatius per família (eixos 0–5). Editorial, no analític. */
@@ -74,7 +79,7 @@ function head(p, { title, desc, jsonld = '', css = CSS_INTERIOR, transparent = f
   <meta property="og:locale" content="${esc(og.locale)}">
   <meta name="twitter:card" content="summary_large_image">` : '';
   return `<!DOCTYPE html>
-<html lang="ca">
+<html lang="${T.html_lang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -87,24 +92,24 @@ function head(p, { title, desc, jsonld = '', css = CSS_INTERIOR, transparent = f
   ${jsonld ? `<script type="application/ld+json">${jsonld}</script>` : ''}
 </head>
 <body>
-<a class="skip-link" href="#contingut">Salta al contingut</a>
+<a class="skip-link" href="#contingut">${esc(T.nav.salta)}</a>
 <header class="header${transparent ? '' : ' is-scrolled'}" data-header>
   <div class="header__inner">
-    <a class="brand" href="${p}index.html" aria-label="Ca la Marxanta — inici">
+    <a class="brand" href="${p}index.html" aria-label="${esc(T.nav.inici_aria)}">
       <img class="brand__logo" src="${p}images/brand/logo.png" width="360" height="306" alt="Ca la Marxanta">
     </a>
-    <nav class="nav" id="menu" data-nav aria-label="Navegació principal">
+    <nav class="nav" id="menu" data-nav aria-label="${esc(T.nav.aria)}">
       <ul class="nav__list">
-        <li><a class="nav__link" href="${p}historia/">Història</a></li>
-        <li><a class="nav__link" href="${p}obrador/">L'obrador</a></li>
-        <li><a class="nav__link" href="${p}colleccio/">Col·lecció</a></li>
-        <li><a class="nav__link" href="${p}trobans/">On trobar-nos</a></li>
-        <li><a class="nav__link" href="${p}empreses/">Empreses</a></li>
-        <li><a class="nav__link" href="${p}contacte/">Contacte</a></li>
+        <li><a class="nav__link" href="${p}${R.historia}/">${esc(T.nav.historia)}</a></li>
+        <li><a class="nav__link" href="${p}${R.obrador}/">${esc(T.nav.obrador)}</a></li>
+        <li><a class="nav__link" href="${p}${R.colleccio}/">${esc(T.nav.colleccio)}</a></li>
+        <li><a class="nav__link" href="${p}${R.trobans}/">${esc(T.nav.trobans)}</a></li>
+        <li><a class="nav__link" href="${p}${R.empreses}/">${esc(T.nav.empreses)}</a></li>
+        <li><a class="nav__link" href="${p}${R.contacte}/">${esc(T.nav.contacte)}</a></li>
       </ul>
       <!-- Amb salt de línia entre ells: enganxats, un lector de pantalla els llegeix
            com una sola paraula ("CAESEN") i en copiar el text surten junts. -->
-      <div class="nav__lang" aria-label="Idioma">
+      <div class="nav__lang" aria-label="${esc(T.nav.idioma)}">
         <a href="${p}index.html" aria-current="true">CA</a>
         <span>ES</span>
         <span>EN</span>
@@ -112,7 +117,7 @@ function head(p, { title, desc, jsonld = '', css = CSS_INTERIOR, transparent = f
     </nav>
     <!-- aria-controls ha d'apuntar a un id que existeixi: és el <nav id="menu"> de sobre.
          A la portada escrita a mà hi era però el <nav> no tenia id, així que no apuntava enlloc. -->
-    <button class="nav__toggle" data-nav-toggle aria-label="Obre el menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <button class="nav__toggle" data-nav-toggle aria-label="${esc(T.nav.obre_menu)}" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 <main id="contingut">`;
@@ -125,30 +130,30 @@ function foot(p, { id = '' } = {}) {
     <div class="footer__grid">
       <div>
         <p class="footer__brand-name">Ca la Marxanta</p>
-        <p class="footer__tagline">Carquinyolis, Porretes i Petarrons 100% artesans, elaborats al barri d'Horta. No volem vendre't un producte, volem que t'agradi.</p>
+        <p class="footer__tagline">${esc(T.peu.tagline)}</p>
         <div class="footer__social"><a href="https://www.instagram.com/calamarxanta_/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></div>
       </div>
-      <div class="footer__col"><h4>Explora</h4><ul>
-        <li><a href="${p}historia/">La nostra història</a></li>
-        <li><a href="${p}obrador/">L'obrador</a></li>
-        <li><a href="${p}colleccio/">Col·lecció</a></li>
-        <li><a href="${p}trobans/">On trobar-nos</a></li>
-        <li><a href="${p}porta-nos-al-teu-barri/">Porta'ns al teu barri</a></li>
-        <li><a href="${p}empreses/">Empreses</a></li>
-        <li><a href="${p}contacte/">Contacte</a></li>
+      <div class="footer__col"><h4>${esc(T.peu.explora)}</h4><ul>
+        <li><a href="${p}${R.historia}/">${esc(T.peu.historia_llarg)}</a></li>
+        <li><a href="${p}${R.obrador}/">${esc(T.nav.obrador)}</a></li>
+        <li><a href="${p}${R.colleccio}/">${esc(T.nav.colleccio)}</a></li>
+        <li><a href="${p}${R.trobans}/">${esc(T.nav.trobans)}</a></li>
+        <li><a href="${p}${R.barri}/">${esc(T.peu.barri)}</a></li>
+        <li><a href="${p}${R.empreses}/">${esc(T.nav.empreses)}</a></li>
+        <li><a href="${p}${R.contacte}/">${esc(T.nav.contacte)}</a></li>
       </ul></div>
-      <div class="footer__col"><h4>Contacte</h4><ul>
-        <li>Carrer Plutó, 24<br>08035 Barcelona</li>
+      <div class="footer__col"><h4>${esc(T.peu.contacte)}</h4><ul>
+        <li>${T.peu.adreca}</li>
         <li><a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a></li>
         <li><a href="tel:+34608387092">+34 608 387 092</a></li>
       </ul></div>
     </div>
     <div class="footer__bottom">
-      <p>Carquinyolis d'Horta © <span data-year>2026</span> · Ca la Marxanta</p>
+      <p>${esc(T.peu.copyright)} <span data-year>2026</span> · Ca la Marxanta</p>
       <div class="footer__legal">
-        <a href="${p}legal/avis-legal/">Nota legal</a>
-        <a href="${p}legal/politica-de-privacitat/">Política de privacitat</a>
-        <a href="${p}legal/politica-de-cookies/">Política de cookies</a>
+        <a href="${p}${R.legal}/avis-legal/">${esc(T.peu.nota_legal)}</a>
+        <a href="${p}${R.legal}/politica-de-privacitat/">${esc(T.peu.privacitat)}</a>
+        <a href="${p}${R.legal}/politica-de-cookies/">${esc(T.peu.cookies)}</a>
       </div>
     </div>
   </div>
@@ -161,12 +166,12 @@ function foot(p, { id = '' } = {}) {
 function card(prod, p) {
   const fam = familyById[prod.familia];
   return `<article class="family-card ${prod.familia === 'petarrons' ? 'family-card--petarrons' : prod.familia === 'porretes-del-padri' ? 'family-card--porretes' : ''} reveal">
-    <a href="${p}colleccio/${prod.slug}/" style="display:flex;flex-direction:column;height:100%">
+    <a href="${p}${R.colleccio}/${prod.slug}/" style="display:flex;flex-direction:column;height:100%">
       <div class="family-card__media"><img src="${p}${prod.imatge}" alt="${esc(prod.nom)} ${esc(prod.varietat)}"></div>
       <div class="family-card__body">
         <h3>${esc(prod.nom)}</h3>
-        <p class="family-card__variety">${esc(prod.varietat)}${prod.temporada ? ' · de temporada' : ''}</p>
-        <span class="link-arrow">Veure la fitxa <span>→</span></span>
+        <p class="family-card__variety">${esc(prod.varietat)}${prod.temporada ? ` · ${esc(T.comu.de_temporada)}` : ''}</p>
+        <span class="link-arrow">${esc(T.comu.veure_fitxa)} <span>→</span></span>
       </div>
     </a>
   </article>`;
@@ -190,7 +195,7 @@ function collectionPage() {
   const body = `
   <section class="section">
     <div class="container">
-      <nav class="breadcrumb" aria-label="Molla de pa"><a href="${p}index.html">Inici</a><span>›</span>Col·lecció</nav>
+      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span>Col·lecció</nav>
       <div class="page-head text-center" style="max-width:60ch;margin-inline:auto;padding-top:var(--space-12)">
         <p class="eyebrow mx-auto">La nostra col·lecció</p>
         <h1>Hi ha receptes que no canvien. Només milloren amb el temps.</h1>
@@ -228,7 +233,7 @@ function productPage(prod) {
   const body = `
   <section class="section section--tight">
     <div class="container">
-      <nav class="breadcrumb" aria-label="Molla de pa"><a href="${p}index.html">Inici</a><span>›</span><a href="${p}colleccio/">Col·lecció</a><span>›</span>${esc(prod.nom)} · ${esc(prod.varietat)}</nav>
+      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span><a href="${p}${R.colleccio}/">Col·lecció</a><span>›</span>${esc(prod.nom)} · ${esc(prod.varietat)}</nav>
       <div class="product" style="margin-top:var(--space-8)">
         <div class="product__media reveal"><img src="${p}${prod.imatge}" alt="Caixa de ${esc(prod.nom)} ${esc(prod.varietat)} (150 g)"></div>
         <div class="product__info reveal" data-delay="1">
@@ -244,8 +249,8 @@ function productPage(prod) {
           <div class="flavour">
             ${flavour.map(([label, v]) => `<div class="flavour__row"><span class="flavour__label">${label}</span><span class="flavour__bar"><i style="width:${v*20}%"></i></span></div>`).join('\n')}
           </div>
-          <a class="btn btn--primary" href="${p}trobans/">On comprar-los</a>
-          <p class="product__hint">No el trobes a prop de casa? <a href="${p}porta-nos-al-teu-barri/">Digues-nos on t'agradaria trobar-lo</a>.</p>
+          <a class="btn btn--primary" href="${p}${R.trobans}/">On comprar-los</a>
+          <p class="product__hint">No el trobes a prop de casa? <a href="${p}${R.barri}/">Digues-nos on t'agradaria trobar-lo</a>.</p>
 
           <div class="info-block">
             <h3>Ingredients</h3>
@@ -300,7 +305,7 @@ function historiaPage() {
   const body = `
   <section class="section section--tight">
     <div class="container">
-      <nav class="breadcrumb" aria-label="Molla de pa"><a href="${p}index.html">Inici</a><span>›</span>Història</nav>
+      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span>Història</nav>
       <div class="page-head story-intro" style="padding-top:var(--space-12)">
         <p class="eyebrow">La nostra història</p>
         <h1>Les millors històries comencen amb una decisió</h1>
@@ -349,7 +354,7 @@ function historiaPage() {
     <h2>Cada dia tornem a començar</h2>
     <hr class="rule mx-auto">
     <p class="lead mx-auto" style="margin-bottom:var(--space-8)">Perquè creiem que les millors tradicions mereixen seguir vives.</p>
-    <a class="btn btn--primary" href="${p}obrador/">Descobreix com els elaborem</a>
+    <a class="btn btn--primary" href="${p}${R.obrador}/">Descobreix com els elaborem</a>
   </div></section>`;
   return head(p, { title: "La nostra història · Ca la Marxanta", desc: "La història de Ca la Marxanta: un obrador de carquinyolis artesans nascut al barri d'Horta el 2018." }) + body + foot(p);
 }
@@ -376,7 +381,7 @@ function obradorPage() {
   const body = `
   <section class="section section--tight">
     <div class="container">
-      <nav class="breadcrumb" aria-label="Molla de pa"><a href="${p}index.html">Inici</a><span>›</span>L'obrador</nav>
+      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span>L'obrador</nav>
       <div class="page-head story-intro" style="padding-top:var(--space-12)">
         <p class="eyebrow">L'obrador</p>
         <h1>Les coses ben fetes necessiten temps</h1>
@@ -412,7 +417,7 @@ function obradorPage() {
     <h2>Ja tens gana?</h2>
     <hr class="rule mx-auto">
     <p class="lead mx-auto" style="margin-bottom:var(--space-8)">Descobreix tota la col·lecció i troba el teu preferit.</p>
-    <a class="btn btn--primary" href="${p}colleccio/">Veure la col·lecció</a>
+    <a class="btn btn--primary" href="${p}${R.colleccio}/">Veure la col·lecció</a>
   </div></section>`;
   return head(p, { title: "L'obrador · Ca la Marxanta", desc: "Així elaborem els nostres carquinyolis: sis passos artesanals, tallats un a un, amb ingredients de proximitat." }) + body + foot(p);
 }
@@ -439,7 +444,7 @@ function trobansPage() {
   const body = `
   <section class="section section--tight">
     <div class="container">
-      <nav class="breadcrumb" aria-label="Molla de pa"><a href="${p}index.html">Inici</a><span>›</span>On trobar-nos</nav>
+      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span>On trobar-nos</nav>
       <div class="page-head story-intro" style="padding-top:var(--space-12)">
         <p class="eyebrow">On trobar-nos</p>
         <h1>On pots comprar els nostres productes</h1>
@@ -459,13 +464,13 @@ function trobansPage() {
     <div class="invite" data-empty hidden>
       <h2 data-empty-title>Encara no ens hi trobaràs</h2>
       <p>Però ens hi agradaria arribar. Coneixes una botiga que hi encaixaria? Digues-nos-ho i hi anirem a trucar.</p>
-      <a class="btn btn--primary" href="${p}porta-nos-al-teu-barri/" data-empty-cta>Recomana'ns una botiga</a>
+      <a class="btn btn--primary" href="${p}${R.barri}/" data-empty-cta>Recomana'ns una botiga</a>
     </div>
 
     <div class="invite invite--band reveal">
       <h3>No ens trobes a prop de casa?</h3>
       <p>Som en ${venda.establiments.length} establiments, però ens en falten molts. Si al teu barri, ciutat o poble hi ha una botiga que hi encaixaria, recomana-la: cada recomanació ens obre una porta.</p>
-      <a class="btn btn--secondary" href="${p}porta-nos-al-teu-barri/">Porta'ns al teu barri</a>
+      <a class="btn btn--secondary" href="${p}${R.barri}/">Porta'ns al teu barri</a>
     </div>
   </div></section>
 
@@ -474,7 +479,7 @@ function trobansPage() {
     <h2>Tens un negoci i vols oferir els nostres productes?</h2>
     <hr class="rule mx-auto">
     <p class="lead mx-auto" style="margin-bottom:var(--space-8)">Col·laborem amb cafeteries, restaurants, hotels i botigues gurmet.</p>
-    <a class="btn btn--primary" href="${p}empreses/">Parlem-ne</a>
+    <a class="btn btn--primary" href="${p}${R.empreses}/">Parlem-ne</a>
   </div></section>`;
   return head(p, { title: "On trobar-nos · Ca la Marxanta", desc: "Llistat de botigues i establiments on comprar els carquinyolis, porretes i petarrons de Ca la Marxanta a Barcelona i Catalunya." }) + body + foot(p);
 }
@@ -505,7 +510,7 @@ function barriPage() {
   const body = `
   <section class="section section--tight">
     <div class="container">
-      <nav class="breadcrumb" aria-label="Molla de pa"><a href="${p}index.html">Inici</a><span>›</span><a href="${p}trobans/">On trobar-nos</a><span>›</span>Porta'ns al teu barri</nav>
+      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span><a href="${p}${R.trobans}/">On trobar-nos</a><span>›</span>Porta'ns al teu barri</nav>
       <div class="page-head story-intro" style="padding-top:var(--space-12)">
         <p class="eyebrow">Porta'ns al teu barri</p>
         <h1 data-barri-title>Quina botiga hi encaixaria?</h1>
@@ -518,7 +523,7 @@ function barriPage() {
   <section class="section section--tight"><div class="container">
     <form class="form reveal" name="barri" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-form="barri" novalidate>
       <input type="hidden" name="form-name" value="barri">
-      <p hidden aria-hidden="true"><label>No omplis aquest camp <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <p hidden aria-hidden="true"><label>${esc(T.comu.no_omplis)} <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <div class="form__grid">
         <div class="field"><label for="b-barri">El teu barri, ciutat o poble *</label><input id="b-barri" name="barri" required autocomplete="address-level3"><span class="field__error"></span></div>
         <div class="field"><label for="b-cp">Codi postal</label><input id="b-cp" name="cp" inputmode="numeric" autocomplete="postal-code"><span class="field__error"></span></div>
@@ -527,10 +532,10 @@ function barriPage() {
         <div class="field form__row--full"><label for="b-motiu">Per què hi encaixaria?</label><textarea id="b-motiu" name="motiu" placeholder="És una botiga de barri amb producte de proximitat…"></textarea><span class="field__error"></span></div>
         <div class="field"><label for="b-nom">El teu nom</label><input id="b-nom" name="nom" autocomplete="name"><span class="field__error"></span></div>
         <div class="field"><label for="b-email">Correu</label><input id="b-email" name="email" type="email" autocomplete="email"><span class="field__error"></span></div>
-        <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> Accepto la <a href="${p}legal/politica-de-privacitat/">política de privacitat</a> i el tractament de les meves dades. *</label><span class="field__error"></span></div>
+        <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> ${esc(T.comu.consent)} <a href="${p}${R.legal}/politica-de-privacitat/">${esc(T.comu.consent_privacitat)}</a> ${esc(T.comu.consent_dades)} *</label><span class="field__error"></span></div>
         <div class="form__row--full"><label class="consent"><input type="checkbox" name="citable"> Autoritzo que Ca la Marxanta expliqui a la botiga que la recomanació ve d'un client del barri (sense donar el meu nom).</label></div>
       </div>
-      <p class="form-error" data-form-error hidden role="alert">No hem pogut enviar el formulari. Torna-ho a provar o escriu-nos a <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
+      <p class="form-error" data-form-error hidden role="alert">${esc(T.comu.error_enviament)} <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
       <p style="margin-top:var(--space-8)"><button type="submit" class="btn btn--primary">Enviar la recomanació</button></p>
     </form>
     <div class="form-success" id="barri-success">
@@ -551,7 +556,7 @@ ${demanda}
     <h2>Tens un negoci i vols oferir els nostres productes?</h2>
     <hr class="rule mx-auto">
     <p class="lead mx-auto" style="margin-bottom:var(--space-8);color:rgba(250,247,241,.85)">No cal esperar que et recomanin: escriu-nos i en parlem.</p>
-    <a class="btn btn--ghost-light" href="${p}empreses/">Parlem-ne</a>
+    <a class="btn btn--ghost-light" href="${p}${R.empreses}/">Parlem-ne</a>
   </div></section>`;
   return head(p, {
     title: "Porta'ns al teu barri · Ca la Marxanta",
@@ -581,7 +586,7 @@ function empresesPage() {
   const body = `
   <section class="section section--tight">
     <div class="container">
-      <nav class="breadcrumb" aria-label="Molla de pa"><a href="${p}index.html">Inici</a><span>›</span>Empreses</nav>
+      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span>Empreses</nav>
       <div class="page-head story-intro" style="padding-top:var(--space-12)">
         <p class="eyebrow">Empreses i professionals</p>
         <h1>Porta la tradició de Ca la Marxanta al teu negoci</h1>
@@ -617,7 +622,7 @@ function empresesPage() {
     <div class="story-intro reveal" style="margin-bottom:var(--space-8)"><p class="eyebrow">Parlem-ne</p><h2>Explica'ns el teu projecte</h2><p class="lead">Si busques un proveïdor de confiança per incorporar un producte artesà de qualitat, ens encantarà conèixer-te.</p></div>
     <form class="form reveal" name="empreses" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-form="empreses" novalidate>
       <input type="hidden" name="form-name" value="empreses">
-      <p hidden aria-hidden="true"><label>No omplis aquest camp <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <p hidden aria-hidden="true"><label>${esc(T.comu.no_omplis)} <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <div class="form__grid">
         <div class="field"><label for="e-nom">Nom *</label><input id="e-nom" name="nom" required><span class="field__error"></span></div>
         <div class="field"><label for="e-empresa">Empresa *</label><input id="e-empresa" name="empresa" required><span class="field__error"></span></div>
@@ -625,8 +630,8 @@ function empresesPage() {
         <div class="field"><label for="e-email">Correu electrònic *</label><input id="e-email" name="email" type="email" required><span class="field__error"></span></div>
         <div class="field"><label for="e-tel">Telèfon</label><input id="e-tel" name="telefon" type="tel"><span class="field__error"></span></div>
         <div class="field"><label for="e-prov">Província</label><input id="e-prov" name="provincia"><span class="field__error"></span></div>
-        <div class="field"><label for="e-tipus">Tipus de negoci</label><select id="e-tipus" name="tipus"><option value="">Selecciona…</option><option>Restaurant</option><option>Hotel</option><option>Cafeteria</option><option>Distribuïdor</option><option>Botiga</option><option>Empresa</option><option>Altres</option></select><span class="field__error"></span></div>
-        <div class="field"><label for="e-volum">Volum aproximat</label><select id="e-volum" name="volum"><option value="">Selecciona…</option><option>Petit (degustació)</option><option>Mitjà (puntual)</option><option>Gran (recurrent)</option></select><span class="field__error"></span></div>
+        <div class="field"><label for="e-tipus">Tipus de negoci</label><select id="e-tipus" name="tipus"><option value="">${esc(T.comu.selecciona)}</option><option>Restaurant</option><option>Hotel</option><option>Cafeteria</option><option>Distribuïdor</option><option>Botiga</option><option>Empresa</option><option>Altres</option></select><span class="field__error"></span></div>
+        <div class="field"><label for="e-volum">Volum aproximat</label><select id="e-volum" name="volum"><option value="">${esc(T.comu.selecciona)}</option><option>Petit (degustació)</option><option>Mitjà (puntual)</option><option>Gran (recurrent)</option></select><span class="field__error"></span></div>
         <div class="field form__row--full"><label>Quins productes t'interessen?</label><div class="checks">
           <label class="check"><input type="checkbox" name="productes" value="Carquinyolis"> Carquinyolis</label>
           <label class="check"><input type="checkbox" name="productes" value="Porretes"> Porretes</label>
@@ -634,9 +639,9 @@ function empresesPage() {
           <label class="check"><input type="checkbox" name="productes" value="Tots"> Tots</label>
         </div></div>
         <div class="field form__row--full"><label for="e-msg">Missatge</label><textarea id="e-msg" name="missatge"></textarea><span class="field__error"></span></div>
-        <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> Accepto la <a href="${p}legal/politica-de-privacitat/">política de privacitat</a> i el tractament de les meves dades. *</label><span class="field__error"></span></div>
+        <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> ${esc(T.comu.consent)} <a href="${p}${R.legal}/politica-de-privacitat/">${esc(T.comu.consent_privacitat)}</a> ${esc(T.comu.consent_dades)} *</label><span class="field__error"></span></div>
       </div>
-      <p class="form-error" data-form-error hidden role="alert">No hem pogut enviar el formulari. Torna-ho a provar o escriu-nos a <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
+      <p class="form-error" data-form-error hidden role="alert">${esc(T.comu.error_enviament)} <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
       <p style="margin-top:var(--space-8)"><button type="submit" class="btn btn--primary">Sol·licitar informació</button></p>
     </form>
     <div class="form-success" id="empreses-success">
@@ -647,7 +652,7 @@ function empresesPage() {
       <p class="form-success__lead">El llegirem amb calma i et respondrem <strong>personalment</strong>. No treballem amb catàlegs automàtics: preferim entendre primer què necessites.</p>
       <p class="form-success__note">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h2.2a1.5 1.5 0 0 1 1.45 1.1l.7 2.5a1.5 1.5 0 0 1-.5 1.55l-1.3 1a12 12 0 0 0 5.8 5.8l1-1.3a1.5 1.5 0 0 1 1.55-.5l2.5.7A1.5 1.5 0 0 1 20 16.3v2.2a1.5 1.5 0 0 1-1.5 1.5A15 15 0 0 1 4 5.5Z"/></svg>
-        <span>Si tens pressa, truca'ns al <a href="tel:+34608387092">+34 608 387 092</a>.</span>
+        <span>${esc(T.comu.pressa)} <a href="tel:+34608387092">+34 608 387 092</a>.</span>
       </p>
     </div>
   </div></section>`;
@@ -660,7 +665,7 @@ function contactePage() {
   const body = `
   <section class="section section--tight">
     <div class="container">
-      <nav class="breadcrumb" aria-label="Molla de pa"><a href="${p}index.html">Inici</a><span>›</span>Contacte</nav>
+      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span>Contacte</nav>
       <div class="page-head story-intro" style="padding-top:var(--space-12)">
         <p class="eyebrow">Contacte</p>
         <h1>Parlem</h1>
@@ -683,14 +688,14 @@ function contactePage() {
       <div class="editorial__media reveal" data-delay="1">
         <form class="form" name="contacte" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-form="contacte" novalidate style="max-width:none">
           <input type="hidden" name="form-name" value="contacte">
-          <p hidden aria-hidden="true"><label>No omplis aquest camp <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <p hidden aria-hidden="true"><label>${esc(T.comu.no_omplis)} <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <div class="form__grid">
             <div class="field"><label for="c-nom">Nom *</label><input id="c-nom" name="nom" required><span class="field__error"></span></div>
             <div class="field"><label for="c-email">Correu electrònic *</label><input id="c-email" name="email" type="email" required><span class="field__error"></span></div>
             <div class="field form__row--full"><label for="c-msg">Missatge *</label><textarea id="c-msg" name="missatge" required></textarea><span class="field__error"></span></div>
-            <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> Accepto la <a href="${p}legal/politica-de-privacitat/">política de privacitat</a>. *</label><span class="field__error"></span></div>
+            <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> ${esc(T.comu.consent_curt)} <a href="${p}${R.legal}/politica-de-privacitat/">${esc(T.comu.consent_privacitat)}</a>. *</label><span class="field__error"></span></div>
           </div>
-          <p class="form-error" data-form-error hidden role="alert">No hem pogut enviar el formulari. Torna-ho a provar o escriu-nos a <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
+          <p class="form-error" data-form-error hidden role="alert">${esc(T.comu.error_enviament)} <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
           <p style="margin-top:var(--space-6)"><button type="submit" class="btn btn--primary">Escriu-nos</button></p>
         </form>
         <div class="form-success" id="contacte-success">
@@ -700,7 +705,7 @@ function contactePage() {
           <p class="form-success__lead">El llegirem nosaltres i et respondrem <strong>personalment</strong>.</p>
           <p class="form-success__note">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h2.2a1.5 1.5 0 0 1 1.45 1.1l.7 2.5a1.5 1.5 0 0 1-.5 1.55l-1.3 1a12 12 0 0 0 5.8 5.8l1-1.3a1.5 1.5 0 0 1 1.55-.5l2.5.7A1.5 1.5 0 0 1 20 16.3v2.2a1.5 1.5 0 0 1-1.5 1.5A15 15 0 0 1 4 5.5Z"/></svg>
-            <span>Si tens pressa, truca'ns al <a href="tel:+34608387092">+34 608 387 092</a>.</span>
+            <span>${esc(T.comu.pressa)} <a href="tel:+34608387092">+34 608 387 092</a>.</span>
           </p>
         </div>
       </div>
@@ -729,8 +734,8 @@ function noTrobadaPage() {
     <p class="lead" style="margin-bottom:var(--space-12)">Potser l'enllaç era antic o hi ha alguna lletra fora de lloc. Tornem al camí?</p>
     <p style="display:flex;gap:var(--space-4);flex-wrap:wrap;justify-content:center">
       <a class="btn btn--primary" href="${arrel}">Anar a l'inici</a>
-      <a class="btn btn--secondary" href="${arrel}colleccio/">Veure la col·lecció</a>
-      <a class="btn btn--secondary" href="${arrel}trobans/">On trobar-nos</a>
+      <a class="btn btn--secondary" href="${arrel}${R.colleccio}/">Veure la col·lecció</a>
+      <a class="btn btn--secondary" href="${arrel}${R.trobans}/">On trobar-nos</a>
     </p>
   </div></section>`;
   return head(arrel, { title: 'Pàgina no trobada · Ca la Marxanta', desc: "La pàgina que busques no existeix. Torna a l'inici de Ca la Marxanta." }) + body + foot(arrel);
@@ -743,7 +748,7 @@ function legalPage(page) {
     (b.h ? `<h2>${esc(b.h)}</h2>` : '') + b.p.map((par) => `<p>${par}</p>`).join('\n')).join('\n');
   const body = `
   <section class="section section--tight"><div class="container">
-    <nav class="breadcrumb" aria-label="Molla de pa"><a href="${p}index.html">Inici</a><span>›</span>${esc(page.title)}</nav>
+    <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span>${esc(page.title)}</nav>
     <div class="page-head" style="padding-top:var(--space-8)"><h1>${esc(page.title)}</h1><hr class="rule"></div>
     <div class="legal reveal">${blocks}</div>
   </div></section>`;
@@ -805,7 +810,7 @@ function portadaPage() {
               <h3>${esc(nom)}</h3>
               <p class="family-card__variety">${esc(varietat)}</p>
               <p>${esc(text)}</p>
-              <a class="link-arrow" href="${p}colleccio/${slug}/">Descobrir <span>→</span></a>
+              <a class="link-arrow" href="${p}${R.colleccio}/${slug}/">Descobrir <span>→</span></a>
             </div>
           </article>`).join('\n          ');
 
@@ -822,7 +827,7 @@ function portadaPage() {
         <p class="hero__subtitle">Cada recepta neix del respecte pels ingredients, pel temps i per una manera de fer les coses que gairebé no ha canviat amb els anys.</p>
         <div class="hero__actions">
           <a class="btn btn--primary" href="#historia">Descobreix la nostra història</a>
-          <a class="btn btn--ghost-light" href="${p}colleccio/">Veure la col·lecció</a>
+          <a class="btn btn--ghost-light" href="${p}${R.colleccio}/">Veure la col·lecció</a>
         </div>
       </div>
       <a class="hero__scroll" href="#historia" aria-label="Baixa per descobrir més">
@@ -845,7 +850,7 @@ function portadaPage() {
             <p>Darrere de cada carquinyoli hi ha una decisió valenta: apostar per un ofici tradicional, recuperar una recepta i dedicar-hi el temps necessari per fer les coses bé. Així va néixer Ca la Marxanta, i així continua creixent.</p>
             <p style="margin-top:1rem"><em>No volem vendre't un producte, volem que t'agradi.</em></p>
             <p style="margin-top:1.5rem">
-              <a class="link-arrow" href="${p}historia/">Conèixer la nostra història <span>→</span></a>
+              <a class="link-arrow" href="${p}${R.historia}/">Conèixer la nostra història <span>→</span></a>
             </p>
           </div>
         </div>
@@ -934,8 +939,8 @@ function portadaPage() {
           Hi ha receptes que passen de generació en generació. I hi ha petits plaers que mantenen el mateix sabor de fa molts anys. Això és Ca la Marxanta.
         </p>
         <div class="hero__actions" style="justify-content:center">
-          <a class="btn btn--primary" href="${p}colleccio/">Veure la col·lecció</a>
-          <a class="btn btn--secondary" href="${p}empreses/">Empreses i professionals</a>
+          <a class="btn btn--primary" href="${p}${R.colleccio}/">Veure la col·lecció</a>
+          <a class="btn btn--secondary" href="${p}${R.empreses}/">Empreses i professionals</a>
         </div>
       </div>
     </section>
@@ -957,24 +962,26 @@ function portadaPage() {
   }) + body + foot(p, { id: 'contacte' });
 }
 
-/* ---------- Escriure fitxers ---------- */
-for (const [name, htmlFn] of [['historia', historiaPage], ['obrador', obradorPage], ['trobans', trobansPage], ['porta-nos-al-teu-barri', barriPage], ['empreses', empresesPage], ['contacte', contactePage]]) {
-  await mkdir(join(ROOT, name), { recursive: true });
-  await writeFile(join(ROOT, name, 'index.html'), htmlFn());
+/* ---------- Escriure fitxers ----------
+   Els noms de carpeta surten de R (data/textos.<idioma>.json), no escrits a mà:
+   quan hi hagi castellà i anglès, cada idioma tindrà les seves adreces. */
+for (const [ruta, htmlFn] of [[R.historia, historiaPage], [R.obrador, obradorPage], [R.trobans, trobansPage], [R.barri, barriPage], [R.empreses, empresesPage], [R.contacte, contactePage]]) {
+  await mkdir(join(ROOT, ruta), { recursive: true });
+  await writeFile(join(ROOT, ruta, 'index.html'), htmlFn());
 }
 for (const lp of legals.pages) {
-  const dir = join(ROOT, 'legal', lp.slug);
+  const dir = join(ROOT, R.legal, lp.slug);
   await mkdir(dir, { recursive: true });
   await writeFile(join(dir, 'index.html'), legalPage(lp));
 }
 await writeFile(join(ROOT, '404.html'), noTrobadaPage());
 await writeFile(join(ROOT, 'index.html'), portadaPage());
 
-await mkdir(join(ROOT, 'colleccio'), { recursive: true });
-await writeFile(join(ROOT, 'colleccio', 'index.html'), collectionPage());
+await mkdir(join(ROOT, R.colleccio), { recursive: true });
+await writeFile(join(ROOT, R.colleccio, 'index.html'), collectionPage());
 let count = 0;
 for (const prod of data.productes) {
-  const dir = join(ROOT, 'colleccio', prod.slug);
+  const dir = join(ROOT, R.colleccio, prod.slug);
   await mkdir(dir, { recursive: true });
   await writeFile(join(dir, 'index.html'), productPage(prod));
   count++;

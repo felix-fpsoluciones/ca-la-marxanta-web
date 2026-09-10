@@ -1,0 +1,64 @@
+{
+  "_": "Textos del web en català. És l'original: el castellà i l'anglès en surten. Les claus són iguals als tres fitxers; si n'afegeixes una aquí, afegeix-la també a textos.es.json i textos.en.json.",
+
+  "codi": "ca",
+  "html_lang": "ca",
+  "og_locale": "ca_ES",
+  "etiqueta": "CA",
+
+  "_rutes": "Carpeta de cada secció. Es tradueixen: una adreça en l'idioma del visitant compta per al cercador. Els noms de producte no, que són marca.",
+  "rutes": {
+    "historia": "historia",
+    "obrador": "obrador",
+    "colleccio": "colleccio",
+    "trobans": "trobans",
+    "barri": "porta-nos-al-teu-barri",
+    "empreses": "empreses",
+    "contacte": "contacte",
+    "legal": "legal"
+  },
+
+  "nav": {
+    "aria": "Navegació principal",
+    "inici_aria": "Ca la Marxanta — inici",
+    "salta": "Salta al contingut",
+    "obre_menu": "Obre el menú",
+    "idioma": "Idioma",
+    "historia": "Història",
+    "obrador": "L'obrador",
+    "colleccio": "Col·lecció",
+    "trobans": "On trobar-nos",
+    "empreses": "Empreses",
+    "contacte": "Contacte"
+  },
+
+  "peu": {
+    "tagline": "Carquinyolis, Porretes i Petarrons 100% artesans, elaborats al barri d'Horta. No volem vendre't un producte, volem que t'agradi.",
+    "explora": "Explora",
+    "historia_llarg": "La nostra història",
+    "barri": "Porta'ns al teu barri",
+    "contacte": "Contacte",
+    "adreca": "Carrer Plutó, 24<br>08035 Barcelona",
+    "copyright": "Carquinyolis d'Horta ©",
+    "nota_legal": "Nota legal",
+    "privacitat": "Política de privacitat",
+    "cookies": "Política de cookies"
+  },
+
+  "comu": {
+    "molla_aria": "Molla de pa",
+    "inici": "Inici",
+    "veure_fitxa": "Veure la fitxa",
+    "de_temporada": "de temporada",
+    "veure_colleccio": "Veure la col·lecció",
+    "parlem_ne": "Parlem-ne",
+    "no_omplis": "No omplis aquest camp",
+    "consent": "Accepto la",
+    "consent_privacitat": "política de privacitat",
+    "consent_dades": "i el tractament de les meves dades.",
+    "consent_curt": "Accepto la",
+    "error_enviament": "No hem pogut enviar el formulari. Torna-ho a provar o escriu-nos a",
+    "selecciona": "Selecciona…",
+    "pressa": "Si tens pressa, truca'ns al"
+  }
+}
