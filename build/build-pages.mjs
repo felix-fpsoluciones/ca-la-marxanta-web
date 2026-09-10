@@ -30,6 +30,9 @@ const FLAVOUR = {
 const PAIR = { cafe:'☕', te:'🍵', 'vi-dolc':'🍷', 'vins-escumosos':'🥂', gelat:'🍨', xocolata:'🍫', llet:'🥛', formatge:'🧀' };
 
 const esc = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+/* JSON per posar dins d'un <script>: cal partir qualsevol "</" o el navegador
+   es pensaria que la etiqueta s'acaba allà. */
+const jsonSegur = (o) => JSON.stringify(o).replace(/</g, '\\u003c');
 
 /* Segell de les targetes d'agraïment: cercle verd amb la porta oberta i raigs */
 const SEGELL = `<svg class="form-success__mark" viewBox="0 0 168 96" aria-hidden="true">
@@ -160,6 +163,7 @@ function foot(p, { id = '' } = {}) {
     </div>
   </div>
 </footer>
+<script>window.CLM_TXT=${jsonSegur(T.js)}</script>
 <script type="module" src="${p}js/main.js"></script>
 </body>
 </html>`;

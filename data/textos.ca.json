@@ -362,6 +362,18 @@
     "gracies_lead": "El llegirem nosaltres i et respondrem <strong>personalment</strong>."
   },
 
+  "_js": "Frases que escriu el JavaScript (js/main.js) i que per tant no són al HTML. {lloc} i {zona} es canvien pel que ha escrit el visitant.",
+  "js": {
+    "buit_titol": "Encara no ens trobaràs a {lloc}",
+    "buit_titol_sense": "Encara no ens hi trobaràs",
+    "barri_titol": "Quina botiga de {zona} hi encaixaria?",
+    "barri_lead": "Encara no ens trobes a {zona}, i ens hi agradaria arribar. Digues-nos quina botiga hi encaixaria i hi anirem a trucar de part teva.",
+    "enviant": "Enviant…",
+    "camp_obligatori": "Aquest camp és obligatori",
+    "correu_invalid": "Introdueix un correu vàlid",
+    "success_lloc": " de {lloc}"
+  },
+
   "error404": {
     "title": "Pàgina no trobada · Ca la Marxanta",
     "desc": "La pàgina que busques no existeix. Torna a l'inici de Ca la Marxanta.",
