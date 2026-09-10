@@ -12,12 +12,63 @@ const data = JSON.parse(await readFile(join(ROOT, 'data', 'productes.json'), 'ut
 const venda = JSON.parse(await readFile(join(ROOT, 'data', 'punts-venda.json'), 'utf8'));
 const legals = JSON.parse(await readFile(join(ROOT, 'data', 'legals.json'), 'utf8'));
 const recos = JSON.parse(await readFile(join(ROOT, 'data', 'recomanacions.json'), 'utf8'));
-/* Textos de la interfície. Un fitxer per idioma; de moment només hi ha el
-   català, que és l'original. En afegir textos.es.json i textos.en.json, això
-   passarà a ser un bucle per idioma. */
-const T = JSON.parse(await readFile(join(ROOT, 'data', 'textos.ca.json'), 'utf8'));
-const R = T.rutes;
+/* --- Idiomes ---
+   El català viu a l'arrel (és l'original i el domini és català); el castellà i
+   l'anglès, a /es/ i /en/. Les funcions de pàgina llegeixen T i R, que canvien
+   a cada volta del bucle final. */
+const IDIOMES = ['ca', 'es', 'en'];
+const TEXTOS = {};
+for (const codi of IDIOMES) {
+  TEXTOS[codi] = JSON.parse(await readFile(join(ROOT, 'data', `textos.${codi}.json`), 'utf8'));
+}
+let T = TEXTOS.ca;      // textos de l'idioma que s'està generant
+let R = T.rutes;        // carpetes de secció d'aquest idioma
+let SUB = '';           // salt extra fins a l'arrel del lloc: '' al català, '../' a la resta
+
+/* Dos camins diferents, i és important no confondre'ls:
+   · p            → arrel DE L'IDIOMA. Per als enllaços entre seccions.
+   · arrelLloc(p) → arrel DEL LLOC. Per al CSS, el JavaScript i les imatges,
+                    que són compartits i viuen fora de /es/ i /en/.
+   Es queden relatius a posta: així el web funciona igual a l'arrel d'un domini
+   que dins d'un subdirectori, com ara a GitHub Pages. */
+const arrelLloc = (p) => p + SUB;
+
+/* Domini final del web. Mentre no hi sigui, els enllaços entre idiomes van
+   relatius (funcionen igual al navegador i el web es pot moure de lloc). Quan
+   el domini estigui en marxa, generar amb:
+     SITE=https://www.carquinyolisdhorta.com node build/build-pages.mjs
+   i les etiquetes hreflang sortiran amb l'adreça completa, que és el que
+   recomana Google. */
+const SITE = process.env.SITE || '';
+
+/* Adreça d'aquesta mateixa pàgina en un altre idioma.
+   `pagina` diu quina pàgina és; sense això no sabríem a quina equivalent anar
+   (les carpetes canvien de nom a cada idioma: colleccio / coleccion / collection). */
+function urlIdioma(p, codi, pagina) {
+  const rutes = TEXTOS[codi].rutes;
+  const carpeta = codi === 'ca' ? '' : `${codi}/`;
+  const base = SITE ? `${SITE}/${carpeta}` : arrelLloc(p) + carpeta;
+  const tipus = pagina && pagina.tipus;
+  if (tipus === 'seccio') return `${base}${rutes[pagina.clau]}/`;
+  if (tipus === 'producte') return `${base}${rutes.colleccio}/${pagina.slug}/`;
+  if (tipus === 'legal') {
+    const lp = legals.pages.find((x) => x.slug === pagina.slug);
+    const slug = codi === 'ca' ? lp.slug : (lp[`slug_${codi}`] || lp.slug);
+    return `${base}${rutes.legal}/${slug}/`;
+  }
+  return `${base}index.html`;   // portada (i qualsevol cas no previst)
+}
+
 const familyById = Object.fromEntries(data.families.map((f) => [f.id, f]));
+
+/* Text d'un producte o família en l'idioma actual. L'original és el català;
+   si encara no hi ha traducció d'un camp, es queda el català abans que buit. */
+const tp = (obj, camp) => (obj[`${camp}_${T.codi}`] ?? obj[camp]);
+const majuscula = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/* Carpeta d'una pàgina legal en l'idioma actual. La clau és sempre el slug
+   català, que fa d'identificador: /legal/avis-legal/ → /es/legal/aviso-legal/ */
+const slugLegal = (clau) => tp(legals.pages.find((x) => x.slug === clau), 'slug');
 
 /* Perfils de sabor orientatius per família (eixos 0–5). Editorial, no analític.
    Van per clau, no per etiqueta: el text el posa el fitxer d'idioma. */
@@ -58,7 +109,7 @@ const DIVISOR = `<div class="form-success__div" aria-hidden="true">
 
 /* Il·lustració del llindar (retallada de la maqueta del client, fons transparent).
    Decorativa: alt buit i lazy, així no es baixa fins que la targeta es mostra. */
-const ESCENA = (p) => `<img class="form-success__scene" src="${p}images/illustrations/llindar.png"
+const ESCENA = (p) => `<img class="form-success__scene" src="${arrelLloc(p)}images/illustrations/llindar.png"
         width="459" height="737" alt="" aria-hidden="true" loading="lazy" decoding="async">`;
 
 /* Fulls d'estil. Les pàgines interiors porten els de fitxa, història i
@@ -73,8 +124,13 @@ const CSS_PORTADA = ['settings', 'base', 'layout', 'animations', 'components/nav
 
 /* transparent: la capçalera arrenca sense vidre perquè va damunt del hero.
    La resta de pàgines no tenen hero, així que hi comencen amb `is-scrolled`. */
-function head(p, { title, desc, jsonld = '', css = CSS_INTERIOR, transparent = false, canonical = '', og = null }) {
-  const fulls = css.map((n) => `<link rel="stylesheet" href="${p}css/${n}.css">`).join('\n  ');
+function head(p, { title, desc, jsonld = '', css = CSS_INTERIOR, transparent = false, canonical = '', og = null, pagina = null }) {
+  const fulls = css.map((n) => `<link rel="stylesheet" href="${arrelLloc(p)}css/${n}.css">`).join('\n  ');
+  /* Diu al cercador que aquestes tres pàgines són la mateixa en tres idiomes,
+     i no contingut duplicat. x-default apunta al català, que és l'original. */
+  const alternatives = IDIOMES.map((codi) =>
+    `<link rel="alternate" hreflang="${codi}" href="${urlIdioma(p, codi, pagina)}">`).join('\n  ')
+    + `\n  <link rel="alternate" hreflang="x-default" href="${urlIdioma(p, 'ca', pagina)}">`;
   const social = og ? `
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Ca la Marxanta">
@@ -93,6 +149,7 @@ function head(p, { title, desc, jsonld = '', css = CSS_INTERIOR, transparent = f
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  ${alternatives}
   ${fulls}
   ${jsonld ? `<script type="application/ld+json">${jsonld}</script>` : ''}
 </head>
@@ -101,7 +158,7 @@ function head(p, { title, desc, jsonld = '', css = CSS_INTERIOR, transparent = f
 <header class="header${transparent ? '' : ' is-scrolled'}" data-header>
   <div class="header__inner">
     <a class="brand" href="${p}index.html" aria-label="${esc(T.nav.inici_aria)}">
-      <img class="brand__logo" src="${p}images/brand/logo.png" width="360" height="306" alt="Ca la Marxanta">
+      <img class="brand__logo" src="${arrelLloc(p)}images/brand/logo.png" width="360" height="306" alt="Ca la Marxanta">
     </a>
     <nav class="nav" id="menu" data-nav aria-label="${esc(T.nav.aria)}">
       <ul class="nav__list">
@@ -113,11 +170,13 @@ function head(p, { title, desc, jsonld = '', css = CSS_INTERIOR, transparent = f
         <li><a class="nav__link" href="${p}${R.contacte}/">${esc(T.nav.contacte)}</a></li>
       </ul>
       <!-- Amb salt de línia entre ells: enganxats, un lector de pantalla els llegeix
-           com una sola paraula ("CAESEN") i en copiar el text surten junts. -->
+           com una sola paraula ("CAESEN") i en copiar el text surten junts.
+           Cada idioma porta a la pàgina equivalent, no a la portada. -->
       <div class="nav__lang" aria-label="${esc(T.nav.idioma)}">
-        <a href="${p}index.html" aria-current="true">CA</a>
-        <span>ES</span>
-        <span>EN</span>
+        ${IDIOMES.map((codi) => codi === T.codi
+          ? `<a href="${urlIdioma(p, codi, pagina)}" aria-current="true">${esc(TEXTOS[codi].etiqueta)}</a>`
+          : `<a href="${urlIdioma(p, codi, pagina)}" hreflang="${codi}" lang="${codi}">${esc(TEXTOS[codi].etiqueta)}</a>`
+        ).join('\n        ')}
       </div>
     </nav>
     <!-- aria-controls ha d'apuntar a un id que existeixi: és el <nav id="menu"> de sobre.
@@ -156,15 +215,15 @@ function foot(p, { id = '' } = {}) {
     <div class="footer__bottom">
       <p>${esc(T.peu.copyright)} <span data-year>2026</span> · Ca la Marxanta</p>
       <div class="footer__legal">
-        <a href="${p}${R.legal}/avis-legal/">${esc(T.peu.nota_legal)}</a>
-        <a href="${p}${R.legal}/politica-de-privacitat/">${esc(T.peu.privacitat)}</a>
-        <a href="${p}${R.legal}/politica-de-cookies/">${esc(T.peu.cookies)}</a>
+        <a href="${p}${R.legal}/${slugLegal('avis-legal')}/">${esc(T.peu.nota_legal)}</a>
+        <a href="${p}${R.legal}/${slugLegal('politica-de-privacitat')}/">${esc(T.peu.privacitat)}</a>
+        <a href="${p}${R.legal}/${slugLegal('politica-de-cookies')}/">${esc(T.peu.cookies)}</a>
       </div>
     </div>
   </div>
 </footer>
 <script>window.CLM_TXT=${jsonSegur(T.js)}</script>
-<script type="module" src="${p}js/main.js"></script>
+<script type="module" src="${arrelLloc(p)}js/main.js"></script>
 </body>
 </html>`;
 }
@@ -173,10 +232,10 @@ function card(prod, p) {
   const fam = familyById[prod.familia];
   return `<article class="family-card ${prod.familia === 'petarrons' ? 'family-card--petarrons' : prod.familia === 'porretes-del-padri' ? 'family-card--porretes' : ''} reveal">
     <a href="${p}${R.colleccio}/${prod.slug}/" style="display:flex;flex-direction:column;height:100%">
-      <div class="family-card__media"><img src="${p}${prod.imatge}" alt="${esc(prod.nom)} ${esc(prod.varietat)}"></div>
+      <div class="family-card__media"><img src="${arrelLloc(p)}${prod.imatge}" alt="${esc(prod.nom)} ${esc(tp(prod, 'varietat'))}"></div>
       <div class="family-card__body">
         <h3>${esc(prod.nom)}</h3>
-        <p class="family-card__variety">${esc(prod.varietat)}${prod.temporada ? ` · ${esc(T.comu.de_temporada)}` : ''}</p>
+        <p class="family-card__variety">${esc(tp(prod, 'varietat'))}${prod.temporada ? ` · ${esc(T.comu.de_temporada)}` : ''}</p>
         <span class="link-arrow">${esc(T.comu.veure_fitxa)} <span>→</span></span>
       </div>
     </a>
@@ -191,8 +250,8 @@ function collectionPage() {
     return `<div class="family-block reveal">
       <div class="family-block__intro">
         <p class="eyebrow">${esc(fam.nom)}</p>
-        <h2>${esc(fam.lema)}</h2>
-        <p class="lead">${esc(fam.recepta[0].toUpperCase() + fam.recepta.slice(1))}.</p>
+        <h2>${esc(tp(fam, 'lema'))}</h2>
+        <p class="lead">${esc(majuscula(tp(fam, 'recepta')))}.</p>
       </div>
       <div class="family-grid">${prods.map((x) => card(x, p)).join('\n')}</div>
     </div>`;
@@ -213,7 +272,7 @@ function collectionPage() {
   <section class="section section--tight"><div class="container">${families}</div></section>
   <section class="quote quote--plain"><p class="quote__text reveal">${esc(T.colleccio.cita)}</p></section>`;
 
-  return head(p, { title: T.colleccio.title, desc: T.colleccio.desc }) + body + foot(p);
+  return head(p, { title: T.colleccio.title, desc: T.colleccio.desc, pagina: { tipus: 'seccio', clau: 'colleccio' } }) + body + foot(p);
 }
 
 /* ---------- Fitxa de producte ---------- */
@@ -227,23 +286,23 @@ function productPage(prod) {
 
   const jsonld = JSON.stringify({
     "@context": "https://schema.org", "@type": "Product",
-    name: `${prod.nom} · ${prod.varietat}`,
+    name: `${prod.nom} · ${tp(prod, 'varietat')}`,
     brand: { "@type": "Brand", name: "Ca la Marxanta" },
-    category: fam.nom, weight: prod.pes, description: prod.descripcio,
+    category: fam.nom, weight: prod.pes, description: tp(prod, 'descripcio'),
     image: `https://www.carquinyolisdhorta.com/${prod.imatge}`
   });
 
   const body = `
   <section class="section section--tight">
     <div class="container">
-      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span><a href="${p}${R.colleccio}/">${esc(T.nav.colleccio)}</a><span>›</span>${esc(prod.nom)} · ${esc(prod.varietat)}</nav>
+      <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span><a href="${p}${R.colleccio}/">${esc(T.nav.colleccio)}</a><span>›</span>${esc(prod.nom)} · ${esc(tp(prod, 'varietat'))}</nav>
       <div class="product" style="margin-top:var(--space-8)">
-        <div class="product__media reveal"><img src="${p}${prod.imatge}" alt="${esc(T.fitxa.caixa_de)} ${esc(prod.nom)} ${esc(prod.varietat)} (150 g)"></div>
+        <div class="product__media reveal"><img src="${arrelLloc(p)}${prod.imatge}" alt="${esc(T.fitxa.caixa_de)} ${esc(prod.nom)} ${esc(tp(prod, 'varietat'))} (150 g)"></div>
         <div class="product__info reveal" data-delay="1">
           <p class="eyebrow">${esc(fam.nom)}</p>
-          <h1>${esc(prod.varietat)}</h1>
-          <p class="product__variety">${esc(fam.lema)}</p>
-          <p class="product__desc">${esc(prod.descripcio)}</p>
+          <h1>${esc(tp(prod, 'varietat'))}</h1>
+          <p class="product__variety">${esc(tp(fam, 'lema'))}</p>
+          <p class="product__desc">${esc(tp(prod, 'descripcio'))}</p>
           <div class="product__meta">
             <span class="badge">${esc(prod.pes)}</span>
             <span class="badge">${esc(T.fitxa.artesa)}</span>
@@ -257,9 +316,9 @@ function productPage(prod) {
 
           <div class="info-block">
             <h3>${esc(T.fitxa.ingredients)}</h3>
-            <p>${esc(prod.ingredients)}</p>
-            <div class="allergens">${prod.allergens.map((a) => `<span class="badge">${esc(a)}</span>`).join('')}</div>
-            <p style="margin-top:var(--space-3);font-size:.9rem;color:var(--color-tinta-soft)">${esc(prod.traces)} ${esc(T.fitxa.conservacio)}</p>
+            <p>${esc(tp(prod, 'ingredients'))}</p>
+            <div class="allergens">${tp(prod, 'allergens').map((a) => `<span class="badge">${esc(a)}</span>`).join('')}</div>
+            <p style="margin-top:var(--space-3);font-size:.9rem;color:var(--color-tinta-soft)">${esc(tp(prod, 'traces'))} ${esc(T.fitxa.conservacio)}</p>
           </div>
 
           <div class="info-block">
@@ -280,7 +339,7 @@ function productPage(prod) {
             <div class="pairings" style="justify-content:flex-start">
               ${prod.maridatges.map((m) => PAIR[m] ? `<div class="pairing"><span class="pairing__emoji">${PAIR[m]}</span><span>${esc(T.fitxa.maridatges[m])}</span></div>` : '').join('')}
             </div>
-            ${prod.nota_maridatge ? `<p class="pairings__note">${esc(prod.nota_maridatge)}</p>` : ''}
+            ${prod.nota_maridatge ? `<p class="pairings__note">${esc(tp(prod, 'nota_maridatge'))}</p>` : ''}
           </div>
         </div>
       </div>
@@ -296,9 +355,10 @@ function productPage(prod) {
   </section>`;
 
   return head(p, {
-    title: `${prod.nom} · ${prod.varietat} — Ca la Marxanta`,
-    desc: prod.descripcio.slice(0, 155),
-    jsonld
+    title: `${prod.nom} · ${tp(prod, 'varietat')} — Ca la Marxanta`,
+    desc: tp(prod, 'descripcio').slice(0, 155),
+    jsonld,
+    pagina: { tipus: 'producte', slug: prod.slug }
   }) + body + foot(p);
   /* Nota: el títol i la descripció surten del producte (productes.json), que és
      on viuen les dades de catàleg; en fer el castellà i l'anglès caldrà tenir-hi
@@ -325,7 +385,7 @@ function historiaPage() {
 
   <section class="section section--tight"><div class="container">
     <div class="editorial editorial--reverse">
-      <div class="editorial__media reveal"><img src="${p}images/workshop/obrador-masa.jpg" alt="${esc(T.historia.nom_alt)}"></div>
+      <div class="editorial__media reveal"><img src="${arrelLloc(p)}images/workshop/obrador-masa.jpg" alt="${esc(T.historia.nom_alt)}"></div>
       <div class="editorial__body reveal" data-delay="1">
         <p class="eyebrow">${esc(T.historia.nom_eyebrow)}</p>
         <h2>${esc(T.historia.nom_titol)}</h2>
@@ -358,7 +418,7 @@ function historiaPage() {
     <p class="lead mx-auto" style="margin-bottom:var(--space-8)">${esc(T.historia.final_text)}</p>
     <a class="btn btn--primary" href="${p}${R.obrador}/">${esc(T.historia.final_cta)}</a>
   </div></section>`;
-  return head(p, { title: T.historia.title, desc: T.historia.desc }) + body + foot(p);
+  return head(p, { title: T.historia.title, desc: T.historia.desc, pagina: { tipus: 'seccio', clau: 'historia' } }) + body + foot(p);
 }
 
 /* ---------- Pàgina OBRADOR ---------- */
@@ -389,7 +449,7 @@ function obradorPage() {
     </div>
   </div></section>
 
-  <section class="quote"><div class="quote__media"><img src="${p}images/workshop/obrador-masa.jpg" alt=""></div><p class="quote__text reveal">${esc(T.obrador.cita)}</p></section>
+  <section class="quote"><div class="quote__media"><img src="${arrelLloc(p)}images/workshop/obrador-masa.jpg" alt=""></div><p class="quote__text reveal">${esc(T.obrador.cita)}</p></section>
 
   <section class="section"><div class="container">
     <div class="story-intro reveal" style="margin-bottom:var(--space-12)">
@@ -407,7 +467,7 @@ function obradorPage() {
     <p class="lead mx-auto" style="margin-bottom:var(--space-8)">${esc(T.obrador.final_text)}</p>
     <a class="btn btn--primary" href="${p}${R.colleccio}/">${esc(T.comu.veure_colleccio)}</a>
   </div></section>`;
-  return head(p, { title: T.obrador.title, desc: T.obrador.desc }) + body + foot(p);
+  return head(p, { title: T.obrador.title, desc: T.obrador.desc, pagina: { tipus: 'seccio', clau: 'obrador' } }) + body + foot(p);
 }
 
 /* ---------- Pàgina TROBA'NS ---------- */
@@ -469,7 +529,7 @@ function trobansPage() {
     <p class="lead mx-auto" style="margin-bottom:var(--space-8)">${esc(T.trobans.b2b_text)}</p>
     <a class="btn btn--primary" href="${p}${R.empreses}/">${esc(T.comu.parlem_ne)}</a>
   </div></section>`;
-  return head(p, { title: T.trobans.title, desc: T.trobans.desc }) + body + foot(p);
+  return head(p, { title: T.trobans.title, desc: T.trobans.desc, pagina: { tipus: 'seccio', clau: 'trobans' } }) + body + foot(p);
 }
 
 /* ---------- Pàgina PORTA'NS AL TEU BARRI ----------
@@ -520,7 +580,7 @@ function barriPage() {
         <div class="field form__row--full"><label for="b-motiu">${esc(T.barri.camp_motiu)}</label><textarea id="b-motiu" name="motiu" placeholder="${esc(T.barri.camp_motiu_ph)}"></textarea><span class="field__error"></span></div>
         <div class="field"><label for="b-nom">${esc(T.barri.camp_nom)}</label><input id="b-nom" name="nom" autocomplete="name"><span class="field__error"></span></div>
         <div class="field"><label for="b-email">${esc(T.barri.camp_email)}</label><input id="b-email" name="email" type="email" autocomplete="email"><span class="field__error"></span></div>
-        <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> ${esc(T.comu.consent)} <a href="${p}${R.legal}/politica-de-privacitat/">${esc(T.comu.consent_privacitat)}</a> ${esc(T.comu.consent_dades)} *</label><span class="field__error"></span></div>
+        <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> ${esc(T.comu.consent)} <a href="${p}${R.legal}/${slugLegal('politica-de-privacitat')}/">${esc(T.comu.consent_privacitat)}</a> ${esc(T.comu.consent_dades)} *</label><span class="field__error"></span></div>
         <div class="form__row--full"><label class="consent"><input type="checkbox" name="citable"> ${esc(T.barri.citable)}</label></div>
       </div>
       <p class="form-error" data-form-error hidden role="alert">${esc(T.comu.error_enviament)} <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
@@ -546,7 +606,7 @@ ${demanda}
     <p class="lead mx-auto" style="margin-bottom:var(--space-8);color:rgba(250,247,241,.85)">${esc(T.barri.b2b_text)}</p>
     <a class="btn btn--ghost-light" href="${p}${R.empreses}/">${esc(T.comu.parlem_ne)}</a>
   </div></section>`;
-  return head(p, { title: T.barri.title, desc: T.barri.desc }) + body + foot(p);
+  return head(p, { title: T.barri.title, desc: T.barri.desc, pagina: { tipus: 'seccio', clau: 'barri' } }) + body + foot(p);
 }
 
 /* ---------- Pàgina EMPRESES (B2B) ---------- */
@@ -608,7 +668,7 @@ function empresesPage() {
           ${T.empreses.productes.map((x) => `<label class="check"><input type="checkbox" name="productes" value="${esc(x)}"> ${esc(x)}</label>`).join('\n          ')}
         </div></div>
         <div class="field form__row--full"><label for="e-msg">${esc(T.empreses.camp_missatge)}</label><textarea id="e-msg" name="missatge"></textarea><span class="field__error"></span></div>
-        <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> ${esc(T.comu.consent)} <a href="${p}${R.legal}/politica-de-privacitat/">${esc(T.comu.consent_privacitat)}</a> ${esc(T.comu.consent_dades)} *</label><span class="field__error"></span></div>
+        <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> ${esc(T.comu.consent)} <a href="${p}${R.legal}/${slugLegal('politica-de-privacitat')}/">${esc(T.comu.consent_privacitat)}</a> ${esc(T.comu.consent_dades)} *</label><span class="field__error"></span></div>
       </div>
       <p class="form-error" data-form-error hidden role="alert">${esc(T.comu.error_enviament)} <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
       <p style="margin-top:var(--space-8)"><button type="submit" class="btn btn--primary">${esc(T.empreses.enviar)}</button></p>
@@ -625,7 +685,7 @@ function empresesPage() {
       </p>
     </div>
   </div></section>`;
-  return head(p, { title: T.empreses.title, desc: T.empreses.desc }) + body + foot(p);
+  return head(p, { title: T.empreses.title, desc: T.empreses.desc, pagina: { tipus: 'seccio', clau: 'empreses' } }) + body + foot(p);
 }
 
 /* ---------- Pàgina CONTACTE ---------- */
@@ -662,7 +722,7 @@ function contactePage() {
             <div class="field"><label for="c-nom">${esc(T.contacte.camp_nom)}</label><input id="c-nom" name="nom" required><span class="field__error"></span></div>
             <div class="field"><label for="c-email">${esc(T.contacte.camp_email)}</label><input id="c-email" name="email" type="email" required><span class="field__error"></span></div>
             <div class="field form__row--full"><label for="c-msg">${esc(T.contacte.camp_missatge)}</label><textarea id="c-msg" name="missatge" required></textarea><span class="field__error"></span></div>
-            <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> ${esc(T.comu.consent_curt)} <a href="${p}${R.legal}/politica-de-privacitat/">${esc(T.comu.consent_privacitat)}</a>. *</label><span class="field__error"></span></div>
+            <div class="form__row--full"><label class="consent"><input type="checkbox" name="rgpd" required> ${esc(T.comu.consent_curt)} <a href="${p}${R.legal}/${slugLegal('politica-de-privacitat')}/">${esc(T.comu.consent_privacitat)}</a>. *</label><span class="field__error"></span></div>
           </div>
           <p class="form-error" data-form-error hidden role="alert">${esc(T.comu.error_enviament)} <a href="mailto:info@calamarxanta.com">info@calamarxanta.com</a>.</p>
           <p style="margin-top:var(--space-6)"><button type="submit" class="btn btn--primary">${esc(T.contacte.enviar)}</button></p>
@@ -680,7 +740,7 @@ function contactePage() {
       </div>
     </div>
   </div></section>`;
-  return head(p, { title: T.contacte.title, desc: T.contacte.desc }) + body + foot(p);
+  return head(p, { title: T.contacte.title, desc: T.contacte.desc, pagina: { tipus: 'seccio', clau: 'contacte' } }) + body + foot(p);
 }
 
 /* ---------- Pàgina 404 ----------
@@ -713,15 +773,20 @@ function noTrobadaPage() {
 /* ---------- Pàgines LEGALS ---------- */
 function legalPage(page) {
   const p = '../../';
+  const titol = tp(page, 'title');
   const blocks = page.blocks.map((b) =>
-    (b.h ? `<h2>${esc(b.h)}</h2>` : '') + b.p.map((par) => `<p>${par}</p>`).join('\n')).join('\n');
+    (b.h ? `<h2>${esc(tp(b, 'h'))}</h2>` : '') + tp(b, 'p').map((par) => `<p>${par}</p>`).join('\n')).join('\n');
+  /* Fora del català, avisem que la versió que preval és l'original. És el que
+     es fa amb qualsevol document legal traduït, i evita malentesos. */
+  const avis = T.codi === 'ca' ? ''
+    : `<p class="legal__avis">${esc(T.legal.nota_versio)}</p>`;
   const body = `
   <section class="section section--tight"><div class="container">
-    <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span>${esc(page.title)}</nav>
-    <div class="page-head" style="padding-top:var(--space-8)"><h1>${esc(page.title)}</h1><hr class="rule"></div>
-    <div class="legal reveal">${blocks}</div>
+    <nav class="breadcrumb" aria-label="${esc(T.comu.molla_aria)}"><a href="${p}index.html">${esc(T.comu.inici)}</a><span>›</span>${esc(titol)}</nav>
+    <div class="page-head" style="padding-top:var(--space-8)"><h1>${esc(titol)}</h1><hr class="rule"></div>
+    <div class="legal reveal">${avis}${blocks}</div>
   </div></section>`;
-  return head(p, { title: `${page.title} · Ca la Marxanta`, desc: `${page.title} de Ca la Marxanta (Carquinyolis d'Horta).` }) + body + foot(p);
+  return head(p, { title: `${titol} · Ca la Marxanta`, desc: `${titol} · Ca la Marxanta (Carquinyolis d'Horta).`, pagina: { tipus: 'legal', slug: page.slug } }) + body + foot(p);
 }
 
 /* ---------- PORTADA ----------
@@ -774,7 +839,7 @@ function portadaPage() {
   const families = FAMILIES_FIXES.map(([mod, img, nom, slug], i) => {
     const [alt, varietat, text] = T.portada.families[i];
     return `<article class="family-card${mod} reveal"${i ? ` data-delay="${i}"` : ''}>
-            <div class="family-card__media"><img src="${p}images/products/${img}" alt="${esc(alt)}"></div>
+            <div class="family-card__media"><img src="${arrelLloc(p)}images/products/${img}" alt="${esc(alt)}"></div>
             <div class="family-card__body">
               <h3>${esc(nom)}</h3>
               <p class="family-card__variety">${esc(varietat)}</p>
@@ -791,7 +856,7 @@ function portadaPage() {
   const body = `
     <section class="hero">
       <div class="hero__media">
-        <img src="${p}images/workshop/obrador-hero.jpg" alt="${esc(T.portada.hero_alt)}" fetchpriority="high">
+        <img src="${arrelLloc(p)}images/workshop/obrador-hero.jpg" alt="${esc(T.portada.hero_alt)}" fetchpriority="high">
       </div>
       <div class="container hero__content">
         <h1 class="hero__title">${T.portada.hero_titol}</h1>
@@ -812,7 +877,7 @@ function portadaPage() {
       <div class="container">
         <div class="editorial">
           <div class="editorial__media reveal">
-            <img src="${p}images/workshop/obrador-rodillo.jpg" alt="${esc(T.portada.historia_alt)}">
+            <img src="${arrelLloc(p)}images/workshop/obrador-rodillo.jpg" alt="${esc(T.portada.historia_alt)}">
           </div>
           <div class="editorial__body reveal" data-delay="1">
             <p class="eyebrow">${esc(T.portada.historia_eyebrow)}</p>
@@ -829,7 +894,7 @@ function portadaPage() {
     </section>
 
     <section class="quote">
-      <div class="quote__media"><img src="${p}images/workshop/obrador-masa.jpg" alt=""></div>
+      <div class="quote__media"><img src="${arrelLloc(p)}images/workshop/obrador-masa.jpg" alt=""></div>
       <p class="quote__text reveal">${esc(T.portada.cita_1)}</p>
     </section>
 
@@ -837,7 +902,7 @@ function portadaPage() {
       <div class="container">
         <div class="editorial editorial--reverse">
           <div class="editorial__media reveal">
-            <img src="${p}images/workshop/obrador-masa.jpg" alt="${esc(T.portada.obrador_alt)}">
+            <img src="${arrelLloc(p)}images/workshop/obrador-masa.jpg" alt="${esc(T.portada.obrador_alt)}">
           </div>
           <div class="editorial__body reveal" data-delay="1">
             <p class="eyebrow">${esc(T.portada.obrador_eyebrow)}</p>
@@ -867,7 +932,7 @@ function portadaPage() {
     </section>
 
     <section class="quote">
-      <div class="quote__media"><img src="${p}images/workshop/obrador-rodillo.jpg" alt=""></div>
+      <div class="quote__media"><img src="${arrelLloc(p)}images/workshop/obrador-rodillo.jpg" alt=""></div>
       <p class="quote__text reveal">${esc(T.portada.cita_3)}</p>
     </section>
 
@@ -922,39 +987,59 @@ function portadaPage() {
     desc: T.portada.desc,
     css: CSS_PORTADA,
     transparent: true,
-    canonical: 'https://www.carquinyolisdhorta.com/',
+    canonical: `https://www.carquinyolisdhorta.com/${T.codi === 'ca' ? '' : T.codi + '/'}`,
     og: {
       title: T.portada.og_title,
       desc: T.portada.og_desc,
       image: 'https://www.carquinyolisdhorta.com/images/workshop/obrador-hero.jpg',
       locale: T.og_locale
     },
-    jsonld
+    jsonld,
+    pagina: { tipus: 'portada' }
   }) + body + foot(p, { id: 'contacte' });
 }
 
 /* ---------- Escriure fitxers ----------
-   Els noms de carpeta surten de R (data/textos.<idioma>.json), no escrits a mà:
-   quan hi hagi castellà i anglès, cada idioma tindrà les seves adreces. */
-for (const [ruta, htmlFn] of [[R.historia, historiaPage], [R.obrador, obradorPage], [R.trobans, trobansPage], [R.barri, barriPage], [R.empreses, empresesPage], [R.contacte, contactePage]]) {
-  await mkdir(join(ROOT, ruta), { recursive: true });
-  await writeFile(join(ROOT, ruta, 'index.html'), htmlFn());
-}
-for (const lp of legals.pages) {
-  const dir = join(ROOT, R.legal, lp.slug);
-  await mkdir(dir, { recursive: true });
-  await writeFile(join(dir, 'index.html'), legalPage(lp));
-}
-await writeFile(join(ROOT, '404.html'), noTrobadaPage());
-await writeFile(join(ROOT, 'index.html'), portadaPage());
+   Una volta per idioma. El català va a l'arrel; el castellà i l'anglès, a /es/
+   i /en/. Els noms de carpeta surten de R, mai escrits a mà. */
+let total = 0;
+for (const codi of IDIOMES) {
+  T = TEXTOS[codi];
+  R = T.rutes;
+  SUB = codi === 'ca' ? '' : '../';
+  const DIR = codi === 'ca' ? ROOT : join(ROOT, codi);
+  let n = 0;
 
-await mkdir(join(ROOT, R.colleccio), { recursive: true });
-await writeFile(join(ROOT, R.colleccio, 'index.html'), collectionPage());
-let count = 0;
-for (const prod of data.productes) {
-  const dir = join(ROOT, R.colleccio, prod.slug);
-  await mkdir(dir, { recursive: true });
-  await writeFile(join(dir, 'index.html'), productPage(prod));
-  count++;
+  for (const [ruta, htmlFn] of [[R.historia, historiaPage], [R.obrador, obradorPage], [R.trobans, trobansPage], [R.barri, barriPage], [R.empreses, empresesPage], [R.contacte, contactePage]]) {
+    await mkdir(join(DIR, ruta), { recursive: true });
+    await writeFile(join(DIR, ruta, 'index.html'), htmlFn());
+    n++;
+  }
+  for (const lp of legals.pages) {
+    const dir = join(DIR, R.legal, tp(lp, 'slug'));
+    await mkdir(dir, { recursive: true });
+    await writeFile(join(dir, 'index.html'), legalPage(lp));
+    n++;
+  }
+  await mkdir(DIR, { recursive: true });
+  await writeFile(join(DIR, 'index.html'), portadaPage());
+  n++;
+
+  await mkdir(join(DIR, R.colleccio), { recursive: true });
+  await writeFile(join(DIR, R.colleccio, 'index.html'), collectionPage());
+  n++;
+  for (const prod of data.productes) {
+    const dir = join(DIR, R.colleccio, prod.slug);
+    await mkdir(dir, { recursive: true });
+    await writeFile(join(dir, 'index.html'), productPage(prod));
+    n++;
+  }
+  console.log(`  ${codi} · ${n} pàgines`);
+  total += n;
 }
-console.log(`OK · col·lecció + ${count} fitxes generades.`);
+
+/* El 404 va sol a l'arrel i en català: l'allotjament el serveix per a
+   qualsevol adreça que no existeixi, sigui de l'idioma que sigui. */
+T = TEXTOS.ca; R = T.rutes; SUB = '';
+await writeFile(join(ROOT, '404.html'), noTrobadaPage());
+console.log(`OK · ${total + 1} pàgines generades en ${IDIOMES.length} idiomes.`);

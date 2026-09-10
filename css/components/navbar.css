@@ -123,13 +123,17 @@
   color: var(--color-or-soft);
   font-weight: 500;
 }
-/* Idiomes encara no disponibles: es veuen, però no són enllaços (evitem un 404) */
+/* Els altres idiomes: enllaços de debò (abans eren <span>, quan encara no
+   existien el castellà i l'anglès), un punt apagats respecte de l'actiu. */
+.nav__lang a:not([aria-current="true"]) { opacity: .72; }
+.nav__lang a:not([aria-current="true"]):hover { opacity: 1; }
 .nav__lang span { opacity: .72; cursor: default; }
 
 /* Sobre la barra de vidre no hi ha fotografia: fora ombra i text en tinta */
 .header.is-scrolled .nav__lang { color: var(--color-tinta); text-shadow: none; }
 .header.is-scrolled .nav__lang a[aria-current="true"] { color: var(--color-fusta-fosc); }
 /* .7 i no menys: per sota es queda per sota del mínim de contrast (4.5:1) */
+.header.is-scrolled .nav__lang a:not([aria-current="true"]),
 .header.is-scrolled .nav__lang span { opacity: .7; }
 
 /* Estat "scrolled": el vidre l'aplica .header::before (vegeu a dalt) */

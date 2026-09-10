@@ -1,0 +1,477 @@
+{
+  "_": "Textos del web en castellano. Traducción del original catalán (textos.ca.json). Las claves son las mismas en los tres ficheros. Los nombres de producto (Carquinyolis d'Horta, Porretes del Padrí, Petarrons) y el de la marca no se traducen nunca.",
+  "codi": "es",
+  "html_lang": "es",
+  "og_locale": "es_ES",
+  "etiqueta": "ES",
+  "_rutes": "Carpeta de cada sección, traducida: una dirección en el idioma del visitante cuenta para el buscador.",
+  "rutes": {
+    "historia": "historia",
+    "obrador": "obrador",
+    "colleccio": "coleccion",
+    "trobans": "donde-encontrarnos",
+    "barri": "llevanos-a-tu-barrio",
+    "empreses": "empresas",
+    "contacte": "contacto",
+    "legal": "legal"
+  },
+  "nav": {
+    "aria": "Navegación principal",
+    "inici_aria": "Ca la Marxanta — inicio",
+    "salta": "Saltar al contenido",
+    "obre_menu": "Abrir el menú",
+    "idioma": "Idioma",
+    "historia": "Historia",
+    "obrador": "El obrador",
+    "colleccio": "Colección",
+    "trobans": "Dónde encontrarnos",
+    "empreses": "Empresas",
+    "contacte": "Contacto"
+  },
+  "peu": {
+    "tagline": "Carquinyolis, Porretes y Petarrons 100% artesanos, elaborados en el barrio de Horta. No queremos venderte un producto, queremos que te guste.",
+    "explora": "Explora",
+    "historia_llarg": "Nuestra historia",
+    "barri": "Llévanos a tu barrio",
+    "contacte": "Contacto",
+    "adreca": "Carrer Plutó, 24<br>08035 Barcelona",
+    "copyright": "Carquinyolis d'Horta ©",
+    "nota_legal": "Aviso legal",
+    "privacitat": "Política de privacidad",
+    "cookies": "Política de cookies"
+  },
+  "comu": {
+    "molla_aria": "Migas de pan",
+    "inici": "Inicio",
+    "veure_fitxa": "Ver la ficha",
+    "de_temporada": "de temporada",
+    "veure_colleccio": "Ver la colección",
+    "parlem_ne": "Hablemos",
+    "no_omplis": "No rellenes este campo",
+    "consent": "Acepto la",
+    "consent_privacitat": "política de privacidad",
+    "consent_dades": "y el tratamiento de mis datos.",
+    "consent_curt": "Acepto la",
+    "error_enviament": "No hemos podido enviar el formulario. Inténtalo de nuevo o escríbenos a",
+    "selecciona": "Selecciona…",
+    "pressa": "Si tienes prisa, llámanos al"
+  },
+  "_legal": "Avís que surt a dalt de les pàgines legals quan no són la versió original.",
+  "legal": {
+    "nota_versio": "Traducción de cortesía. En caso de discrepancia, prevalece la versión catalana de este documento."
+  },
+  "portada": {
+    "title": "Ca la Marxanta · Carquinyolis artesanos de Horta (Barcelona)",
+    "desc": "Carquinyolis, Petarrons y Porretes 100% artesanos, con mantequilla artesana y avellanas y almendras de Cataluña. Una tradición catalana nacida en el barrio de Horta en 2018.",
+    "og_title": "Ca la Marxanta · Carquinyolis artesanos de Horta",
+    "og_desc": "No queremos venderte un producto, queremos que te guste.",
+    "hero_alt": "Manos trabajando la masa en el obrador",
+    "hero_titol": "Hacemos carquinyolis.<br>Conservamos nuestra tradición.",
+    "hero_subtitol": "Cada receta nace del respeto por los ingredientes, por el tiempo y por una manera de hacer las cosas que casi no ha cambiado con los años.",
+    "hero_cta": "Descubre nuestra historia",
+    "hero_baixa": "Baja para descubrir más",
+    "historia_alt": "Trabajo manual de la masa con rodillo de madera",
+    "historia_eyebrow": "Una historia que merece ser contada",
+    "historia_titol": "Todo empezó en 2018, en el barrio de Horta",
+    "historia_text": "Detrás de cada carquinyoli hay una decisión valiente: apostar por un oficio tradicional, recuperar una receta y dedicarle el tiempo necesario para hacer las cosas bien. Así nació Ca la Marxanta, y así sigue creciendo.",
+    "historia_lema": "No queremos venderte un producto, queremos que te guste.",
+    "historia_enllac": "Conocer nuestra historia",
+    "cita_1": "Hay sabores que no deberían desaparecer nunca.",
+    "obrador_alt": "Bolas de masa enharinadas a punto de entrar al horno",
+    "obrador_eyebrow": "La tradición sigue viva",
+    "obrador_titol": "Las cosas bien hechas necesitan tiempo",
+    "obrador_text_1": "Trabajamos con mantequilla 100% artesana y con avellanas y almendras de Cataluña. La receta se inspira en unos carquinyolis más crujientes y comederos que los habituales.",
+    "obrador_text_2a": "Se cortan",
+    "obrador_text_2b": "uno a uno antes de entrar al horno",
+    "obrador_text_2c": ". De esta manera no quedan en forma de rebanada como la variante más extendida: es su rasgo característico, y es como se tiene que hacer.",
+    "cita_2": "Cada mañana empieza igual.<br>Y eso nos encanta.",
+    "pilars_eyebrow": "La diferencia está en los detalles",
+    "pilars_titol": "Tres maneras de entender la artesanía",
+    "pilars": [
+      [
+        "Ingredientes",
+        "Avellanas y almendras de Cataluña, mantequilla artesana y piel de limón ecológico. Productos de proximidad y de gran calidad."
+      ],
+      [
+        "Elaboración",
+        "Cortados uno a uno. Sin prisa, con la misma dedicación de siempre."
+      ],
+      [
+        "Tradición",
+        "Una manera de hacer arraigada en el barrio de Horta, que se mantiene viva porque alguien decide protegerla."
+      ]
+    ],
+    "cita_3": "No aceleramos el tiempo. Porque el buen sabor nunca tuvo prisa.",
+    "colleccio_eyebrow": "Nuestra colección",
+    "colleccio_titol": "Hay recetas que no cambian. Solo mejoran con el tiempo.",
+    "descobrir": "Descubrir",
+    "families": [
+      [
+        "Caja de Carquinyolis d'Horta de almendra",
+        "Almendra · Avellana",
+        "El crujiente clásico, cortado uno a uno. El que marida con cafés, tés y vinos dulces."
+      ],
+      [
+        "Caja de Porretes del Padrí de almendra",
+        "Almendra · Avellana",
+        "Bastones de carquinyoli para desayunar y merendar. El mismo corazón, en formato bastón."
+      ],
+      [
+        "Caja de Petarrons clásicos",
+        "5 variedades",
+        "Galletas de mantequilla 100% artesana. Tan buenas que todo el mundo preguntaba si eran pedos de monja."
+      ]
+    ],
+    "cita_4": "Cada receta tiene su propia personalidad.",
+    "maridatge_eyebrow": "Con qué disfrutarlos",
+    "maridatge_titol": "Pequeños placeres para compartir",
+    "maridatges": [
+      "Café",
+      "Té",
+      "Moscatel",
+      "Vinos espumosos",
+      "Helado",
+      "Chocolate",
+      "Quesos"
+    ],
+    "cita_5": "Porque los mejores momentos siempre se comparten.",
+    "final_titol": "Hay oficios que sobreviven gracias a quien cree en ellos",
+    "final_text": "Hay recetas que pasan de generación en generación. Y hay pequeños placeres que mantienen el mismo sabor de hace muchos años. Esto es Ca la Marxanta.",
+    "final_cta": "Empresas y profesionales"
+  },
+  "historia": {
+    "title": "Nuestra historia · Ca la Marxanta",
+    "desc": "La historia de Ca la Marxanta: un obrador de carquinyolis artesanos nacido en el barrio de Horta en 2018.",
+    "eyebrow": "Nuestra historia",
+    "h1": "Las mejores historias empiezan con una decisión",
+    "lead": "La de hacer las cosas como siempre se han hecho: con tiempo, con cuidado y con ingredientes de verdad.",
+    "cita": "Las tradiciones no sobreviven por casualidad. Sobreviven porque alguien decide protegerlas.",
+    "nom_alt": "Masa enharinada en el obrador",
+    "nom_eyebrow": "El nombre",
+    "nom_titol": "¿Por qué \"Ca la Marxanta\"?",
+    "nom_text": "Una <em>marxanta</em> es quien va al mercado, quien recorre caminos llevando el buen producto de un lugar a otro. El nombre evoca ese oficio antiguo y de proximidad: hoy, nuestros carquinyolis viajan del obrador de Horta a las mesas de Cataluña.",
+    "barri_eyebrow": "El barrio de Horta",
+    "barri_titol": "Soy de Horta",
+    "barri_text": "El barrio de Horta es uno de los más carismáticos de Barcelona; siempre ha mantenido su identidad. Incluso puedes ver a gente que desfila orgullosa con camisetas que dicen \"Sóc d'Horta\". A veces da la sensación de no estar en Barcelona: el ambiente que se respira es bien distinto.",
+    "promesa_eyebrow": "Nuestra promesa",
+    "promesa_titol": "Lo que nunca cambia",
+    "promesa": [
+      "Elaboración artesana",
+      "Ingredientes escogidos, de proximidad",
+      "Producción cuidada, sin prisa",
+      "Proximidad y trato cercano",
+      "Compromiso con la calidad"
+    ],
+    "final_titol": "Cada día volvemos a empezar",
+    "final_text": "Porque creemos que las mejores tradiciones merecen seguir vivas.",
+    "final_cta": "Descubre cómo los elaboramos"
+  },
+  "obrador": {
+    "title": "El obrador · Ca la Marxanta",
+    "desc": "Así elaboramos nuestros carquinyolis: seis pasos artesanales, cortados uno a uno, con ingredientes de proximidad.",
+    "eyebrow": "El obrador",
+    "h1": "Las cosas bien hechas necesitan tiempo",
+    "lead": "No buscamos producir más. Buscamos hacerlo mejor.",
+    "passos_eyebrow": "El proceso artesanal",
+    "passos_titol": "Seis pasos",
+    "passos": [
+      [
+        "Selección",
+        "Escogemos avellanas y almendras de Cataluña, mantequilla artesana y piel de limón ecológico."
+      ],
+      [
+        "Mezcla",
+        "Amasamos los ingredientes en la proporción justa, sin aditivos innecesarios."
+      ],
+      [
+        "Trabajo manual",
+        "Damos forma a la masa a mano, con el cuidado de siempre."
+      ],
+      [
+        "Corte uno a uno",
+        "Cortamos el carquinyoli uno a uno antes de hornear. Por eso no quedan en forma de rebanada."
+      ],
+      [
+        "Cocción",
+        "La cocción es la que les da el crujiente característico."
+      ],
+      [
+        "Envasado",
+        "Los envasamos con cuidado para que lleguen perfectos a tu casa."
+      ]
+    ],
+    "cita": "Creemos en el tiempo, en las manos y en el respeto por una receta.",
+    "ingredients_eyebrow": "Nuestros ingredientes",
+    "ingredients_titol": "Los buenos ingredientes nunca necesitan esconderse",
+    "ingredients": [
+      [
+        "Almendra y avellana",
+        "De Cataluña. Aportan el sabor intenso y característico de nuestros carquinyolis."
+      ],
+      [
+        "Mantequilla artesana",
+        "100% artesana: el corazón de los Petarrons y su textura inconfundible."
+      ],
+      [
+        "Piel de limón ecológico",
+        "Un toque fresco y aromático, presente en casi todas las recetas."
+      ],
+      [
+        "Huevo",
+        "Liga la masa y aporta estructura; en los Petarrons usamos la clara."
+      ],
+      [
+        "Azúcar moreno",
+        "Para un dulzor justo, nunca excesivo."
+      ],
+      [
+        "Harina de trigo",
+        "La base de toda la familia, trabajada con tiempo y paciencia."
+      ]
+    ],
+    "final_titol": "¿Ya tienes hambre?",
+    "final_text": "Descubre toda la colección y encuentra tu preferido."
+  },
+  "colleccio": {
+    "title": "Colección · Ca la Marxanta — Carquinyolis, Porretes y Petarrons",
+    "desc": "Descubre la colección de Ca la Marxanta: Carquinyolis d'Horta, Porretes del Padrí y Petarrons, todos 100% artesanos.",
+    "eyebrow": "Nuestra colección",
+    "h1": "Hay recetas que no cambian. Solo mejoran con el tiempo.",
+    "lead": "Cada receta nace del mismo compromiso: respetar el sabor auténtico, escoger bien los ingredientes y elaborar cada pieza con el mismo cuidado del primer día.",
+    "cita": "Cada receta tiene su propia personalidad."
+  },
+  "fitxa": {
+    "artesa": "100% artesano",
+    "temporada_badge": "Producto de temporada",
+    "on_comprar": "Dónde comprarlos",
+    "hint_pregunta": "¿No lo encuentras cerca de casa?",
+    "hint_enllac": "Dinos dónde te gustaría encontrarlo",
+    "ingredients": "Ingredientes",
+    "conservacio": "Conservar en un lugar fresco y seco.",
+    "nutri_caption": "Valores nutricionales por 100 g",
+    "nutri_energia": "Valor energético",
+    "nutri_greixos": "Grasas",
+    "nutri_saturats": "saturadas",
+    "nutri_hidrats": "Hidratos de carbono",
+    "nutri_sucres": "azúcares",
+    "nutri_proteines": "Proteínas",
+    "nutri_sal": "Sal",
+    "marida_amb": "Marida con",
+    "altres_eyebrow": "Otras recetas",
+    "altres_titol": "Descubre el resto de la colección",
+    "caixa_de": "Caja de",
+    "perfils": {
+      "cruixent": "Crujiente",
+      "intensitat": "Intensidad",
+      "dolcor": "Dulzor",
+      "torrat": "Tostado",
+      "persistencia": "Persistencia",
+      "tendresa": "Ternura",
+      "mantega": "Mantequilla",
+      "aroma": "Aroma"
+    },
+    "maridatges": {
+      "cafe": "Café",
+      "te": "Té",
+      "vi-dolc": "Vino dulce",
+      "vins-escumosos": "Vinos espumosos",
+      "gelat": "Helado",
+      "xocolata": "Chocolate",
+      "llet": "Leche",
+      "formatge": "Quesos"
+    }
+  },
+  "trobans": {
+    "title": "Dónde encontrarnos · Ca la Marxanta",
+    "desc": "Listado de tiendas y establecimientos donde comprar los carquinyolis, porretes y petarrons de Ca la Marxanta en Barcelona y Cataluña.",
+    "eyebrow": "Dónde encontrarnos",
+    "h1": "Dónde puedes comprar nuestros productos",
+    "lead": "Puedes encontrar nuestros Carquinyolis, Porretes y Petarrons en estos establecimientos de Barcelona y Cataluña.",
+    "cerca_label": "Busca por tu barrio, población o código postal",
+    "cerca_placeholder": "Gràcia, Sabadell, 08035…",
+    "tots": "Todos",
+    "veure_mapa": "Ver en el mapa",
+    "buit_titol": "Todavía no nos encontrarás aquí",
+    "buit_text": "Pero nos gustaría llegar. ¿Conoces una tienda donde encajaríamos? Dínoslo e iremos a llamar.",
+    "buit_cta": "Recomiéndanos una tienda",
+    "banda_titol": "¿No nos encuentras cerca de casa?",
+    "banda_text_a": "Estamos en",
+    "banda_text_b": "establecimientos, pero nos faltan muchos. Si en tu barrio, ciudad o pueblo hay una tienda donde encajaríamos, recomiéndala: cada recomendación nos abre una puerta.",
+    "banda_cta": "Llévanos a tu barrio",
+    "b2b_eyebrow": "Empresas y profesionales",
+    "b2b_titol": "¿Tienes un negocio y quieres ofrecer nuestros productos?",
+    "b2b_text": "Colaboramos con cafeterías, restaurantes, hoteles y tiendas gourmet."
+  },
+  "barri": {
+    "title": "Llévanos a tu barrio · Ca la Marxanta",
+    "desc": "¿No encuentras nuestros carquinyolis en tu barrio? Recomiéndanos una tienda de tu zona e iremos a llamar de tu parte.",
+    "eyebrow": "Llévanos a tu barrio",
+    "h1": "¿Qué tienda encajaría?",
+    "lead": "Si en tu barrio, ciudad o pueblo no nos encuentras, ayúdanos a llegar. Dinos qué tienda encajaría e iremos a llamar de tu parte.",
+    "camp_barri": "Tu barrio, ciudad o pueblo *",
+    "camp_cp": "Código postal",
+    "camp_botiga": "Tienda que recomiendas",
+    "camp_botiga_ph": "Nombre de la tienda",
+    "camp_on": "Dónde está",
+    "camp_on_ph": "Dirección o Instagram",
+    "camp_motiu": "¿Por qué encajaría?",
+    "camp_motiu_ph": "Es una tienda de barrio con producto de proximidad…",
+    "camp_nom": "Tu nombre",
+    "camp_email": "Correo",
+    "citable": "Autorizo a Ca la Marxanta a explicar a la tienda que la recomendación viene de un cliente del barrio (sin dar mi nombre).",
+    "enviar": "Enviar la recomendación",
+    "gracies_titol": "Gracias por abrirnos una puerta",
+    "gracies_lead_a": "Hemos apuntado tu recomendación",
+    "gracies_lead_b": ".<br>Cada tienda que nos recomendáis es una <strong>conversación</strong> que empezamos con mucho <strong>más sentido</strong>.",
+    "gracies_nota": "Si nos has dejado el correo,<br>te avisaremos el día que lleguemos.",
+    "demanda_eyebrow": "Dónde nos pedís",
+    "demanda_titol": "Los barrios que nos reclaman",
+    "demanda_lead": "Estas son las zonas desde donde más nos habéis escrito. Estamos trabajando en ello.",
+    "demanda_autor": "Una recomendación recibida",
+    "b2b_eyebrow": "¿Y si la tienda eres tú?",
+    "b2b_titol": "¿Tienes un negocio y quieres ofrecer nuestros productos?",
+    "b2b_text": "No hace falta esperar a que te recomienden: escríbenos y hablamos."
+  },
+  "empreses": {
+    "title": "Empresas y profesionales · Ca la Marxanta",
+    "desc": "Distribución de carquinyolis, porretes y petarrons artesanos para cafeterías, restaurantes, hoteles, tiendas gourmet y distribuidores.",
+    "eyebrow": "Empresas y profesionales",
+    "h1": "Lleva la tradición de Ca la Marxanta a tu negocio",
+    "lead": "Colaboramos con profesionales que valoran la calidad, la artesanía y las relaciones basadas en la confianza.",
+    "cta_dalt": "Quiero colaborar",
+    "sectors_eyebrow": "Con quién trabajamos",
+    "sectors_titol": "Un producto que encaja en tu negocio",
+    "sectors": [
+      [
+        "Cafeterías",
+        "Para añadir valor a la experiencia del café."
+      ],
+      [
+        "Restaurantes",
+        "Un postre tradicional, un detalle para la sobremesa."
+      ],
+      [
+        "Hoteles",
+        "Producto premium para desayunos y amenities."
+      ],
+      [
+        "Tiendas gourmet",
+        "Para diferenciar el lineal con producto artesano."
+      ],
+      [
+        "Vinotecas y bodegas",
+        "Maridajes, enoturismo y regalos."
+      ],
+      [
+        "Empresas",
+        "Detalles corporativos, Navidad y eventos."
+      ],
+      [
+        "Distribuidores",
+        "Relaciones comerciales duraderas y de confianza."
+      ]
+    ],
+    "raons_eyebrow": "Por qué elegirnos",
+    "raons_titol": "Calidad de verdad, de principio a fin",
+    "raons": [
+      [
+        "Elaboración artesana",
+        "Cortados uno a uno, sin prisa."
+      ],
+      [
+        "Ingredientes escogidos",
+        "Avellanas y almendras de Cataluña y mantequilla artesana."
+      ],
+      [
+        "Imagen premium",
+        "Un packaging cuidado que luce en cualquier lineal."
+      ],
+      [
+        "Proximidad",
+        "Trato cercano y atención personalizada."
+      ]
+    ],
+    "passos_eyebrow": "Cómo trabajamos",
+    "passos_titol": "Empezar es sencillo",
+    "passos": [
+      "Nos cuentas tu proyecto",
+      "Conocemos tus necesidades",
+      "Te asesoramos",
+      "Preparamos una propuesta",
+      "Empezamos a colaborar"
+    ],
+    "form_eyebrow": "Hablemos",
+    "form_titol": "Cuéntanos tu proyecto",
+    "form_lead": "Si buscas un proveedor de confianza para incorporar un producto artesano de calidad, nos encantará conocerte.",
+    "camp_nom": "Nombre *",
+    "camp_empresa": "Empresa *",
+    "camp_carrec": "Cargo",
+    "camp_email": "Correo electrónico *",
+    "camp_telefon": "Teléfono",
+    "camp_provincia": "Provincia",
+    "camp_tipus": "Tipo de negocio",
+    "tipus": [
+      "Restaurante",
+      "Hotel",
+      "Cafetería",
+      "Distribuidor",
+      "Tienda",
+      "Empresa",
+      "Otros"
+    ],
+    "camp_volum": "Volumen aproximado",
+    "volums": [
+      "Pequeño (degustación)",
+      "Medio (puntual)",
+      "Grande (recurrente)"
+    ],
+    "camp_productes": "¿Qué productos te interesan?",
+    "productes": [
+      "Carquinyolis",
+      "Porretes",
+      "Petarrons",
+      "Todos"
+    ],
+    "camp_missatge": "Mensaje",
+    "enviar": "Solicitar información",
+    "gracies_titol": "Hemos recibido tu proyecto",
+    "gracies_lead": "Lo leeremos con calma y te responderemos <strong>personalmente</strong>. No trabajamos con catálogos automáticos: preferimos entender primero qué necesitas."
+  },
+  "contacte": {
+    "title": "Contacto · Ca la Marxanta",
+    "desc": "Contacta con Ca la Marxanta: Carrer Plutó 24, 08035 Barcelona · info@calamarxanta.com · +34 608 387 092.",
+    "eyebrow": "Contacto",
+    "h1": "Hablemos",
+    "lead": "Para cualquier duda o información que necesites, contacta con nosotros. ¡Estaremos encantados de atenderte!",
+    "label_adreca": "Dirección",
+    "adreca": "Carrer Plutó, 24 · 08035 Barcelona",
+    "label_correu": "Correo",
+    "label_telefon": "Teléfono",
+    "label_instagram": "Instagram",
+    "camp_nom": "Nombre *",
+    "camp_email": "Correo electrónico *",
+    "camp_missatge": "Mensaje *",
+    "enviar": "Escríbenos",
+    "gracies_titol": "Mensaje recibido",
+    "gracies_lead": "Lo leeremos nosotros y te responderemos <strong>personalmente</strong>."
+  },
+  "_js": "Frases que escribe el JavaScript (js/main.js). {lloc} y {zona} se sustituyen por lo que ha escrito el visitante.",
+  "js": {
+    "buit_titol": "Todavía no nos encontrarás en {lloc}",
+    "buit_titol_sense": "Todavía no nos encontrarás aquí",
+    "barri_titol": "¿Qué tienda de {zona} encajaría?",
+    "barri_lead": "Todavía no nos encuentras en {zona}, y nos gustaría llegar. Dinos qué tienda encajaría e iremos a llamar de tu parte.",
+    "enviant": "Enviando…",
+    "camp_obligatori": "Este campo es obligatorio",
+    "correu_invalid": "Introduce un correo válido",
+    "success_lloc": " de {lloc}"
+  },
+  "error404": {
+    "title": "Página no encontrada · Ca la Marxanta",
+    "desc": "La página que buscas no existe. Vuelve al inicio de Ca la Marxanta.",
+    "eyebrow": "Error 404",
+    "h1": "Esta página no existe",
+    "lead": "Quizá el enlace era antiguo o hay alguna letra fuera de sitio. ¿Volvemos al camino?",
+    "cta_inici": "Ir al inicio"
+  }
+}

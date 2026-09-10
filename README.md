@@ -8,12 +8,37 @@ Basada en la **Web Experience Bible** (`../CA-LA-MARXANTA-Web-Experience-Bible.m
 
 - [x] Sistema de diseño en tokens (`css/settings.css`)
 - [x] Estructura modular CSS/JS
-- [x] **Home narrativa** (`index.html`) — catalán
-- [x] Datos reales de producto (`data/productes.json`, 9 SKU) y puntos de venta (`data/punts-venda.json`, 23)
+- [x] **Home narrativa** — la genera `build/build-pages.mjs`, como el resto
+- [x] Datos reales de producto (`data/productes.json`, 9 SKU) y puntos de venta (`data/punts-venda.json`, 24)
 - [x] Páginas: Història, Obrador, Col·lecció + 9 fichas, Empreses, Dónde encontrarnos, Contacte, Legals
 - [x] **Porta'ns al teu barri** (`porta-nos-al-teu-barri/`) — recomendación de tienda por parte del cliente
-- [ ] Versiones **castellano** e **inglés** (estructura i18n prevista)
+- [x] Versiones **castellano** (`/es/`) e **inglés** (`/en/`)
 - [ ] Sustituir fotos de obrador (placeholders stock) por sesión real
+- [ ] Precios y horario (pendientes del cliente)
+
+## Idiomas
+
+Catalán en la raíz (es el original), castellano en `/es/` e inglés en `/en/`.
+
+Todo el texto vive en `data/textos.{ca,es,en}.json`; las descripciones de producto
+y los textos legales, en `data/productes.json` y `data/legals.json` con sufijo
+`_es` / `_en`. **En el código del generador no queda ni una frase escrita a mano**,
+así que añadir un idioma es copiar un fichero, traducirlo y sumar su código a
+`IDIOMES` en `build/build-pages.mjs`.
+
+Las carpetas de sección se traducen (`/colleccio/`, `/es/coleccion/`,
+`/en/collection/`), el selector de la cabecera lleva a la página equivalente y
+cada página declara sus `hreflang`. Los nombres de producto y de tienda no se
+traducen nunca: son marca.
+
+Los textos legales llevan, fuera del catalán, un aviso de que la versión que
+prevalece es la original. **Conviene que los valide la gestoría del cliente.**
+
+```bash
+node build/build-pages.mjs      # genera las 61 páginas (3 idiomas)
+node build/comprova-textos.mjs  # que los 3 ficheros de idioma tengan las mismas claves
+node build/comprova-enllacos.mjs # que no haya ni un enlace interno roto
+```
 
 ## Formularios
 
