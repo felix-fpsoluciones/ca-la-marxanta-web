@@ -151,8 +151,8 @@
     "nom_titol": "Per què \"Ca la Marxanta\"?",
     "nom_text": "Una <em>marxanta</em> és qui va al mercat, qui recorre camins portant el bon producte d'un lloc a un altre. El nom evoca aquest ofici antic i de proximitat: avui, els nostres carquinyolis viatgen de l'obrador d'Horta a les taules de Catalunya.",
     "barri_eyebrow": "El barri d'Horta",
-    "barri_titol": "Sóc d'Horta",
-    "barri_text": "El barri d'Horta és un dels més carismàtics de Barcelona; sempre ha mantingut la seva identitat. Fins i tot hi pots veure gent que desfila orgullosa amb samarretes que diuen \"Sóc d'Horta\". De vegades fa la sensació de no ser a Barcelona: l'ambient que s'hi respira és ben diferent.",
+    "barri_titol": "«Sóc d'Horta»",
+    "barri_text": "El barri d'Horta és un dels més carismàtics de Barcelona; sempre ha mantingut la seva identitat. Fins i tot hi pots veure gent que desfila orgullosa amb samarretes que diuen «Sóc d'Horta». De vegades sembla que no siguis a Barcelona: l'ambient que s'hi respira és ben diferent.",
     "promesa_eyebrow": "La nostra promesa",
     "promesa_titol": "El que mai canvia",
     "promesa": [
@@ -322,7 +322,7 @@
     "enviar": "Enviar la recomanació",
     "gracies_titol": "Gràcies per obrir-nos una porta",
     "gracies_lead_a": "Hem apuntat la teva recomanació",
-    "gracies_lead_b": ".<br>Cada botiga que ens recomaneu és una <strong>conversa</strong> que comencem amb molt <strong>més sentit</strong>.",
+    "gracies_lead_b": ".<br>Cada botiga que ens recomanes és una <strong>conversa</strong> que comencem amb molt <strong>més sentit</strong>.",
     "gracies_nota": "Si ens has deixat el correu,<br>t'avisarem el dia que hi arribem.",
     "demanda_eyebrow": "On ens demaneu",
     "demanda_titol": "Els barris que ens reclamen",
@@ -348,7 +348,7 @@
       ],
       [
         "Restaurants",
-        "Un postre tradicional, un detall per a la sobretaula."
+        "Unes postres tradicionals, un detall per a la sobretaula."
       ],
       [
         "Hotels",

@@ -80,7 +80,7 @@
     "obrador_alt": "Bolas de masa enharinadas a punto de entrar al horno",
     "obrador_eyebrow": "La tradición sigue viva",
     "obrador_titol": "Las cosas bien hechas necesitan tiempo",
-    "obrador_text_1": "Trabajamos con mantequilla 100% artesana y con avellanas y almendras de Cataluña. La receta se inspira en unos carquinyolis más crujientes y comederos que los habituales.",
+    "obrador_text_1": "Trabajamos con mantequilla 100% artesana y con avellanas y almendras de Cataluña. La receta se inspira en unos carquinyolis más crujientes y apetecibles que los habituales.",
     "obrador_text_2a": "Se cortan",
     "obrador_text_2b": "uno a uno antes de entrar al horno",
     "obrador_text_2c": ". De esta manera no quedan en forma de rebanada como la variante más extendida: es su rasgo característico, y es como se tiene que hacer.",
@@ -119,7 +119,7 @@
       [
         "Caja de Petarrons clásicos",
         "5 variedades",
-        "Galletas de mantequilla 100% artesana. Tan buenas que todo el mundo preguntaba si eran pedos de monja."
+        "Galletas de mantequilla 100% artesana. Tan buenas que todo el mundo preguntaba si eran pets de monja."
       ]
     ],
     "cita_4": "Cada receta tiene su propia personalidad.",
@@ -152,7 +152,7 @@
     "nom_text": "Una <em>marxanta</em> es quien va al mercado, quien recorre caminos llevando el buen producto de un lugar a otro. El nombre evoca ese oficio antiguo y de proximidad: hoy, nuestros carquinyolis viajan del obrador de Horta a las mesas de Cataluña.",
     "barri_eyebrow": "El barrio de Horta",
     "barri_titol": "Soy de Horta",
-    "barri_text": "El barrio de Horta es uno de los más carismáticos de Barcelona; siempre ha mantenido su identidad. Incluso puedes ver a gente que desfila orgullosa con camisetas que dicen \"Sóc d'Horta\". A veces da la sensación de no estar en Barcelona: el ambiente que se respira es bien distinto.",
+    "barri_text": "El barrio de Horta es uno de los más carismáticos de Barcelona; siempre ha mantenido su identidad. Incluso puedes ver a gente que desfila orgullosa con camisetas que dicen «Sóc d'Horta». A veces da la sensación de no estar en Barcelona: el ambiente que se respira es bien distinto.",
     "promesa_eyebrow": "Nuestra promesa",
     "promesa_titol": "Lo que nunca cambia",
     "promesa": [
@@ -266,7 +266,7 @@
       "dolcor": "Dulzor",
       "torrat": "Tostado",
       "persistencia": "Persistencia",
-      "tendresa": "Ternura",
+      "tendresa": "Suavidad",
       "mantega": "Mantequilla",
       "aroma": "Aroma"
     },
@@ -292,7 +292,7 @@
     "tots": "Todos",
     "veure_mapa": "Ver en el mapa",
     "buit_titol": "Todavía no nos encontrarás aquí",
-    "buit_text": "Pero nos gustaría llegar. ¿Conoces una tienda donde encajaríamos? Dínoslo e iremos a llamar.",
+    "buit_text": "Pero nos gustaría llegar. ¿Conoces una tienda donde encajaríamos? Dínoslo e iremos a llamar a su puerta.",
     "buit_cta": "Recomiéndanos una tienda",
     "banda_titol": "¿No nos encuentras cerca de casa?",
     "banda_text_a": "Estamos en",
@@ -322,7 +322,7 @@
     "enviar": "Enviar la recomendación",
     "gracies_titol": "Gracias por abrirnos una puerta",
     "gracies_lead_a": "Hemos apuntado tu recomendación",
-    "gracies_lead_b": ".<br>Cada tienda que nos recomendáis es una <strong>conversación</strong> que empezamos con mucho <strong>más sentido</strong>.",
+    "gracies_lead_b": ".<br>Cada tienda que nos recomiendas es una <strong>conversación</strong> que empezamos con mucho <strong>más sentido</strong>.",
     "gracies_nota": "Si nos has dejado el correo,<br>te avisaremos el día que lleguemos.",
     "demanda_eyebrow": "Dónde nos pedís",
     "demanda_titol": "Los barrios que nos reclaman",

@@ -80,13 +80,13 @@
     "obrador_alt": "Floured balls of dough ready for the oven",
     "obrador_eyebrow": "The tradition is still alive",
     "obrador_titol": "Things done well take time",
-    "obrador_text_1": "We work with 100% artisan butter and with hazelnuts and almonds from Catalonia. The recipe draws on a crunchier, more moreish carquinyoli than the usual ones.",
+    "obrador_text_1": "We work with 100% artisan butter and with hazelnuts and almonds from Catalonia. The recipe draws on carquinyolis that are crunchier and moreish than the usual ones.",
     "obrador_text_2a": "They are cut",
     "obrador_text_2b": "one by one before they go into the oven",
     "obrador_text_2c": ". That way they don't come out slice-shaped like the more common version: it is what sets them apart, and it is how it should be done.",
     "cita_2": "Every morning begins the same way.<br>And we love that.",
     "pilars_eyebrow": "The difference is in the details",
-    "pilars_titol": "Three ways of understanding craft",
+    "pilars_titol": "Three principles behind our craft",
     "pilars": [
       [
         "Ingredients",
@@ -94,14 +94,14 @@
       ],
       [
         "Method",
-        "Cut one by one. No rush, with the same care as always."
+        "Hand-cut, one by one. No rush, with the same care as always."
       ],
       [
         "Tradition",
         "A way of working rooted in the Horta neighbourhood, kept alive because someone decided to protect it."
       ]
     ],
-    "cita_3": "We don't speed time up. Because good flavour was never in a hurry.",
+    "cita_3": "We don't rush time. Because good flavour was never in a hurry.",
     "colleccio_eyebrow": "Our collection",
     "colleccio_titol": "Some recipes never change. They only get better with time.",
     "descobrir": "Discover",
@@ -119,7 +119,7 @@
       [
         "Box of classic Petarrons",
         "5 varieties",
-        "100% artisan butter biscuits. So good that everyone asked whether they were nun's puffs."
+        "100% artisan butter biscuits. So good that everyone asked whether they were pets de monja."
       ]
     ],
     "cita_4": "Every recipe has a character of its own.",
@@ -151,8 +151,8 @@
     "nom_titol": "Why \"Ca la Marxanta\"?",
     "nom_text": "A <em>marxanta</em> is someone who goes to market, who travels the roads carrying good produce from one place to another. The name evokes that old, local trade: today our carquinyolis travel from the Horta workshop to tables across Catalonia.",
     "barri_eyebrow": "The Horta neighbourhood",
-    "barri_titol": "I'm from Horta",
-    "barri_text": "Horta is one of the most characterful neighbourhoods in Barcelona, and it has always held on to its identity. You will even see people walking proudly in T-shirts that read \"Sóc d'Horta\" — I'm from Horta. Sometimes it doesn't feel like Barcelona at all: the atmosphere is quite different.",
+    "barri_titol": "«I'm from Horta»",
+    "barri_text": "Horta is one of the most characterful neighbourhoods in Barcelona, and it has always held on to its identity. You will even see people walking proudly in T-shirts that read «Sóc d'Horta» — I'm from Horta. Sometimes it doesn't feel like Barcelona at all: the atmosphere is quite different.",
     "promesa_eyebrow": "Our promise",
     "promesa_titol": "What never changes",
     "promesa": [
@@ -294,7 +294,7 @@
     "buit_titol": "You won't find us here yet",
     "buit_text": "But we'd love to get there. Do you know a shop where we'd fit in? Tell us and we'll give them a call.",
     "buit_cta": "Recommend a shop",
-    "banda_titol": "Not near you?",
+    "banda_titol": "Can't find us nearby?",
     "banda_text_a": "We're in",
     "banda_text_b": "shops, and there are many more to go. If there's a shop in your neighbourhood, town or village where we'd fit in, recommend it: every recommendation opens a door for us.",
     "banda_cta": "Bring us to your neighbourhood",
@@ -325,7 +325,7 @@
     "gracies_lead_b": ".<br>Every shop you recommend is a <strong>conversation</strong> we begin with far <strong>more meaning</strong>.",
     "gracies_nota": "If you left us your email,<br>we'll let you know the day we get there.",
     "demanda_eyebrow": "Where you're asking for us",
-    "demanda_titol": "The neighbourhoods calling us",
+    "demanda_titol": "The neighbourhoods asking for us",
     "demanda_lead": "These are the areas you've written to us from the most. We're working on it.",
     "demanda_autor": "A recommendation we received",
     "b2b_eyebrow": "And what if the shop is yours?",
@@ -435,14 +435,14 @@
     "camp_missatge": "Message",
     "enviar": "Request information",
     "gracies_titol": "We've received your project",
-    "gracies_lead": "We'll read it carefully and reply <strong>personally</strong>. We don't work with automatic catalogues: we'd rather understand what you need first."
+    "gracies_lead": "We'll read it carefully and reply <strong>personally</strong>. We don't just send out a standard catalogue: we'd rather understand what you need first."
   },
   "contacte": {
     "title": "Contact · Ca la Marxanta",
     "desc": "Get in touch with Ca la Marxanta: Carrer Plutó 24, 08035 Barcelona · info@calamarxanta.com · +34 608 387 092.",
     "eyebrow": "Contact",
     "h1": "Let's talk",
-    "lead": "For any question or anything you need to know, get in touch. We'll be glad to help!",
+    "lead": "If you have a question or need any information, get in touch. We'll be glad to help!",
     "label_adreca": "Address",
     "adreca": "Carrer Plutó, 24 · 08035 Barcelona, Spain",
     "label_correu": "Email",
